@@ -44,7 +44,7 @@ class Util {
    * @param {number} level - The log level to set.
    */
   static set_log_level(level){
-    Util.log_level = level
+    Log.log_level = level
   }
 
   /**
@@ -52,7 +52,7 @@ class Util {
    * @returns {number} The current log level.
    */
   static log_level(){
-    return Util.log_level
+    return Log.log_level
   }
 
   /**
@@ -60,7 +60,7 @@ class Util {
    * @returns {number} The current log level.
    */
   static get_log_level(){
-    return Util.log_level
+    return Log.log_level
   }
 
   /**
@@ -73,9 +73,9 @@ class Util {
     if( ret[0] !== true){
       return
     }
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.debug(`${name}`)
-      array.map( item => Util.debug(item));
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.debug(`${name}`)
+      array.map( item => Log.debug(item));
     }
   }
 
@@ -84,9 +84,9 @@ class Util {
      * @param {string} mes - The message to log.
      */
     static debug(mes){
-      Util.display_log(`debug ${mes}`)
-      if( Util.get_log_level() <= Util.DEBUG() ){
-        Util.display_log(mes)
+      Log.display_log(`debug ${mes}`)
+      if( Log.get_log_level() <= Log.DEBUG() ){
+        Log.display_log(mes)
       }
     }
 
@@ -96,9 +96,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static debug_x(name, value){
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value )
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value )
     }
   }
 
@@ -108,8 +108,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static debug_1(name, value){
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -121,8 +121,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static debug_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -132,9 +132,9 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static info_array(name, array){
-    if( Util.get_log_level() <= Util.INFO() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.INFO() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -143,8 +143,8 @@ class Util {
    * @param {string} mes - The message to log.
    */
   static info(mes){
-    if( Util.get_log_level() <= Util.INFO() ){
-      Util.display_log(mes)
+    if( Log.get_log_level() <= Log.INFO() ){
+      Log.display_log(mes)
     }
   }
 
@@ -154,9 +154,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static info_x(name, value){
-    if( Util.get_log_level() <= Util.INFO() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= Log.INFO() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
@@ -166,8 +166,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static info_1(name, value){
-    if( Util.get_log_level() <= Util.INFO() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.INFO() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -179,8 +179,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static info_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.INFO() ){
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.INFO() ){
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -190,9 +190,9 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static warn_array(name, array){
-    if( Util.get_log_level() <= Util.WARN() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.WARN() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -201,8 +201,8 @@ class Util {
    * @param {string} mes - The message to log.
    */
   static warn(mes){
-    if( Util.get_log_level() <= Util.WARN() ){
-      Util.display_log(mes)
+    if( Log.get_log_level() <= Log.WARN() ){
+      Log.display_log(mes)
     }
   }
 
@@ -212,9 +212,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static warn_x(name, value){
-    if( Util.get_log_level() <= Util.WARN() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= Log.WARN() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
@@ -224,8 +224,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static warn_1(name, value){
-    if( Util.get_log_level() <= Util.WARN() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.WARN() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -237,8 +237,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static warn_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.WARN() ){
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.WARN() ){
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -248,9 +248,9 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static error_array(name, array){
-    if( Util.get_log_level() <= Util.ERROR() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.ERROR() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -259,8 +259,8 @@ class Util {
    * @param {string} mes - The message to log.
    */
   static error(mes){
-    if( Util.get_log_level() <= Util.ERROR() ){
-      Util.display_log(mes)
+    if( Log.get_log_level() <= Log.ERROR() ){
+      Log.display_log(mes)
     }
   }
 
@@ -270,9 +270,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static error_x(name, value){
-    if( Util.get_log_level() <= Util.ERROR() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= Log.ERROR() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
@@ -282,8 +282,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static error_1(name, value){
-    if( Util.get_log_level() <= Util.ERROR() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.ERROR() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -295,8 +295,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static error_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.ERROR() ){
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.ERROR() ){
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -306,9 +306,9 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static fault_array(name, array){
-    if( Util.get_log_level() <= Util.FAULT() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.FAULT() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -317,8 +317,8 @@ class Util {
    * @param {string} mes - The message to log.
    */
   static fault(mes){
-    if( Util.get_log_level() <= FAULT.FAULT() ){
-      Util.display_log(mes)
+    if( Log.get_log_level() <= FAULT.FAULT() ){
+      Log.display_log(mes)
     }
   }
 
@@ -328,9 +328,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static fault_x(name, value){
-    if( Util.get_log_level() <= FAULT.FAULT() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= FAULT.FAULT() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
@@ -340,8 +340,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static fault_1(name, value){
-    if( Util.get_log_level() <= Util.FAULT() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.FAULT() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -353,8 +353,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static fault_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.FAULT() ){
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.FAULT() ){
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -364,9 +364,9 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static unknown_array(name, array){
-    if( Util.get_log_level() <= Util.UNKNOWN() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.UNKNOWN() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -375,8 +375,8 @@ class Util {
    * @param {string} mes - The message to log.
    */
   static unknown(mes){
-    if( Util.get_log_level() <= Util.UNKNOWN() ){
-      Util.display_log(mes)
+    if( Log.get_log_level() <= Log.UNKNOWN() ){
+      Log.display_log(mes)
     }
   }
 
@@ -386,9 +386,9 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static unknown_x(name, value){
-    if( Util.get_log_level() <= Util.UNKNOWN() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= Log.UNKNOWN() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
@@ -398,8 +398,8 @@ class Util {
    * @param {*} value - The value to display in the log.
    */
   static unknown_1(name, value){
-    if( Util.get_log_level() <= Util.UNKNOWN() ){
-      Util.display_log(`${name}=${value}`)
+    if( Log.get_log_level() <= Log.UNKNOWN() ){
+      Log.display_log(`${name}=${value}`)
     }
   }
 
@@ -411,8 +411,8 @@ class Util {
    * @param {*} value2 - The second value to display in the log.
    */
   static unknownt_2(name, value, name2, value2){
-    if( Util.get_log_level() <= Util.UNKNOWN() ) {
-      Util.display_log(`${name}=${value} ${name2}=${value2}`)
+    if( Log.get_log_level() <= Log.UNKNOWN() ) {
+      Log.display_log(`${name}=${value} ${name2}=${value2}`)
     }
   }
 
@@ -422,9 +422,9 @@ class Util {
    * @param {string} name - The name to display in the log.
    */
   static displayx_array(array, name){
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.display_log(`${name}`)
-      array.map( item => Util.display_log(item));
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.display_log(`${name}`)
+      array.map( item => Log.display_log(item));
     }
   }
 
@@ -434,18 +434,18 @@ class Util {
    * @param {string} name - The name to display in the log.
    */
   static displayx(value, name){
-    if( Util.get_log_level() <= Util.DEBUG() ){
-      Util.display_log(`${name}`)
-      Util.display_log( value)
+    if( Log.get_log_level() <= Log.DEBUG() ){
+      Log.display_log(`${name}`)
+      Log.display_log( value)
     }
   }
 
   static display_log(message ){
-    Util.display(message, 'CUI', true);
+    Log.display(message, 'CUI', true);
   }
 
   static display_alert(message){
-    Util.display(message, 'GUI', true);
+    .display(message, 'GUI', true);
   }
 
   static display(message, kind, mode){
@@ -461,4 +461,4 @@ class Util {
     }
   }
 }
-this.Util = Util
+this.Log = Log

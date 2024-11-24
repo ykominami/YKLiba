@@ -1,48 +1,3 @@
-function make_folder_info( name, id, url  ){
-  return  { 
-    name: name,
-    folder_id: id,
-    folder_url: url
-  }
-}
-
-function get_folder_info_list(values){
-  const folder_info_list = values.map( (item) => {
-    if ( item[0] === "folder" ){
-      const name = item[1]
-      const id = item[2]
-      const url = item[3]
-      return make_folder_info(name, id, url)
-    }
-  } )
-
-  const folder_info_hash = {}
-  folder_info_list.map( (info) => {
-    folder_info_hash[info.name] = info
-  } )
-  // display_log( folder_info_list )
-  return [folder_info_list, folder_info_hash]
-}
-
-function get_folder_id_by_key(key){
-  const ss_id = "1KtGdnnpj8k_bkxfYITalK193nRlVXiN0o_YiASO5KNs"
-  const [ss, sheet] = get_spreadsheet(ss_id, "INFO")
-  const values = get_simple_rows(sheet)
-
-  const [folder_info_list, folder_info_hash] = get_folder_info_list(values)
-  const folder_info = folder_info_hash[key]
-  return folder_info.folder_id
-}
-
-function get_folder_by_id(folder_id){
-  return DriveApp.getFolderById(folder_id)
-}
-
-function get_folder_by_key(key){
-  const folder_id = get_folder_id_by_key(key)
-  return get_folder_by_id(folder_id)
-}
-
 function test_get_folder(){
   const folder_id = get_folder_id_by_key("Frontend Focus")
   const folder = get_folder_by_id(folder_id)
@@ -52,44 +7,6 @@ function get_headerless_range(range){
   const newRange = range.offset(1,  0);
   [new_column, new_row, new_height, new_width] = getRangeShape(newRange);
   return newRange;
-}
-
-function get_simple_rows_with_env(env){
-  [ss, sheet] = get_spreadsheet(env.ss_id, env.sheet_name)
-  const values = get_simple_rows(sheet);
-  return values
-}
-
-function simple_rows_x(sheetx){
-  [values, range] = get_simple_rows_and_range(sheetx);
-
-  [tl_x, tl_y, bl_x, bl_y] = getRelativeCordinatesOfTLandBL(values);
-  [column, row, height, width] = getRangeShape(range);
-
-  rindex = get_rindex(values[0]);
-  simple_width = rindex;
-  [tl_x, tl_y, bl_x, bl_y, tr_x, tr_y, br_x, br_y] = getRelativeCordinatesOfTLandBlandTRandBR(values);
-  const simple_range = range.offset(tl_y, tl_x, (bl_y - tl_y), simple_width, );
-  const v = simple_range.getValues();
-  return v;
-}
-
-function get_simple_rows(sheet) {
-  const range = get_valid_range(sheet);
-  let values = []
-  if (range !== null){
-    values = range.getValues();
-  }
-  return values;
-}
-
-function get_simple_rows_and_range(sheet) {
-  const range = get_valid_range(sheet);
-  let values = []
-  if (range !== null){
-    values = range.getValues();
-  }
-  return [values, range];
 }
 
 function get_data_as_records_with_header(env){
@@ -201,13 +118,6 @@ function get_records_with_header_from_sheet_first(ss_id, sheet_name){
   [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
   const sheetx = sheets[0];
   const v = get_records_with_header(sheetx);
-  return v;
-}
-
-function get_simple_rows_x(ss_id, sheet_name){
-  [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
-  const sheetx = sheets_by_name[sheet_name];
-  const v = get_simple_rows(sheetx);
   return v;
 }
 
