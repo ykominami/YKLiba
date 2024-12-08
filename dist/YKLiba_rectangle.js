@@ -1,7 +1,7 @@
 function make_mask_pattern(array){
-  const ret_check = is_valid_2d_array(array)
+  const ret_check = is_valid_2d_array(array);
   if( ret_check[0] === false ){
-    return []
+    return [];
   }
   const height = array.length;
   const width = array[0].length;
@@ -53,13 +53,13 @@ function detect_adjacency_interior(array, ret_array, x, y){
 function detect_adjacency_row(array, ret_array, width){
   for(let x=0; x<width; x++){
     if( x === 0){
-      ret_array[0][x] = array[0][x+1]
+      ret_array[0][x] = array[0][x+1];
     }
     else if( x === (width - 1)){
-      ret_array[0][x] = array[0][x-1]
+      ret_array[0][x] = array[0][x-1];
     }
     else{
-      ret_array[0][x] = array[0][x-1] + array[0][x+1]
+      ret_array[0][x] = array[0][x-1] + array[0][x+1];
     }
   }
   return ret_array;
@@ -68,24 +68,24 @@ function detect_adjacency_row(array, ret_array, width){
 function detect_adjacency_column(array, ret_array, height){
   for(let y=0; y<height; y++){
     if( y === 0){
-      ret_array[y][0] = array[y+1][0]
+      ret_array[y][0] = array[y+1][0];
     }
     else if( y === (height - 1)){
-      ret_array[y][0] = array[y-1][0]
+      ret_array[y][0] = array[y-1][0];
     }
     else{
-      ret_array[y][0] = array[y-1][0] + array[y+1][0]
+      ret_array[y][0] = array[y-1][0] + array[y+1][0];
     }
   }
 }
 
 function make_adjacency_array(array){
-  const ret_check = is_valid_2d_array(array)
+  const ret_check = is_valid_2d_array(array);
   if( ret_check[0] === false ){
     return [];
   }
-  const height = array.length
-  const width = array[0].length
+  const height = array.length;
+  const width = array[0].length;
   const ret_array = [];
 
   for(let i=0; i<height; i++){
@@ -95,21 +95,21 @@ function make_adjacency_array(array){
 
   if( width === 1){
     if( height === 1){
-      ret_array.push([1])
+      ret_array.push([1]);
       return ret_array;
     }
     else{
-      detect_adjacency_column(array, ret_array, height)
+      detect_adjacency_column(array, ret_array, height);
       return ret_array;
     }
   }
   else if( height === 1){
     if (width === 1){
-      ret_array.push([1])
+      ret_array.push([1]);
       return ret_array;
     }
     else{
-      detect_adjacency_row(array, ret_array, width)
+      detect_adjacency_row(array, ret_array, width);
       return ret_array;
     }
   }
@@ -120,33 +120,33 @@ function make_adjacency_array(array){
     for(let x=0; x<width; x++){
       if( y == 0 ){
         if( x == 0 ){
-          detect_adjacency_top_left(array, ret_array, x, y)
+          detect_adjacency_top_left(array, ret_array, x, y);
         }
         else if(x == (width - 1)){
-          detect_adjacency_top_right(array, ret_array, x, y)
+          detect_adjacency_top_right(array, ret_array, x, y);
         }
         else{
-          detect_adjacency_top_side(array, ret_array, x, y)
+          detect_adjacency_top_side(array, ret_array, x, y);
         }
       } else if(y == (height - 1)){
         if( x == 0 ){
-          detect_adjacency_bottom_left(array, ret_array, x, y)
+          detect_adjacency_bottom_left(array, ret_array, x, y);
         }
         else if(x == (width - 1)){
-          detect_adjacency_bottom_right(array, ret_array, x, y)
+          detect_adjacency_bottom_right(array, ret_array, x, y);
         }
         else {
-          detect_adjacency_bottom_side(array, ret_array, x, y)
+          detect_adjacency_bottom_side(array, ret_array, x, y);
         }
       } else {
         if( x == 0 ){
-          detect_adjacency_left_side(array, ret_array, x, y)
+          detect_adjacency_left_side(array, ret_array, x, y);
         }
         else if(x == (width - 1)){
-          detect_adjacency_right_side(array, ret_array, x, y)
+          detect_adjacency_right_side(array, ret_array, x, y);
         }
         else{
-          detect_adjacency_interior(array, ret_array, x, y)
+          detect_adjacency_interior(array, ret_array, x, y);
         }
       }
     }
