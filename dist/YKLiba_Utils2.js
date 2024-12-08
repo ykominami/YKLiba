@@ -1,241 +1,37 @@
-
-function display_log(message){
-  display(message, 'CUI', true);
-}
-
-function display_alert(message){
-  display(message, 'GUI', true);
-}
-
-function display(message, kind, mode){
-  if(mode != true){
-    return;
-  }
-  if(kind == "GUI"){
-    const ui = SpreadsheetApp.getUi();
-    ui.alert( message )
-  }
-  else{
-    Logger.log( message );    
-  }
-}
-
 function isEqual(array_a, array_b){
-  return JSON.stringify(array_a) === JSON.stringify(array_b)
+  return JSON.stringify(array_a) === JSON.stringify(array_b);
 }
 function tojson(array){
-  return JSON.stringify(array)
+  return JSON.stringify(array);
 }
 function is_valid_object(array){
   if( array === null ){
-    return [false, "null", 1]
+    return [false, "null", 1];
   }
   else if( typeof(array) === "undefined"){
-    return [false, "message: undefined", 2]
+    return [false, "message: undefined", 2];
   }
   else {
-    return [true, "true", 3]
+    return [true, "true", 3];
   }
 }
-
-function is_valid_1d_array(array){
-  let ret = is_valid_object(array)
-  if( ret[0]  === false){
-    return ret
-  }
-  else if( array.length === 0 ){
-    return [false, 'first element of Array is empty array', 10]
-  }
-  else if( array.length === 1 ){
-    ret = is_valid_object(array[0])
-    if( ret[0] === false ){
-      return [false, 'first element of Array is null or undefined', 11]
-    }
-    else{
-      if( typeof( array ) === "object"){
-        if( typeof(array[0] ) === "object" ){
-          return [false, "nested Array", 12]
-        }
-        else{
-          return [true, "1x1 array", 13]
-        }
-      }
-      else{
-          return [false, "anything else", 14]
-      }
-    }
-  }
-  else if( array.length > 1 ){
-    if( typeof(array[0]) === "object" ){
-      if( array[0].length > 1 ){
-        return [false, "multipule dimension Array", 15]
-      }
-      else if( array[0].length === 1) {
-        return [false, "1 x 1 Array", 16]
-      }
-      else{
-        return [false, "first element of Array is empty array", 17]
-      }
-    }
-    else{
-      return [true, `1d Array`, 18]
-    }
-  }
-  else {
-    ret = is_valid_object(array[0])
-    if( ret[0] === false ){
-      return [false, 'first element of Array is null or undefined', 19]
-    }
-    else{
-      if( typeof(array[0]) === "object" ){
-        if( array[0].length == 0){
-          return [false, "empty array", 21]
-        }
-        else if( array[0].length == 1){
-          return [false, "1 x 1 Array", 22]
-        }
-        else{
-          return [true , "first element of Array is 1d Array", 23]
-        }
-      }
-      else{
-        return [false, "Unknown", 24]
-      }
-    }
-  }
-}
-
-
-function is_valid_2d_array(array){
-  let ret = is_valid_object(array)
-  if( ret[0]  === false){
-    return ret
-  }
-  else if( array.length === 1 ){
-    ret = is_valid_object(array[0])
-    if( ret[0] === false ){
-      return [false, 'first element of Array is null or undefined', 1]
-    }
-    else{
-      if( typeof( array ) === "object"){
-        if( typeof(array[0] ) === "object" ){
-          return [false, "nested Array", 2]
-        }
-        else{
-          return [true, "11x1 array", 21]
-        }
-      }
-      else{
-          return [false, "anything else", 22]
-      }
-    }
-  }
-  else if( array.length > 1 ){
-    if( typeof(array[0]) === "object" ){
-      if( array[0].length > 1 ){
-        return [false, "multipule dimension Array", 4]
-      }
-      else if( array[0].length === 1) {
-        return [true, "1 x 1 Array", 5]
-      }
-      else{
-        return [true, "first element of Array is empty array", 6]
-      }
-    }
-    else{
-      return [true, `1d Array`, 7]
-    }
-  }
-  else {
-    ret = is_valid_object(array[0])
-    if( ret[0] === false ){
-      return [false, 'first element of Array is null or undefined', 8]
-    }
-    else{
-      if( array[0].length === 0 ){
-        return [false, "first element of Array is empty Array", 9]
-      }
-      if( typeof(array[0]) === "object" ){
-        if( array[0].length == 1){
-          return [true, "1 x 1 Array", 10]
-        }
-        else{
-          return [true, "first element of Array is 1d Array", 11]
-        }
-      }
-    }
-  }
-}
-
-function is_equal_array_one_dim(array_a, array_b){
-  const length_a = array_a.length;
-  const length_b = array_b.length;
-  if( length_a !== length_b ){
-    return [false, ['length of array are different', height_a, height_b]];
-  }
-
-  for(let x=0; x<length_a; x++){
-    if( array_a[x] !== array_b[x] ){
-      return [false, ['element of array are different, x', array_a[x], array_b[x]] ];
-    }
-  }
-  return [true, ['same array', 0, 0]];
-}
-
-function is_equal_array_two_dim(array_a, array_b){
-  const height_a = array_a.length;
-  const height_b = array_b.length;
-  if( height_a !== height_b ){
-    return [false, [1, height_a, height_b]];
-  }
-
-  const width_a = array_a[0].length;
-  const width_b = array_b[0].length;
-  if( width_a !== width_b ){
-    return [false, [2, width_a, width_b]];
-  }
-
-  for(let y=0; y<height_a; y++){
-    for(let x=0; x<width_a; x++){
-      if( array_a[y][x] !== array_b[y][x] ){
-        return [false, [3, x, y, array_a[y][x], array_b[y][x]]];
-      }
-    }
-  }
-  return [true, [0, 0, 0]];
-}
-
-function is_equal_array(array_a, array_b){
-  // const ret_check = is_valid_2d_array(array_a)
-  if( typeof( array_a[0]) === "object" ){
-    return is_equal_array_two_dim(array_a, array_b);
-  }
-  else{
-    return is_equal_array_one_dim(array_a, array_b);
-  }
-}
-
-
-function get_max_and_min(array){
-  const aryMax = function (a, b) {return Math.max(a, b);}
-  const aryMin = function (a, b) {return Math.min(a, b);}
-  let max = array.reduce(aryMax);
-  let min = array.reduce(aryMin);
-
-  return [max, min];
-}
-
 function dump_range(range){
   const array = range.getValues();
   const h = array.length;
   for( let i = 0; i<h; i++){
-    display_log(`${i}=${array[i]}`);
+    Log.debug(`${i}=${array[i]}`);
   }
 }
 
 function dump_array(array){
   for (let row of array){
-    display_log( row );
+    Log.debug( row );
+  }
+}
+
+function dump_object(obj){
+  for (let key in obj){
+    Log.debug( `${key}: ${obj[key]}` );
   }
 }
 
@@ -257,17 +53,15 @@ function detect_blank(values){
 function get_rindex(array){
   let str;
   const w = array.length - 1;
-  rindex = -1;
-  // display_log(`w=${w} array=${array}`)
+  let rindex = -1;
   for(let i = w; 0 <= i; i--){
-    // display_log(`array[${i}] = ${array[i]}`)
     str = array[i].trim();
     if( str !== ""){
       rindex = i;
       break;
     }
     else{
-      // display_log(`i=${i} str=${str}`)
+      // Log.debug(`i=${i} str=${str}`)
     }
   }
   return rindex;
@@ -345,7 +139,7 @@ function extend_array( base_array, right_side_array, bottom_side_array){
 
   const ret_array_height = height + 1;
   // const ret_array_width = width + 1;
-  ret_array = Array(ret_array_height);
+  let ret_array = Array(ret_array_height);
   for(let y=0; y<height; y++){
     ret_array[y] = [...base_array[y], right_side_array[y] ];
   }
@@ -357,7 +151,7 @@ function extend_array( base_array, right_side_array, bottom_side_array){
 function sum_row_and_sum_column(array){
   const height = array.length;
   if( typeof(array[0]) === "undefined" ){
-    return [[], []]
+    return [[], []];
   }
   const width = array[0].length;
   const row_length = width;
@@ -375,9 +169,9 @@ function sum_row_and_sum_column(array){
 }
 
 function test_date_staring(){
-  const today = new Date()
-  const date_str = make_date_string(today)
-  display_log(`date_str=${date_str}` )
+  const today = new Date();
+  const date_str = make_date_string(today);
+  Log.debug(`date_str=${date_str}` );
 }
 
 function make_date_string(date){
@@ -389,7 +183,7 @@ function make_date_string(date){
   const formattedDay = day.toString().padStart(2, '0');
   const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
   // console.log(formattedDate); // 出力例: 2024-11-21
-  return formattedDate
+  return formattedDate;
 }
 
 function messageArrayDiff(array1, array2) {
@@ -399,25 +193,24 @@ function messageArrayDiff(array1, array2) {
 }
 
 function output_file_under_folder(folder, file_name, content){
-  let document = null
+  let document = null;
   // file_name = "d"
-  content = ""
-  file = get_file(folder, file_name)
+  content = "";
+  let file = get_file(folder, file_name);
+  let file_id = null;
   if( file === null ){
-    document = DocumentApp.create(file_name)
-    file_id = document.getId()
-    file = DriveApp.getFileById(file_id)
-    file.moveTo(folder)
-    // display_log(`1`)
+    document = DocumentApp.create(file_name);
+    file_id = document.getId();
+    file = DriveApp.getFileById(file_id);
+    file.moveTo(folder);
   }
   else {
-    file_id = file.getId()
-    document = DocumentApp.openById(file_id)
-    // display_log(`2`)
+    file_id = file.getId();
+    document = DocumentApp.openById(file_id);
   }
-  output_to_document(document, content)
+  output_to_document(document, content);
 }
 function diff_date(date1, date2){
    const diffInMs = Math.abs(date1.getTime() - date2.getTime()); // ミリ秒の差分
-   return diffInms
+   return diffInMs;
 }

@@ -1,4 +1,4 @@
-class Util {
+class Log {
   // static log_level
   // UNKNOWN(6)
   // 常に記録されるべき不明なエラー
@@ -17,34 +17,49 @@ class Util {
   // 
   // DEBUG(1)
   // 低レベルの情報  // DEBUG=
-  static UNKNOWN(){ return 6}
-  static FAULT(){ return 5}
-  static ERROR(){ return 4}
+
+  /**
+   * Returns the log level for unknown messages.
+   * @returns {number} Log level for warnings.
+   */
+  static UNKNOWN(){ return 6;}
+
+  /**
+   * Returns the log level for fault messages.
+   * @returns {number} Log level for warnings.
+   */
+  static FAULT(){ return 5;}
+
+  /**
+   * Returns the log level for error messages.
+   * @returns {number} Log level for warnings.
+   */
+  static ERROR(){ return 4;}
 
   /**
    * Returns the log level for warnings.
    * @returns {number} Log level for warnings.
    */
-  static WARN(){ return 3}
+  static WARN(){ return 3;}
 
   /**
    * Returns the log level for informational messages.
    * @returns {number} Log level for informational messages.
    */
-  static INFO(){ return 2}
+  static INFO(){ return 2;}
 
   /**
    * Returns the log level for debug messages.
    * @returns {number} Log level for debug messages.
    */
-  static DEBUG(){ return 1}
+  static DEBUG(){ return 1;}
 
   /**
    * Sets the current log level.
    * @param {number} level - The log level to set.
    */
   static set_log_level(level){
-    Log.log_level = level
+    Log.log_level = level;
   }
 
   /**
@@ -52,7 +67,7 @@ class Util {
    * @returns {number} The current log level.
    */
   static log_level(){
-    return Log.log_level
+    return Log.log_level;
   }
 
   /**
@@ -60,7 +75,7 @@ class Util {
    * @returns {number} The current log level.
    */
   static get_log_level(){
-    return Log.log_level
+    return Log.log_level;
   }
 
   /**
@@ -69,12 +84,12 @@ class Util {
    * @param {Array} array - The 2D array to log.
    */
   static debug_array(name, array){
-    const ret = is_valid_2d_array(array)
+    const ret = is_valid_2d_array(array);
     if( ret[0] !== true){
-      return
+      return;
     }
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.debug(`${name}`)
+      Log.debug(`${name}`);
       array.map( item => Log.debug(item));
     }
   }
@@ -84,9 +99,9 @@ class Util {
      * @param {string} mes - The message to log.
      */
     static debug(mes){
-      Log.display_log(`debug ${mes}`)
+      // Log.display_log(`debug ${mes}`)
       if( Log.get_log_level() <= Log.DEBUG() ){
-        Log.display_log(mes)
+        Log.display_log(mes);
       }
     }
 
@@ -97,8 +112,8 @@ class Util {
    */
   static debug_x(name, value){
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value )
+      Log.display_log(`${name}`);
+      Log.display_log( value );
     }
   }
 
@@ -109,7 +124,7 @@ class Util {
    */
   static debug_1(name, value){
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -122,7 +137,7 @@ class Util {
    */
   static debug_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -133,7 +148,7 @@ class Util {
    */
   static info_array(name, array){
     if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -144,7 +159,7 @@ class Util {
    */
   static info(mes){
     if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(mes)
+      Log.display_log(mes);
     }
   }
 
@@ -155,8 +170,8 @@ class Util {
    */
   static info_x(name, value){
     if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -167,7 +182,7 @@ class Util {
    */
   static info_1(name, value){
     if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -180,7 +195,7 @@ class Util {
    */
   static info_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -191,7 +206,7 @@ class Util {
    */
   static warn_array(name, array){
     if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -202,7 +217,7 @@ class Util {
    */
   static warn(mes){
     if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(mes)
+      Log.display_log(mes);
     }
   }
 
@@ -213,8 +228,8 @@ class Util {
    */
   static warn_x(name, value){
     if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -225,7 +240,7 @@ class Util {
    */
   static warn_1(name, value){
     if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -238,7 +253,7 @@ class Util {
    */
   static warn_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -249,7 +264,7 @@ class Util {
    */
   static error_array(name, array){
     if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -260,7 +275,7 @@ class Util {
    */
   static error(mes){
     if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(mes)
+      Log.display_log(mes);
     }
   }
 
@@ -271,8 +286,8 @@ class Util {
    */
   static error_x(name, value){
     if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -283,7 +298,7 @@ class Util {
    */
   static error_1(name, value){
     if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -296,7 +311,7 @@ class Util {
    */
   static error_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -307,7 +322,7 @@ class Util {
    */
   static fault_array(name, array){
     if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -318,7 +333,7 @@ class Util {
    */
   static fault(mes){
     if( Log.get_log_level() <= FAULT.FAULT() ){
-      Log.display_log(mes)
+      Log.display_log(mes);
     }
   }
 
@@ -329,8 +344,8 @@ class Util {
    */
   static fault_x(name, value){
     if( Log.get_log_level() <= FAULT.FAULT() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -341,7 +356,7 @@ class Util {
    */
   static fault_1(name, value){
     if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -354,7 +369,7 @@ class Util {
    */
   static fault_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -365,7 +380,7 @@ class Util {
    */
   static unknown_array(name, array){
     if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -376,7 +391,7 @@ class Util {
    */
   static unknown(mes){
     if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(mes)
+      Log.display_log(mes);
     }
   }
 
@@ -387,8 +402,8 @@ class Util {
    */
   static unknown_x(name, value){
     if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -399,7 +414,7 @@ class Util {
    */
   static unknown_1(name, value){
     if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}=${value}`)
+      Log.display_log(`${name}=${value}`);
     }
   }
 
@@ -412,7 +427,7 @@ class Util {
    */
   static unknownt_2(name, value, name2, value2){
     if( Log.get_log_level() <= Log.UNKNOWN() ) {
-      Log.display_log(`${name}=${value} ${name2}=${value2}`)
+      Log.display_log(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -423,7 +438,7 @@ class Util {
    */
   static displayx_array(array, name){
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`)
+      Log.display_log(`${name}`);
       array.map( item => Log.display_log(item));
     }
   }
@@ -435,8 +450,8 @@ class Util {
    */
   static displayx(value, name){
     if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`)
-      Log.display_log( value)
+      Log.display_log(`${name}`);
+      Log.display_log( value);
     }
   }
 
@@ -445,7 +460,7 @@ class Util {
   }
 
   static display_alert(message){
-    .display(message, 'GUI', true);
+    Log.display(message, 'GUI', true);
   }
 
   static display(message, kind, mode){
@@ -454,11 +469,11 @@ class Util {
     }
     if(kind == "GUI"){
       const ui = SpreadsheetApp.getUi();
-      ui.alert( message )
+      ui.alert( message );
     }
     else{
       Logger.log( message );    
     }
   }
 }
-this.Log = Log
+this.Log = Log;

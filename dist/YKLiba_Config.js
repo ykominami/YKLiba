@@ -70,7 +70,7 @@ function get_folder_info_list(values){
   folder_info_list.map( (info) => {
     folder_info_hash[info.name] = info
   } )
-  // display_log( folder_info_list )
+  // Log.debug( folder_info_list )
   return [folder_info_list, folder_info_hash]
 }
 
@@ -104,13 +104,13 @@ function get_folder_id_by_key(key, arg_folder_info_hash = null){
   let folder_info_hash
   if( arg_folder_info_hash === null){
     const values = get_values_from_config_sheet_x()
-    display_log(values)
+    Log.debug(values)
     folder_info_hash = get_folder_info_hash(values)
   }
   else{
     folder_info_hash = arg_get_folder_info_hash
   }
-  display_log(folder_info_hash)
+  Log.debug(folder_info_hash)
   const folder_info = folder_info_hash[key]
   return folder_info.folder_id
 }

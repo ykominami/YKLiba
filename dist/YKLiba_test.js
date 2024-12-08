@@ -7,12 +7,12 @@ function test_dtermin(){
   ret22 = determine("_BLANK", " ");
   ret23 = determine("_BLANK", " A ");
 
-  display_log(`ret11=${ret11}`);
-  display_log(`ret12=${ret12}`);
-  display_log(`ret12=${ret13}`);
-  display_log(`ret21=${ret21}`);
-  display_log(`ret22=${ret22}`);
-  display_log(`ret22=${ret23}`);
+  Log.debug(`ret11=${ret11}`);
+  Log.debug(`ret12=${ret12}`);
+  Log.debug(`ret12=${ret13}`);
+  Log.debug(`ret21=${ret21}`);
+  Log.debug(`ret22=${ret22}`);
+  Log.debug(`ret22=${ret23}`);
 }
 
 function test_detect_record(){
@@ -25,62 +25,62 @@ function test_detect_record(){
 
   let ret;
   ret = detect_record(array, "NOT_BLANK", 0, 0, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, "NOT_BLANK", 0, 0, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, "NOT_BLANK", 0, 0, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, "NOT_BLANK", 0, 0, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, "NOT_BLANK", 0, 0, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, "NOT_BLANK", 0, 0, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   //
-  display_log(`================`);
+  Log.debug(`================`);
   //  
   ret = detect_record(array, "NOT_BLANK", 0, 1, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, "NOT_BLANK", 0, 1, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, "NOT_BLANK", 0, 1, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, "NOT_BLANK", 0, 1, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, "NOT_BLANK", 0, 1, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, "NOT_BLANK", 0, 1, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   //
-  display_log(`================`);
+  Log.debug(`================`);
   //  
   ret = detect_record(array, "NOT_BLANK", 0, 2, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, "NOT_BLANK", 0, 2, 2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, "NOT_BLANK", 0, 2, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, "NOT_BLANK", 0, 2, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, "NOT_BLANK", 0, 2, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, "NOT_BLANK", 0, 2, 3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   //
 
@@ -96,22 +96,22 @@ function test_arrayShape(){
 
   let ret;
   ret = arrayShape(array);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array4);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array5);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array6);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
 }
 
@@ -130,34 +130,34 @@ function test_getRelativeCordinatesOfTopLeft_simple(){
   start_y = -1;
 
   [size, len_max, len_min] = arrayShape(array);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   
   [size, len_max, len_min] = arrayShape(array2);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   
   [size, len_max, len_min] = arrayShape(array3);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   
   [size, len_max, len_min] = arrayShape(array4);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   
   [size, len_max, len_min] = arrayShape(array5);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
   
   [size, len_max, len_min] = arrayShape(array6);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 }
 
 function test_getRelativeCordinatesOfBottomLeft_simple(){
@@ -175,44 +175,44 @@ function test_getRelativeCordinatesOfBottomLeft_simple(){
   start_y = -1;
 
   [size, len_max, len_min] = arrayShape(array);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 0;
   [size, len_max, len_min] = arrayShape(array2);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array3);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array4);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array5);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array6);
-  display_log(`size=${size} len_max=${len_max} len_min=${len_min}`)
+  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 }
 
 function test_getRelativeCordinatesOfTLandBL(){
@@ -226,28 +226,28 @@ function test_getRelativeCordinatesOfTLandBL(){
   let ret;
 
   ret = getRelativeCordinatesOfTLandBL(array);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array2);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array3);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array4);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array5);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array6);
-  display_log(`ret=${ret}`);
+  Log.debug(`ret=${ret}`);
 }
 
 function test_get_column_code(){
   [null, '', 'A','Z','a','z', 'AA', 'ZZ'].map( ch => {
     const code = get_column_number(ch);
-    display_log(`ch=${ch} code=${code}`);
-  })
+    Log.debug(`ch=${ch} code=${code}`);
+  });
 }
 
