@@ -1,11 +1,10 @@
-
-function test_dtermin(){
-  ret11 = determine("NOT_BLANK", "");
-  ret12 = determine("NOT_BLANK", " ");
-  ret13 = determine("NOT_BLANK", " A ");
-  ret21 = determine("BLANK", "");
-  ret22 = determine("_BLANK", " ");
-  ret23 = determine("_BLANK", " A ");
+function test_dtermin() {
+  ret11 = determine('NOT_BLANK', '');
+  ret12 = determine('NOT_BLANK', ' ');
+  ret13 = determine('NOT_BLANK', ' A ');
+  ret21 = determine('BLANK', '');
+  ret22 = determine('_BLANK', ' ');
+  ret23 = determine('_BLANK', ' A ');
 
   Log.debug(`ret11=${ret11}`);
   Log.debug(`ret12=${ret12}`);
@@ -15,84 +14,83 @@ function test_dtermin(){
   Log.debug(`ret22=${ret23}`);
 }
 
-function test_detect_record(){
+function test_detect_record() {
   const array = [[], []];
-  const array2 = [["A"], []];
-  const array3 = [[], ["A"], []];
-  const array4 = [[], ["A"], ['B']];
-  const array5 = [[], ["A"], ['B'], []];
-  const array6 = [[], ["A"], [], ['B'], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
-  ret = detect_record(array, "NOT_BLANK", 0, 0, 2);
+  ret = detect_record(array, 'NOT_BLANK', 0, 0, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, "NOT_BLANK", 0, 0, 2);
+  ret = detect_record(array2, 'NOT_BLANK', 0, 0, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, "NOT_BLANK", 0, 0, 3);
+  ret = detect_record(array3, 'NOT_BLANK', 0, 0, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, "NOT_BLANK", 0, 0, 3);
+  ret = detect_record(array4, 'NOT_BLANK', 0, 0, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, "NOT_BLANK", 0, 0, 3);
+  ret = detect_record(array5, 'NOT_BLANK', 0, 0, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, "NOT_BLANK", 0, 0, 3);
+  ret = detect_record(array6, 'NOT_BLANK', 0, 0, 3);
   Log.debug(`ret=${ret}`);
   //
-  Log.debug(`================`);
-  //  
-  ret = detect_record(array, "NOT_BLANK", 0, 1, 2);
+  Log.debug('================');
+  //
+  ret = detect_record(array, 'NOT_BLANK', 0, 1, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, "NOT_BLANK", 0, 1, 2);
+  ret = detect_record(array2, 'NOT_BLANK', 0, 1, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, "NOT_BLANK", 0, 1, 3);
+  ret = detect_record(array3, 'NOT_BLANK', 0, 1, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, "NOT_BLANK", 0, 1, 3);
+  ret = detect_record(array4, 'NOT_BLANK', 0, 1, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, "NOT_BLANK", 0, 1, 3);
+  ret = detect_record(array5, 'NOT_BLANK', 0, 1, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, "NOT_BLANK", 0, 1, 3);
+  ret = detect_record(array6, 'NOT_BLANK', 0, 1, 3);
   Log.debug(`ret=${ret}`);
   //
-  Log.debug(`================`);
-  //  
-  ret = detect_record(array, "NOT_BLANK", 0, 2, 2);
+  Log.debug('================');
+  //
+  ret = detect_record(array, 'NOT_BLANK', 0, 2, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, "NOT_BLANK", 0, 2, 2);
+  ret = detect_record(array2, 'NOT_BLANK', 0, 2, 2);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, "NOT_BLANK", 0, 2, 3);
+  ret = detect_record(array3, 'NOT_BLANK', 0, 2, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, "NOT_BLANK", 0, 2, 3);
+  ret = detect_record(array4, 'NOT_BLANK', 0, 2, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, "NOT_BLANK", 0, 2, 3);
+  ret = detect_record(array5, 'NOT_BLANK', 0, 2, 3);
   Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, "NOT_BLANK", 0, 2, 3);
+  ret = detect_record(array6, 'NOT_BLANK', 0, 2, 3);
   Log.debug(`ret=${ret}`);
 
   //
-
 }
 
-function test_arrayShape(){
+function test_arrayShape() {
   const array = [[], []];
-  const array2 = [["A"], []];
-  const array3 = [[], ["A"], []];
-  const array4 = [[], ["A"], ['B']];
-  const array5 = [[], ["A"], ['B'], []];
-  const array6 = [[], ["A"], [], ['B'], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
   ret = arrayShape(array);
@@ -112,16 +110,15 @@ function test_arrayShape(){
 
   ret = arrayShape(array6);
   Log.debug(`ret=${ret}`);
-
 }
 
-function test_getRelativeCordinatesOfTopLeft_simple(){
+function test_getRelativeCordinatesOfTopLeft_simple() {
   const array = [[], []];
-  const array2 = [["A"], []];
-  const array3 = [[], ["A"], []];
-  const array4 = [[], ["A"], ['B']];
-  const array5 = [[], ["A"], ['B'], []];
-  const array6 = [[], ["A"], [], ['B'], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
   let start_x;
@@ -133,40 +130,40 @@ function test_getRelativeCordinatesOfTopLeft_simple(){
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
-  
+
   [size, len_max, len_min] = arrayShape(array2);
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array2, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
-  
+
   [size, len_max, len_min] = arrayShape(array3);
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
-  
+
   [size, len_max, len_min] = arrayShape(array4);
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
-  
+
   [size, len_max, len_min] = arrayShape(array5);
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
-  
+
   [size, len_max, len_min] = arrayShape(array6);
   Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
   Log.debug(`ret=${ret}`);
 }
 
-function test_getRelativeCordinatesOfBottomLeft_simple(){
+function test_getRelativeCordinatesOfBottomLeft_simple() {
   const array = [[], []];
-  const array2 = [["A"], []];
-  const array3 = [[], ["A"], []];
-  const array4 = [[], ["A"], ['B']];
-  const array5 = [[], ["A"], ['B'], []];
-  const array6 = [[], ["A"], [], ['B'], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
   let start_x;
@@ -215,13 +212,13 @@ function test_getRelativeCordinatesOfBottomLeft_simple(){
   Log.debug(`ret=${ret}`);
 }
 
-function test_getRelativeCordinatesOfTLandBL(){
+function test_getRelativeCordinatesOfTLandBL() {
   const array = [[], []];
-  const array2 = [["A"], []];
-  const array3 = [[], ["A"], []];
-  const array4 = [[], ["A"], ['B']];
-  const array5 = [[], ["A"], ['B'], []];
-  const array6 = [[], ["A"], [], ['B'], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
 
@@ -244,10 +241,9 @@ function test_getRelativeCordinatesOfTLandBL(){
   Log.debug(`ret=${ret}`);
 }
 
-function test_get_column_code(){
-  [null, '', 'A','Z','a','z', 'AA', 'ZZ'].map( ch => {
+function test_get_column_code() {
+  [null, '', 'A', 'Z', 'a', 'z', 'AA', 'ZZ'].map((ch) => {
     const code = get_column_number(ch);
     Log.debug(`ch=${ch} code=${code}`);
   });
 }
-

@@ -1,3 +1,9 @@
+function configADD_UNDER_ROW(){
+  return 1;
+}
+function configREWRITE(){
+  return 2;
+}
 function get_config_ss_id() {
   const ss_id = "1KtGdnnpj8k_bkxfYITalK193nRlVXiN0o_YiASO5KNs"
   return ss_id
@@ -8,6 +14,7 @@ function get_config_sheetname(){
 
 function get_values_from_config_sheet_x(){
   const sheet = get_config_sheet()
+  Logger.log(`YKLiba_Config.js get_values_from_config_sheet_x 0 sheet=${sheet}`)
   return get_values_from_config_sheet(sheet)
 }
 
