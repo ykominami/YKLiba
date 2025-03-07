@@ -49,9 +49,14 @@ function get_simple_rows(sheet, maxRange = null) {
   const range = get_simple_rows_range(sheet);
   let values = [];
   Logger.log(`YKLiba_simple.js get_simple_rows 0 range=${range}`);
-  if (range !== null && maxRange !== null) {
-    newRange = adjustRange(range, maxRange.h, maxRange.w)
-    values = newRange.getValues();
+  if (range !== null){
+    if (maxRange !== null) {
+      newRange = adjustRange(range, maxRange.h, maxRange.w)
+      values = newRange.getValues();
+    }
+    else{
+      values = range.getValues();
+    }
     Logger.log(`YKLiba_simple.js get_simple_rows 1`);
   }
   return values;

@@ -3,7 +3,19 @@ function isNullOrWhitespace(arg){
 }
 
 function isAfterDate(date1, date2){
-  return date1.getTime() < date2.getTime();
+  let time1, time2;
+  try{
+    time1 = date1.getTime();
+  } catch(e){
+    time1 = date1;
+  }
+  try{
+    time2 = date2.getTime();
+  } catch(e){
+    time2 = date2;
+  }
+  
+  return time1 < time2;
 }
 
 function is_undefined(obj){

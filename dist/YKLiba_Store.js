@@ -30,12 +30,79 @@ class Store {
     return Store.stores[index][key];
   }
 
-  static add_level_2(store_index, base_name, hash){
-    Store.stores[store_index] = {};
-    Store.stores[store_index][base_name] = hash;
+  static keys(index){
+    return Object.keys( Store.sores[index] );
+  }
+
+  static add_level_2(store_index, index, hash){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    Store.stores[store_index][index] = hash;
+  }
+  static  set_level_2(store_index, index, key, value){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    Store.stores[store_index][index][key] = value;
   }
   static  get_level_2(store_index, index, key){
-    Store.stores[store_index][index][key];
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    return Store.stores[store_index][index][key];
+  }
+
+  static add_level_3(store_index, index, base_name, hash){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    Store.stores[store_index][index][base_name] = hash;
+  }
+  static  set_level_3(store_index, index, base_name, key, value){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    if( (typeof Store.stores[store_index][index][base_name]) === "undefined" ){
+      Store.stores[store_index][index][base_name] = {};
+    }
+    Store.stores[store_index][index][base_name][key] = value;
+  }
+  static  get_level_3(store_index, index, base_name, key){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    if( (typeof Store.stores[store_index][index][base_name]) === "undefined" ){
+      Store.stores[store_index][index][base_name] = {};
+    }
+    return Store.stores[store_index][index][base_name][key];
+  }
+  static  keys_level_3(store_index, index, base_name){
+    if( (typeof Store.stores[store_index]) === "undefined" ){
+      Store.stores[store_index] = {};
+    }
+    if( (typeof Store.stores[store_index][index]) === "undefined" ){
+      Store.stores[store_index][index] = {};
+    }
+    if( (typeof Store.stores[store_index][index][base_name]) === "undefined" ){
+      Store.stores[store_index][index][base_name] = {};
+    }
+    return Object.keys( Store.stores[store_index][index][base_name] );
   }
 }
 this.Store = Store;
