@@ -372,15 +372,22 @@ function is_equal_array(arrayA, arrayB) {
 }
 
 function getMaxAndMin(array) {
+  for(let i=0; i<array.length; i++){
+    if( array[i] < 0){
+      throw new Error(`getMaxAndMin array[${i}]=${array[i]}`);
+    }
+  }
+  Logger.log(`getMaxAndMin array=${array}`)
   const aryMax = function (a, b) { return Math.max(a, b); };
   const aryMin = function (a, b) { return Math.min(a, b); };
   const max = array.reduce(aryMax);
   const min = array.reduce(aryMin);
 
+  Logger.log(`getMaxAndMin max=${max} min=${min}`)
   return [max, min];
 }
 
-function getMaxAndMinFromMestedArray(array, op) {
+function getMaxAndMinFromNestedArray(array, op) {
   const aryMax = function (a, b) {
     if (op(a) >= op(b)) {
       return a;
