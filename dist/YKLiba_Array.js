@@ -169,11 +169,37 @@ function get_reform_data(row_data) {
   });
 }
 
-function output_to_document(document, content) {
-  const body = document.getActiveTab().asDocumentTab().getBody();
-  body.appendParagraph(content);
-}
+/**
+ * Googleドキュメントに文字列を追加する
+ *
+ * @param {object} doc Googleドキュメント
+ * @param {string} text 追加する文字列
+ * @return {number} 追加結果（0: 成功, 1: 文字列長0, -1: 失敗）
+ */
+function output_to_document(doc, text) {
+  // 返値を種類別に変数に保持
+  var SUCCESS = 0;
+  var NO_TEXT = 1;
+  var FAILURE = -1;
 
+  // 文字列長が0の場合は追加しない
+  if (text.length === 0) {
+    Logger.log("文字列長が0のため、ドキュメントへの追加をスキップしました。");
+    return NO_TEXT;
+  }
+
+  try {
+    // 本文を取得
+    var body = doc.getBody();
+    // 文字列を追加
+    body.appendParagraph(text);
+    Logger.log("ドキュメントへの文字列追加に成功しました。");
+    return SUCCESS;
+  } catch (e) {
+    Logger.log("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
+    return FAILURE;
+  }
+}
 function linkedRegion(values, op) {
   if (values === null) {
     return [];
@@ -372,11 +398,6 @@ function is_equal_array(arrayA, arrayB) {
 }
 
 function getMaxAndMin(array) {
-  for(let i=0; i<array.length; i++){
-    if( array[i] < 0){
-      throw new Error(`getMaxAndMin array[${i}]=${array[i]}`);
-    }
-  }
   Logger.log(`getMaxAndMin array=${array}`)
   const aryMax = function (a, b) { return Math.max(a, b); };
   const aryMin = function (a, b) { return Math.min(a, b); };

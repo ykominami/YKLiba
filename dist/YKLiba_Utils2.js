@@ -5,12 +5,22 @@ function isNullOrWhitespace(arg){
 function isAfterDate(date1, date2){
   let time1, time2;
   try{
-    time1 = date1.getTime();
+    if( typeof(date1) === "number" ){
+      time1 = date1;
+    }
+    else{
+      time1 = date1.getTime();
+    }
   } catch(e){
     time1 = date1;
   }
   try{
-    time2 = date2.getTime();
+    if( typeof(date2) === "number" ){
+      time2 = date2;
+    }
+    else{
+      time2 = date2.getTime();
+    }
   } catch(e){
     time2 = date2;
   }
