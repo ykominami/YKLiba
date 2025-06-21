@@ -65,13 +65,17 @@ function get_folder_id_by_key(key, arg_folder_info_hash = null){
   const folder_info = folder_info_hash[key]
   return folder_info.folder_id
 }
-
-function get_folder_by_id(folder_id){
-  return DriveApp.getFolderById(folder_id)
+function x(){
+  folderId = "1QZo7uAsrFbM7hdHX7B7Q0ivTuSmtFbE-"
+  let folder = get_folder_by_id(folderId)
+  Logger.log(`folder=${folder}`)
+}
+function get_folder_by_id(folderId){
+  return DriveApp.getFolderById(folderId)
 }
 
 function get_folder_by_key(key){
-  const folder_id = get_folder_id_by_key(key)
-  return get_folder_by_id(folder_id)
+  const folderId = get_folder_id_by_key(key)
+  return get_folder_by_id(folderId)
 }
 
