@@ -23,54 +23,12 @@ class Config0 {
     return this.getValuesFromConfigSheet(sheet)
   }
 
-  static getFolderInfoList(values) {
-    let folderInfoList = []
-    let item
-    for (let i = 0; i < values.length; i++) {
-      item = values[i]
-      if (item[0] === "folder") {
-        folderInfoList << Code.convertItemToFolderInfo(i, item);
-      }
-    }
-
-    const folderInfoHash = {}
-    folderInfoList.forEach((info) => {
-      folderInfoHash[info.name] = info
-    })
-    return [folderInfoList, folderInfoHash]
-  }
-
-  static getFolderInfoHash(values) {
-    const [folderInfoList, folderInfoHash] = this.getFolderInfoList(values)
-    return folderInfoHash
-  }
-
   static getValuesFromConfigSheet(sheet) {
     return Base.getSimpleRows(sheet)
   }
 
-  static getFolderIdByKey(key, argFolderInfoHash = null) {
-    let folderInfoHash
-    if (argFolderInfoHash === null) {
-      const values = this.getValuesFromConfigSheetX()
-      Log.debug(values)
-      folderInfoHash = this.getFolderInfoHash(values)
-    }
-    else {
-      folderInfoHash = argGetFolderInfoHash
-    }
-    Log.debug(folderInfoHash)
-    const folderInfo = folderInfoHash[key]
-    return folderInfo.folder_id
-  }
-
   static getFolderById(folderId) {
     return DriveApp.getFolderById(folderId)
-  }
-
-  static getFolderByKey(key) {
-    const folderId = this.getFolderIdByKey(key)
-    return this.getFolderById(folderId)
   }
 }
 
