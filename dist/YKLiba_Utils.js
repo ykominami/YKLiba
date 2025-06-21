@@ -203,12 +203,6 @@ function sum_row_and_sum_column(array) {
   return [row_count, column_count];
 }
 
-function test_date_staring() {
-  const today = new Date();
-  const date_str = make_date_string(today);
-  Log.debug(`date_str=${date_str}`);
-}
-
 function make_date_string(date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
