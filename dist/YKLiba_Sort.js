@@ -1,46 +1,46 @@
-function SortCUI_x(env, sort_option_array){
+function SortCUI_x(env, sort_option_array) {
   const config = make_config_2(env, sort_option_array);
-  Log.debug( config );
+  Log.debug(config);
   return SortCUI(config);
 }
 
-function SortCUI(config){
-  let [ss, sheet] = get_spreadsheet(config.ss_id, config.sheet_name);
+function SortCUI(config) {
+  const [ss, sheet] = get_spreadsheet(config.ss_id, config.sheet_name);
   return Sortx(sheet, config);
 }
 
-function SortGUI_x(env, array){
-  const config = make_config_2(env, array);
+function SortGUI_x(env, array) {
+  const config = makeConfig2(env, array);
   return SortGUI(config);
 }
 
-function SortGUI(config){
+function SortGUI(config) {
   const sheet = SpreadsheetApp.getActiveSheet();
   return Sortx(sheet, config);
 }
 
-function Sortx_in_range_x(data_range, sort_options) {
-  let sort_option_array = make_field_condition_2( sort_options );
+function Sortx_in_range_x(dataRange, sortOptions) {
+  const sortOptionArray = make_field_condition_2(sortOptions);
 
-  Log.debug(`Sortx_in_range sort_option_array=${ JSON.stringify(sort_option_array) }`);
-  data_range.activate()
-  .sort(sort_option_array);
-  return data_range;
+  Log.debug(`Sortx_in_range sortOptionArray=${JSON.stringify(sortOptionArray)}`);
+  dataRange.activate()
+    .sort(sortOptionArray);
+  return dataRange;
 }
-function Sortx_in_range(data_range, config) {
-  const column = data_range.getColumn();
+function Sortx_in_range(dataRange, config) {
+  const column = dataRange.getColumn();
 
   Log.debug(`Sortx_in_range config=${JSON.stringify(config)}`);
-  Log.debug(`Sortx_in_range column=${column} config.sort_options=${config.sort_options}`);
+  Log.debug(`Sortx_in_range column=${column} config.sortOptions=${config.sortOptions}`);
 
-  return Sortx_in_range_x(data_range, config.sort_options);
+  return Sortx_in_range_x(dataRange, config.sortOptions);
 }
-function Sortx(sheet,config, adujst=null) {
-  let [header_range, data_range] = get_range_of_header_and_data(sheet,adujst);
-  const range = Sortx_in_range(data_range, config);
+function Sortx(sheet, config, adujst = null) {
+  const [headerRange, dataRange] = get_range_of_header_and_data(sheet, adujst);
+  const range = Sortx_in_range(dataRange, config);
   return range;
 }
-function divide_range(range, arg_adjust=null){
+function divide_range(range, arg_adjust = null) {
   const shape = getRangeShape(range);
   const adjust = get_valid_adjust(arg_adjust);
 
@@ -52,9 +52,8 @@ function divide_range(range, arg_adjust=null){
   return [header_range, data_range];
 }
 
-function sortOp(range, env, sortOption){
+function sortOp(range, env, sortOption) {
   const config = make_config_2(env, sortOption);
   const sortedRange = Sortx_in_range(range, config);
   return sortedRange;
 }
-

@@ -2,19 +2,19 @@ class Log {
   // static log_level
   // UNKNOWN(6)
   // 常に記録されるべき不明なエラー
-  // 
+  //
   // FATAL(5)
   // プログラムをクラッシュさせるような制御不可能なエラー
-  // 
+  //
   // ERROR(4)
   // 制御可能なエラー
-  // 
+  //
   // WARN(3)
   // 警告
-  // 
+  //
   // INFO(2)
   // 一般的な情報
-  // 
+  //
   // DEBUG(1)
   // 低レベルの情報  // DEBUG=
 
@@ -22,60 +22,60 @@ class Log {
    * Returns the log level for unknown messages.
    * @returns {number} Log level for warnings.
    */
-  static UNKNOWN(){ return 6;}
+  static UNKNOWN() { return 6; }
 
   /**
    * Returns the log level for fault messages.
    * @returns {number} Log level for warnings.
    */
-  static FAULT(){ return 5;}
+  static FAULT() { return 5; }
 
   /**
    * Returns the log level for error messages.
    * @returns {number} Log level for warnings.
    */
-  static ERROR(){ return 4;}
+  static ERROR() { return 4; }
 
   /**
    * Returns the log level for warnings.
    * @returns {number} Log level for warnings.
    */
-  static WARN(){ return 3;}
+  static WARN() { return 3; }
 
   /**
    * Returns the log level for informational messages.
    * @returns {number} Log level for informational messages.
    */
-  static INFO(){ return 2;}
+  static INFO() { return 2; }
 
   /**
    * Returns the log level for debug messages.
    * @returns {number} Log level for debug messages.
    */
-  static DEBUG(){ return 1;}
+  static DEBUG() { return 1; }
 
   /**
    * Sets the current log level.
    * @param {number} level - The log level to set.
    */
-  static set_log_level(level){
-    Log.log_level = level;
+  static setLogLevel(level) {
+    Log.logLevel = level;
   }
 
   /**
    * Returns the current log level.
    * @returns {number} The current log level.
    */
-  static log_level(){
-    return Log.log_level;
+  static logLevel() {
+    return Log.logLevel;
   }
 
   /**
    * Returns the current log level.
    * @returns {number} The current log level.
    */
-  static get_log_level(){
-    return Log.log_level;
+  static getLogLevel() {
+    return Log.logLevel;
   }
 
   /**
@@ -83,37 +83,24 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static debug_array(name, array){
-    const ret = is_valid_2d_array(array);
-    if( ret[0] !== true){
+  static debugArray(name, array) {
+    const ret = isValid2dArray(array);
+    if (ret[0] !== true) {
       return;
     }
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.debug(`${name}`);
-      array.map( item => Log.debug(item));
+    if (Log.getLog_Level() <= Log.DEBUG()) {
+      console.error(`${name}`);
+      array.map((item) => console.error(item));
     }
   }
 
-    /**
+  /**
      * Logs a debug message if the log level is set to debug.
      * @param {string} mes - The message to log.
      */
-    static debug(mes){
-      // Log.display_log(`debug ${mes}`)
-      if( Log.get_log_level() <= Log.DEBUG() ){
-        Log.display_log(mes);
-      }
-    }
-
-  /**
-   * Logs a debug message with a name and value if the log level is set to debug.
-   * @param {string} name - The name to display in the log.
-   * @param {*} value - The value to display in the log.
-   */
-  static debug_x(name, value){
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value );
+  static debug(mes) {
+    if (Log.getLogLevel() <= Log.DEBUG()) {
+      console.error(mes);
     }
   }
 
@@ -122,9 +109,21 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static debug_1(name, value){
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}=${value}`);
+  static debugX(name, value) {
+    if (Log.getLogLevel() <= Log.DEBUG()) {
+      console.error(`${name}`);
+      console.error(value);
+    }
+  }
+
+  /**
+   * Logs a debug message with a name and value if the log level is set to debug.
+   * @param {string} name - The name to display in the log.
+   * @param {*} value - The value to display in the log.
+   */
+  static debug1(name, value) {
+    if (Log.getLogLevel() <= Log.DEBUG()) {
+      console.error(`${name}=${value}`);
     }
   }
 
@@ -135,9 +134,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static debug_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static debug2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.DEBUG()) {
+      console.error(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -146,10 +145,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static info_array(name, array){
-    if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
+  static infoArray(name, array) {
+    if (Log.getLogLevel() <= Log.INFO()) {
+      console.info(`${name}`);
+      array.map((item) => console.info(item));
     }
   }
 
@@ -157,9 +156,9 @@ class Log {
    * Logs an informational message if the log level is set to info.
    * @param {string} mes - The message to log.
    */
-  static info(mes){
-    if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(mes);
+  static info(mes) {
+    if (Log.getLogLevel() <= Log.INFO()) {
+      console.info(mes);
     }
   }
 
@@ -168,10 +167,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static info_x(name, value){
-    if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
+  static infoX(name, value) {
+    if (Log.getLogLevel() <= Log.INFO()) {
+      console.info(`${name}`);
+      console.info(value);
     }
   }
 
@@ -180,9 +179,9 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static info_1(name, value){
-    if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}=${value}`);
+  static info1(name, value) {
+    if (Log.getLogLevel() <= Log.INFO()) {
+      console.info(`${name}=${value}`);
     }
   }
 
@@ -193,9 +192,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static info_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.INFO() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static info2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.INFO()) {
+      console.info(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -204,10 +203,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static warn_array(name, array){
-    if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
+  static warn_array(name, array) {
+    if (Log.getLogLevel() <= Log.WARN()) {
+      console.warn(`${name}`);
+      array.map((item) => console.warn(item));
     }
   }
 
@@ -215,9 +214,9 @@ class Log {
    * Logs a warning message if the log level is set to warn.
    * @param {string} mes - The message to log.
    */
-  static warn(mes){
-    if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(mes);
+  static warn(mes) {
+    if (Log.getLogLevel() <= Log.WARN()) {
+      console.warn(mes);
     }
   }
 
@@ -226,10 +225,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static warn_x(name, value){
-    if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
+  static warnX(name, value) {
+    if (Log.getLogLevel() <= Log.WARN()) {
+      console.warn(`${name}`);
+      console.warn(value);
     }
   }
 
@@ -238,9 +237,9 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static warn_1(name, value){
-    if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}=${value}`);
+  static warn1(name, value) {
+    if (Log.getLogLevel() <= Log.WARN()) {
+      console.warn(`${name}=${value}`);
     }
   }
 
@@ -251,9 +250,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static warn_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.WARN() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static warn2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.WARN()) {
+      console.warn(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -262,10 +261,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static error_array(name, array){
-    if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
+  static errorArray(name, array) {
+    if (Log.getLogLevel() <= Log.ERROR()) {
+      Log.error(`${name}`);
+      array.map((item) => console.error(item));
     }
   }
 
@@ -273,9 +272,9 @@ class Log {
    * Logs an error message if the log level is set to error.
    * @param {string} mes - The message to log.
    */
-  static error(mes){
-    if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(mes);
+  static error(mes) {
+    if (Log.getLogLevel() <= Log.ERROR()) {
+      console.error(mes);
     }
   }
 
@@ -284,10 +283,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static error_x(name, value){
-    if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
+  static errorX(name, value) {
+    if (Log.getLogLevel() <= Log.ERROR()) {
+      console.error(`${name}`);
+      console.error(value);
     }
   }
 
@@ -296,9 +295,9 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static error_1(name, value){
-    if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}=${value}`);
+  static error1(name, value) {
+    if (Log.getLogLevel() <= Log.ERROR()) {
+      console.error(`${name}=${value}`);
     }
   }
 
@@ -309,9 +308,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static error_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.ERROR() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static error2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.ERROR()) {
+      console.error(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -320,10 +319,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static fault_array(name, array){
-    if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
+  static faultArray(name, array) {
+    if (Log.getLogLevel() <= Log.FAULT()) {
+      console.error(`${name}`);
+      array.map((item) => console.error(item));
     }
   }
 
@@ -331,9 +330,9 @@ class Log {
    * Logs a fault message if the log level is set to fault.
    * @param {string} mes - The message to log.
    */
-  static fault(mes){
-    if( Log.get_log_level() <= FAULT.FAULT() ){
-      Log.display_log(mes);
+  static fault(mes) {
+    if (Log.getLogLevel() <= Log.FAULT()) {
+      console.error(mes);
     }
   }
 
@@ -342,10 +341,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static fault_x(name, value){
-    if( Log.get_log_level() <= FAULT.FAULT() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
+  static faultX(name, value) {
+    if (Log.getLogLevel() <= FAULT.FAULT()) {
+      console.error(`${name}`);
+      console.error(value);
     }
   }
 
@@ -354,9 +353,9 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static fault_1(name, value){
-    if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}=${value}`);
+  static fault1(name, value) {
+    if (Log.getLogLevel() <= Log.FAULT()) {
+      console.error(`${name}=${value}`);
     }
   }
 
@@ -367,9 +366,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static fault_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.FAULT() ){
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static fault2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.FAULT()) {
+      console.error(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -378,10 +377,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
    */
-  static unknown_array(name, array){
-    if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
+  static unknownArray(name, array) {
+    if (Log.getLogLevel() <= Log.UNKNOWN()) {
+      console.error(`${name}`);
+      array.map((item) => console.error(item));
     }
   }
 
@@ -389,9 +388,9 @@ class Log {
    * Logs an unknown message if the log level is set to unknown.
    * @param {string} mes - The message to log.
    */
-  static unknown(mes){
-    if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(mes);
+  static unknown(mes) {
+    if (Log.getLogLevel() <= Log.UNKNOWN()) {
+      console.error(mes);
     }
   }
 
@@ -400,10 +399,10 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static unknown_x(name, value){
-    if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
+  static unknownX(name, value) {
+    if (Log.getLogLevel() <= Log.UNKNOWN()) {
+      console.error(`${name}`);
+      console.error(value);
     }
   }
 
@@ -412,9 +411,9 @@ class Log {
    * @param {string} name - The name to display in the log.
    * @param {*} value - The value to display in the log.
    */
-  static unknown_1(name, value){
-    if( Log.get_log_level() <= Log.UNKNOWN() ){
-      Log.display_log(`${name}=${value}`);
+  static unknown1(name, value) {
+    if (Log.getLogLevel() <= Log.UNKNOWN()) {
+      console.error(`${name}=${value}`);
     }
   }
 
@@ -425,9 +424,9 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static unknownt_2(name, value, name2, value2){
-    if( Log.get_log_level() <= Log.UNKNOWN() ) {
-      Log.display_log(`${name}=${value} ${name2}=${value2}`);
+  static unknownt2(name, value, name2, value2) {
+    if (Log.getLogLevel() <= Log.UNKNOWN()) {
+      console.error(`${name}=${value} ${name2}=${value2}`);
     }
   }
 
@@ -436,11 +435,9 @@ class Log {
    * @param {Array} array - The 2D array to log.
    * @param {string} name - The name to display in the log.
    */
-  static displayx_array(array, name){
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`);
-      array.map( item => Log.display_log(item));
-    }
+  static displayxArray(array, name) {
+    console.log(`${name}`);
+    array.map((item) => console.log(item));
   }
 
   /**
@@ -448,32 +445,37 @@ class Log {
    * @param {*} value - The value to display in the log.
    * @param {string} name - The name to display in the log.
    */
-  static displayx(value, name){
-    if( Log.get_log_level() <= Log.DEBUG() ){
-      Log.display_log(`${name}`);
-      Log.display_log( value);
-    }
+  static displayX(value, name) {
+    console.log(`${name}`)
+    console.log(value);
   }
 
-  static display_log(message ){
+  static displayLog(message) {
     Log.display(message, 'CUI', true);
   }
 
-  static display_alert(message){
+  static displayAlert(message) {
     Log.display(message, 'GUI', true);
   }
 
-  static display(message, kind, mode){
-    if(mode != true){
+  static display(message, kind, mode) {
+    if (mode != true) {
       return;
     }
-    if(kind == "GUI"){
+    if (kind == 'GUI') {
       const ui = SpreadsheetApp.getUi();
-      ui.alert( message );
+      ui.alert(message);
+    } else {
+      console.log(message);
     }
-    else{
-      Logger.log( message );    
-    }
+  }
+  static testConsole() {
+    console.info('INFO')
+    console.log('LOG')
+    console.warn('WARN')
+    console.error('ERROR')
+    //console.debug('DEBUG')
+    //console.fatal('FATAL')
   }
 }
 this.Log = Log;
