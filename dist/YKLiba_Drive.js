@@ -11,8 +11,8 @@ function get_file(folder, name) {
   files = folder.getFilesByName(name);
   while (files.hasNext()) {
     const file = files.next();
-    Logger.log(file.getName());
-    Logger.log(file.getId());
+    Log.debug(file.getName());
+    Log.debug(file.getId());
     return file;
   }
   return null;

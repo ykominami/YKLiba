@@ -12,14 +12,14 @@ class Config0 {
 
   static getValuesFromConfigSheetX() {
     const sheet = this.getConfigSheet()
-    Logger.log(`YKLiba_Config.js getValuesFromConfigSheetX 0 sheet=${sheet}`)
+    Log.debug(`YKLiba_Config.js getValuesFromConfigSheetX 0 sheet=${sheet}`)
     return this.getValuesFromConfigSheet(sheet)
   }
 
   static getValuesFromConfigSheetY() {
     const sheetname = PropertiesService.getScriptProperties().getProperty('CONFIG2_SHEETNAME');
     const sheet = this.getConfigSheet(sheetname);
-    Logger.log(`YKLiba_Config.js getValuesFromConfigSheetY 0 sheet=${sheet}`)
+    Log.debug(`YKLiba_Config.js getValuesFromConfigSheetY 0 sheet=${sheet}`)
     return this.getValuesFromConfigSheet(sheet)
   }
 

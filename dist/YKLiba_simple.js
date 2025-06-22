@@ -48,7 +48,7 @@ function adjustRange(range, maxH, maxW){
 function get_simple_rows(sheet, maxRange = null) {
   const range = get_simple_rows_range(sheet);
   let values = [];
-  Logger.log(`YKLiba_simple.js get_simple_rows 0 range=${range}`);
+  Log.debug(`YKLiba_simple.js get_simple_rows 0 range=${range}`);
   if (range !== null){
     if (maxRange !== null) {
       newRange = adjustRange(range, maxRange.h, maxRange.w)
@@ -57,7 +57,7 @@ function get_simple_rows(sheet, maxRange = null) {
     else{
       values = range.getValues();
     }
-    Logger.log(`YKLiba_simple.js get_simple_rows 1`);
+    Log.debug(`YKLiba_simple.js get_simple_rows 1`);
   }
   return values;
 }

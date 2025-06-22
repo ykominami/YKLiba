@@ -158,16 +158,16 @@ class Arrayx {
     var NO_TEXT = 1;
     var FAILURE = -1;
     if (text.length === 0) {
-      Logger.log("文字列長が0のため、ドキュメントへの追加をスキップしました。");
+      Log.error("文字列長が0のため、ドキュメントへの追加をスキップしました。");
       return NO_TEXT;
     }
     try {
       var body = doc.getBody();
       body.appendParagraph(text);
-      Logger.log("ドキュメントへの文字列追加に成功しました。");
+      Log.debug("ドキュメントへの文字列追加に成功しました。");
       return SUCCESS;
     } catch (e) {
-      Logger.log("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
+      Log.error("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
       return FAILURE;
     }
   }
@@ -342,12 +342,12 @@ class Arrayx {
   }
 
   static getMaxAndMin(array) {
-    Logger.log(`getMaxAndMin array=${array}`)
+    Log.debug(`getMaxAndMin array=${array}`)
     const aryMax = function (a, b) { return Math.max(a, b); };
     const aryMin = function (a, b) { return Math.min(a, b); };
     const max = array.reduce(aryMax);
     const min = array.reduce(aryMin);
-    Logger.log(`getMaxAndMin max=${max} min=${min}`)
+    Log.debug(`getMaxAndMin max=${max} min=${min}`)
     return [max, min];
   }
 
