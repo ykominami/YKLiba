@@ -11,14 +11,14 @@ function get_config_sheet(sheetname = null){
 
 function get_values_from_config_sheet_x(){
   const sheet = get_config_sheet()
-  Log.debug(`YKLiba_Config.js get_values_from_config_sheet_x 0 sheet=${sheet}`)
+  Logger.log(`YKLiba_Config.js get_values_from_config_sheet_x 0 sheet=${sheet}`)
   return get_values_from_config_sheet(sheet)
 }
 
 function get_values_from_config_sheet_y(){
   const sheetname = PropertiesService.getScriptProperties().getProperty('CONFIG2_SHEETNAME');
   const sheet = get_config_sheet(sheetname);
-  Log.debug(`YKLiba_Config.js get_values_from_config_sheet_y 0 sheet=${sheet}`)
+  Logger.log(`YKLiba_Config.js get_values_from_config_sheet_y 0 sheet=${sheet}`)
   return get_values_from_config_sheet(sheet)
 }
 

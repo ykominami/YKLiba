@@ -12,8 +12,8 @@ class Drive {
     files = folder.getFilesByName(name);
     while (files.hasNext()) {
       const file = files.next();
-      Log.debug(file.getName());
-      Log.debug(file.getId());
+      Logger.log(file.getName());
+      Logger.log(file.getId());
       return file;
     }
     return null;
