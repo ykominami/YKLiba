@@ -49,7 +49,7 @@ class Simple {
   static getSimpleRows(sheet, maxRange = null) {
     const range = this.getSimpleRowsRange(sheet);
     let values = [];
-    Logger.log(`YKLiba_simple.js getSimpleRows 0 range=${range}`);
+    Log.debug(`YKLiba_simple.js getSimpleRows 0 range=${range}`);
     if (range !== null) {
       if (maxRange !== null) {
         const newRange = this.adjustRange(range, maxRange.h, maxRange.w);
@@ -58,7 +58,7 @@ class Simple {
       else {
         values = range.getValues();
       }
-      Logger.log(`YKLiba_simple.js getSimpleRows 1`);
+      Log.debug(`YKLiba_simple.js getSimpleRows 1`);
     }
     return values;
   }
