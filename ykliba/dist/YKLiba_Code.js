@@ -19,7 +19,7 @@ function get_data_as_records_with_header(env, adjust = null) {
 }
 
 function get_records_with_header(sheet, adjust = null) {
-  Logger.log(`YKLiba_Code.gs get_records_with_header adjust=${adjust}`)
+  YKLiblog.Log.debug(`YKLiba_Code.gs get_records_with_header adjust=${adjust}`)
   const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
   const header = header_range.getValues().pop();
   const data = data_range.getValues();
@@ -66,20 +66,20 @@ function transformRange2(range, height, width){
   c2 = shape.c;
   h2 = height;
   w2 = width;
-  Logger.log(`transformRange2 r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
+  YKLiblog.Log.debug(`transformRange2 r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
   return range.offset(r2, c2, h2, w2);
 }
 
 function transformRange(range, argAdjust){
-  Logger.log(`transformRange range=${range}`);
-  Logger.log(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
+  YKLiblog.Log.debug(`transformRange range=${range}`);
+  YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
   const shape = getRangeShape(range)
-  Logger.log(`transformRange shape=${shape}`);
-  Logger.log(`transformRange shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
-  Logger.log(`transformRange argAdjust=${argAdjust}`);
+  YKLiblog.Log.debug(`transformRange shape=${shape}`);
+  YKLiblog.Log.debug(`transformRange shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
+  YKLiblog.Log.debug(`transformRange argAdjust=${argAdjust}`);
   const adjust = get_valid_adjust(argAdjust);
-  Logger.log(`transformRange adjust=${adjust}`);
-  Logger.log(`transformRange adjust.r=${adjust.r} adjust.c=${adjust.c} adjust.h=${adjust.h} adjust.w=${adjust.w}`);
+  YKLiblog.Log.debug(`transformRange adjust=${adjust}`);
+  YKLiblog.Log.debug(`transformRange adjust.r=${adjust.r} adjust.c=${adjust.c} adjust.h=${adjust.h} adjust.w=${adjust.w}`);
   let r = adjust.r;
   if( r == null){ r = 0 }
   let c = adjust.c; 
@@ -92,16 +92,16 @@ function transformRange(range, argAdjust){
   let c2 = c;
   let h2= shape.h + h;
   let w2 = shape.w + w
-  Logger.log(`transformRange r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
+  YKLiblog.Log.debug(`transformRange r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
   return range.offset(r2, c2, h2, w2);
 }
 
 function get_range_of_header_and_data(sheet, argAdjust = null) {
   const range = getValidRange(sheet);
-  Logger.log(`YKLiba_Code.js get_range_of_header_and_data range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
+  YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
   const shape = getRangeShape(range);
-  Logger.log(`YKLiba_Code.js get_range_of_header_and_data shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
-  Logger.log(`YKLiba_Code.js get_range_of_header_and_data argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h} argAdjust.w=${argAdjust.w}`);
+  YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
+  YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h} argAdjust.w=${argAdjust.w}`);
   const newRange = transformRange(range, argAdjust)
   const height = newRange.getHeight();
   const headerRange = newRange.offset(0, 0, 1);
@@ -111,7 +111,7 @@ function get_range_of_header_and_data(sheet, argAdjust = null) {
 }
 
 function get_range_of_header_and_data_with_width(sheet, adjust = null) {
-  Logger.log(`YKLiba_Code.js get_range_of_header_and_data_with_width argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
+  YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data_with_width argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
   
   const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
   const shape = getRangeShape(data_range);
@@ -128,7 +128,7 @@ function get_records_with_header_from_sheet_first(ss_id, sheet_name, adjust = nu
 }
 
 function set_format_to_named_column(sheet, column_name, format, adjust = null) {
-  Logger.log(`YKLiba_Code.js set_format_to_named_column  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
+  YKLiblog.Log.debug(`YKLiba_Code.js set_format_to_named_column  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
   const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
   const headers = header_range.getValues().pop();
   const index = headers.indexOf(column_name);

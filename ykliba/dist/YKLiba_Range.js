@@ -13,7 +13,7 @@ function getValidRange(sheet) {
   const [range, values] = getRangeAndValues(sheet);
   if ((range !== null && typeof (range) !== 'undefined') && values !== null) {
     const shape = getRangeShape(range);
-    const tlRelative = getRelativeCordinatesOfTopLeft(values);
+    const tlRelative = getRelativeCoordinatesOfTopLeft(values);
 
     const newHeight = shape.h - tlRelative.y;
     const newWidth = shape.w - tlRelative.x;
@@ -28,7 +28,7 @@ function getRangeShape(range) {
   const height = range.getHeight();
   const width = range.getWidth();
 
-  return makeShape({
+  return Misc.makeShape({
     r: row, c: column, h: height, w: width,
   });
 }
@@ -43,16 +43,14 @@ function getColumn(dataRange, index) {
 }
 
 function insertOneRow(sheet, argAdjust = null) {
-  const [header_range, dataRange] = getRangeOfHeaderAndData(sheet, argAdjust);
+  const [header_range, dataRange] = Code.getRangeOfHeaderAndData(sheet, argAdjust);
   const shape = getRangeShape(dataRange);
   const targetRange = dataRange.offset(0, 0, 1, shape.w);
   targetRange.insertCells(SpreadsheetApp.Dimension.COLUMNS);
 }
 
 function grouping(values, op) {
-  // Log.display_log(values)
   return values.reduce((hash, curVal, index) => {
-    // Log.display_log(curVal)
 
     const [key, value] = op(curVal);
     if (typeof (hash[key]) === 'undefined') {
@@ -97,11 +95,10 @@ function divideRangeX(range, grouping_op, link_op) {
   // const index = 0
   // const cond_value = 2
   const values = range.getValues();
-  const result = linkedRegion(values, link_op);
-  // Log.display_log(result)
+  const result = Arrayx.linkedRegion(values, link_op);
   const width = values[0].length;
   const targetRange = range.offset(result[0][0], 0, result[0][1] - result[0][0] + 1, width);
   const shape = getRangeShape(targetRange);
-  dumpObject(shape);
+  Utils.dumpObject(shape);
   return targetRange;
 }

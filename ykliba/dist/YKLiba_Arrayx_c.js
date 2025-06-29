@@ -101,7 +101,7 @@ class Arrayx {
   static getRelativeCoordinatesOfTLandBL(array) {
     const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
-    const tlPoint = Arrax.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
+    const tlPoint = Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
     const blPoint = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array, shape, tlPoint);
     return { tl: tlPoint, bl: blPoint };
   }
@@ -132,7 +132,7 @@ class Arrayx {
   }
 
   static getRelativeCoordinatesOfTLandBlandTRandBR(array) {
-    const shape = Arrax.arrayShape(array);
+    const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
     const tlPoint = Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
     const trPoint = { x: shape.lenMin, y: 0 };
@@ -158,16 +158,16 @@ class Arrayx {
     var NO_TEXT = 1;
     var FAILURE = -1;
     if (text.length === 0) {
-      Logger.log("文字列長が0のため、ドキュメントへの追加をスキップしました。");
+      YKLiblog.Log.debug("文字列長が0のため、ドキュメントへの追加をスキップしました。");
       return NO_TEXT;
     }
     try {
       var body = doc.getBody();
       body.appendParagraph(text);
-      Logger.log("ドキュメントへの文字列追加に成功しました。");
+      YKLiblog.Log.debug("ドキュメントへの文字列追加に成功しました。");
       return SUCCESS;
     } catch (e) {
-      Logger.log("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
+      YKLiblog.Log.error("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
       return FAILURE;
     }
   }
@@ -214,7 +214,7 @@ class Arrayx {
       return [false, 'first element of Array is empty array', 10];
     }
     if (array.length === 1) {
-      ret = Arrax.isValidObject(array[0]);
+      ret = Arrayx.isValidObject(array[0]);
       if (ret[0] === false) {
         return [false, 'first element of Array is null or undefined', 11];
       }
@@ -342,12 +342,12 @@ class Arrayx {
   }
 
   static getMaxAndMin(array) {
-    Logger.log(`getMaxAndMin array=${array}`)
+    YKLiblog.Log.debug(`getMaxAndMin array=${array}`)
     const aryMax = function (a, b) { return Math.max(a, b); };
     const aryMin = function (a, b) { return Math.min(a, b); };
     const max = array.reduce(aryMax);
     const min = array.reduce(aryMin);
-    Logger.log(`getMaxAndMin max=${max} min=${min}`)
+    YKLiblog.Log.debug(`getMaxAndMin max=${max} min=${min}`)
     return [max, min];
   }
 

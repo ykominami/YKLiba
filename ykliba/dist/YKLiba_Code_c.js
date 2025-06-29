@@ -20,7 +20,7 @@ class Code {
   }
 
   static getRecordsWithHeader(sheet, adjust = null) {
-    Logger.log(`YKLiba_Code.gs getRecordsWithHeader adjust=${adjust}`)
+    YKLiblog.Log.debug(`YKLiba_Code.gs getRecordsWithHeader adjust=${adjust}`)
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
     const header = header_range.getValues().pop();
     const data = data_range.getValues();
@@ -68,20 +68,20 @@ class Code {
     const c2 = shape.c;
     const h2 = height;
     const w2 = width;
-    Logger.log(`transformRange2 r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
+    YKLiblog.Log.debug(`transformRange2 r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
     return range.offset(r2, c2, h2, w2);
   }
 
   static transformRange(range, argAdjust){
-    Logger.log(`transformRange range=${range}`);
-    Logger.log(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
+    YKLiblog.Log.debug(`transformRange range=${range}`);
+    YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
     const shape = Range.getRangeShape(range)
-    Logger.log(`transformRange shape=${shape}`);
-    Logger.log(`transformRange shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
-    Logger.log(`transformRange argAdjust=${argAdjust}`);
+    YKLiblog.Log.debug(`transformRange shape=${shape}`);
+    YKLiblog.Log.debug(`transformRange shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
+    YKLiblog.Log.debug(`transformRange argAdjust=${argAdjust}`);
     const adjust = Misc.getValidAdjust(argAdjust);
-    Logger.log(`transformRange adjust=${adjust}`);
-    Logger.log(`transformRange adjust.r=${adjust.r} adjust.c=${adjust.c} adjust.h=${adjust.h} adjust.w=${adjust.w}`);
+    YKLiblog.Log.debug(`transformRange adjust=${adjust}`);
+    YKLiblog.Log.debug(`transformRange adjust.r=${adjust.r} adjust.c=${adjust.c} adjust.h=${adjust.h} adjust.w=${adjust.w}`);
     let r = adjust.r;
     if( r == null){ r = 0 }
     let c = adjust.c; 
@@ -94,16 +94,16 @@ class Code {
     let c2 = c;
     let h2= shape.h + h;
     let w2 = shape.w + w
-    Logger.log(`transformRange r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
+    YKLiblog.Log.debug(`transformRange r2=${r2} c2=${c2} h2=${h2} w2=${w2}`);
     return range.offset(r2, c2, h2, w2);
   }
 
   static getRangeOfHeaderAndData(sheet, argAdjust = null) {
     const range = Range.getValidRange(sheet);
-    Logger.log(`YKLiba_Code.js getRangeOfHeaderAndData range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
+    YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
     const shape = Range.getRangeShape(range);
-    Logger.log(`YKLiba_Code.js getRangeOfHeaderAndData shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
-    Logger.log(`YKLiba_Code.js getRangeOfHeaderAndData argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h} argAdjust.w=${argAdjust.w}`);
+    YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
+    YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h} argAdjust.w=${argAdjust.w}`);
     const newRange = Code.transformRange(range, argAdjust)
     const height = newRange.getHeight();
     const headerRange = newRange.offset(0, 0, 1);
@@ -113,7 +113,7 @@ class Code {
   }
 
   static getRangeOfHeaderAndDataWithWidth(sheet, adjust = null) {
-    Logger.log(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
+    YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
     
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
     const shape = Range.getRangeShape(data_range);
@@ -130,7 +130,7 @@ class Code {
   }
 
   static setFormatToNamedColumn(sheet, column_name, format, adjust = null) {
-    Logger.log(`YKLiba_Code.js setFormatToNamedColumn  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
+    YKLiblog.Log.debug(`YKLiba_Code.js setFormatToNamedColumn  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
     const headers = header_range.getValues().pop();
     const index = headers.indexOf(column_name);
