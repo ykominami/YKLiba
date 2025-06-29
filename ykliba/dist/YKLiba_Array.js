@@ -184,7 +184,7 @@ function output_to_document(doc, text) {
 
   // 文字列長が0の場合は追加しない
   if (text.length === 0) {
-    Logger.log("文字列長が0のため、ドキュメントへの追加をスキップしました。");
+    YKLiblog.Log.debug("文字列長が0のため、ドキュメントへの追加をスキップしました。");
     return NO_TEXT;
   }
 
@@ -193,10 +193,10 @@ function output_to_document(doc, text) {
     var body = doc.getBody();
     // 文字列を追加
     body.appendParagraph(text);
-    Logger.log("ドキュメントへの文字列追加に成功しました。");
+    YKLiblog.Log.debug("ドキュメントへの文字列追加に成功しました。");
     return SUCCESS;
   } catch (e) {
-    Logger.log("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
+    YKLiblog.Log.error("ドキュメントへの文字列追加に失敗しました。エラー: " + e.toString());
     return FAILURE;
   }
 }
@@ -208,10 +208,8 @@ function linkedRegion(values, op) {
     if (currentIndex === 0) {
       if (op(currentValue)) {
         accumlator.push([0, -1]);
-        // Log.display_log(`1`)
       } else {
         accumlator.push([-1, -1]);
-        // Log.display_log(`2`)
       }
     } else {
       array = accumlator[accumlator.length - 1];
@@ -221,19 +219,15 @@ function linkedRegion(values, op) {
           if ((accumlator.length - 1) === currentIndex) {
             array[1] = currentIndex;
           }
-          // Log.display_log(`3`)
         } else {
           array[1] = currentIndex;
-          // Log.display_log(`4`)
         }
       } else if (array[0] === -1) {
         // do nothing
       } else if (array[1] === -1) {
         array[1] = array[0];
-        // Log.display_log(`5`)
       } else {
         accumlator.push([-1, -1]);
-        // Log.display_log(`6`)
       }
     }
     return accumlator;
@@ -398,13 +392,13 @@ function is_equal_array(arrayA, arrayB) {
 }
 
 function getMaxAndMin(array) {
-  Logger.log(`getMaxAndMin array=${array}`)
+  YKLiblog.Log.debug(`getMaxAndMin array=${array}`)
   const aryMax = function (a, b) { return Math.max(a, b); };
   const aryMin = function (a, b) { return Math.min(a, b); };
   const max = array.reduce(aryMax);
   const min = array.reduce(aryMin);
 
-  Logger.log(`getMaxAndMin max=${max} min=${min}`)
+  YKLiblog.Log.debug(`getMaxAndMin max=${max} min=${min}`)
   return [max, min];
 }
 

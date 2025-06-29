@@ -11,8 +11,8 @@ function get_file(folder, name) {
   files = folder.getFilesByName(name);
   while (files.hasNext()) {
     const file = files.next();
-    Logger.log(file.getName());
-    Logger.log(file.getId());
+    YKLiblog.Log.debug(file.getName());
+    YKLiblog.Log.debug(file.getId());
     return file;
   }
   return null;
@@ -32,4 +32,7 @@ function clear_sheet(sheet) {
   if( lastRow > 1 ){
     sheet.deleteRows(1, lastRow);
   }
+}
+function fileSaparator(){
+  return "/"
 }

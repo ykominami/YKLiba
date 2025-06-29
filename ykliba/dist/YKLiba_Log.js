@@ -88,7 +88,7 @@ class Log {
     if (ret[0] !== true) {
       return;
     }
-    if (Log.getLog_Level() <= Log.DEBUG()) {
+    if (Log.getLogLevel() <= Log.DEBUG()) {
       console.error(`${name}`);
       array.map((item) => console.error(item));
     }
@@ -342,7 +342,7 @@ class Log {
    * @param {*} value - The value to display in the log.
    */
   static faultX(name, value) {
-    if (Log.getLogLevel() <= FAULT.FAULT()) {
+    if (Log.getLogLevel() <= Log.FAULT()) {
       console.error(`${name}`);
       console.error(value);
     }
@@ -424,7 +424,7 @@ class Log {
    * @param {string} name2 - The second name to display in the log.
    * @param {*} value2 - The second value to display in the log.
    */
-  static unknownt2(name, value, name2, value2) {
+  static unknown2(name, value, name2, value2) {
     if (Log.getLogLevel() <= Log.UNKNOWN()) {
       console.error(`${name}=${value} ${name2}=${value2}`);
     }

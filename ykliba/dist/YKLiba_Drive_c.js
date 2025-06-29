@@ -12,8 +12,8 @@ class Drive {
     files = folder.getFilesByName(name);
     while (files.hasNext()) {
       const file = files.next();
-      Logger.log(file.getName());
-      Logger.log(file.getId());
+      YKLiblog.Log.debug(file.getName());
+      YKLiblog.Log.debug(file.getId());
       return file;
     }
     return null;
@@ -33,6 +33,9 @@ class Drive {
     if( lastRow > 1 ){
       sheet.deleteRows(1, lastRow);
     }
+  }
+  static fileSeparator(){
+    return "/"
   }
 }
 this.Drive = Drive;
