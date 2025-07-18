@@ -1,3 +1,8 @@
+/**
+ * オブジェクトからシェイプ情報を抽出して返す
+ * @param {Object} obj - シェイプ情報を含むオブジェクト
+ * @returns {Object} シェイプ情報（r, c, h, w）
+ */
 function makeShape(obj) {
   return {
     r: obj.r,
@@ -6,7 +11,12 @@ function makeShape(obj) {
     w: obj.w,
   };
 }
-// function makeRangeAdjust(obj) {
+
+/**
+ * オブジェクトからレンジ調整情報を抽出して返す（makeRangeAdjustの短縮版）
+ * @param {Object} obj - レンジ調整情報を含むオブジェクト
+ * @returns {Object} レンジ調整情報（r, c, h, w）
+ */
 function mRA(obj) {
   return {
     r: obj.r,
@@ -15,10 +25,15 @@ function mRA(obj) {
     w: obj.w,
   };
 }
+
+/**
+ * 調整パラメータを検証し、有効な調整オブジェクトを返す
+ * @param {Object|null} arg_adjust - 調整パラメータ
+ * @returns {Object} 有効な調整オブジェクト
+ */
 function get_valid_adjust(arg_adjust) {
   let adjust;
   if (arg_adjust === null) {
-    // adjust = makeRangeAdjust({
     adjust = mRA({
       r: 0, c: 0, h: 0, w: 0,
     });
@@ -27,6 +42,11 @@ function get_valid_adjust(arg_adjust) {
   }
   return adjust;
 }
+
+/**
+ * get_env関数を生成する関数を作成
+ * @returns {string} get_env関数のコード文字列
+ */
 function make_funcion_get_env() {
   const ssId = get_ss_id();
   const message = `function get_env() {
@@ -39,12 +59,25 @@ function make_funcion_get_env() {
   return message;
 }
 
+/**
+ * 設定オブジェクトを作成
+ * @param {Object} env - 環境設定オブジェクト
+ * @param {...any} fields - フィールド情報
+ * @returns {Object} 設定オブジェクト
+ */
 function make_config(env, ...fields) {
   return {
     displayMode: env.displayMode, ssId: env.ssId, sheetName: env.sheetName, sortOptions: null, columnIndex: env.columnIndex, fields: fields.pop(),
   };
 }
 
+/**
+ * 設定オブジェクトを作成（バージョン2）
+ * @param {Object} env - 環境設定オブジェクト
+ * @param {Object|null} sortOptions - ソートオプション
+ * @param {...any} fields - フィールド情報
+ * @returns {Object} 設定オブジェクト
+ */
 function makeConfig2(env, sortOptions, ...fields) {
   if (sortOptions != null) {
     obj = {
@@ -59,6 +92,11 @@ function makeConfig2(env, sortOptions, ...fields) {
   return obj;
 }
 
+/**
+ * 文字を昇順ソートオプションに変換
+ * @param {string} ch - ソート文字（'a'または'd'）
+ * @returns {boolean} 昇順フラグ（true: 昇順, false: 降順）
+ */
 function convert_ascending_sort_option(ch) {
   sort_char = ch.toLowerCase();
   if (sort_char === 'a') {
@@ -69,6 +107,11 @@ function convert_ascending_sort_option(ch) {
   return sort_option;
 }
 
+/**
+ * 列番号を変換（文字列の場合は数値に変換）
+ * @param {string|number} ch - 列番号または列文字
+ * @returns {number} 列番号
+ */
 function convert_column_number(ch) {
   let column_number = ch;
 
@@ -78,6 +121,11 @@ function convert_column_number(ch) {
   return column_number;
 }
 
+/**
+ * 配列アイテムから昇順ソートオプションを作成
+ * @param {Array} item - [列番号, ソート文字]の配列
+ * @returns {Array} [列番号, 昇順フラグ]の配列
+ */
 function make_ascending_sort_option_in_array(item) {
   const column_number = convert_column_number(item[0]);
   const sort_option = convert_ascending_sort_option(item[1]);
@@ -85,6 +133,11 @@ function make_ascending_sort_option_in_array(item) {
   return [column_number, sort_option];
 }
 
+/**
+ * 配列から昇順ソートオプション配列を作成（バージョン2）
+ * @param {Array} array - ソート情報の配列
+ * @returns {Array} 昇順ソートオプションの配列
+ */
 function make_ascending_sort_option_array_2(array) {
   let sort_char;
   let sort_option;
@@ -104,6 +157,11 @@ function make_ascending_sort_option_array_2(array) {
   return array2;
 }
 
+/**
+ * 配列から昇順ソートオプション配列を作成
+ * @param {Array} array - ソート情報の配列
+ * @returns {Array} 昇順フラグの配列
+ */
 function make_ascending_sort_option_array(array) {
   let sort_char;
   let sort_option;
@@ -124,18 +182,24 @@ function make_ascending_sort_option_array(array) {
   return v;
 }
 
+/**
+ * フィールド条件を作成（バージョン2）
+ * @param {Array} array - ソート情報の配列
+ * @returns {Array} フィールド条件の配列
+ */
 function make_field_condition_2(array) {
-  // Log.debug(`make_field_condition_2 array=${ JSON.stringify(array) }`)
   const sort_option_array = make_ascending_sort_option_array_2(array);
-  // Log.debug(`make_field_condition_2 sort_option_array=${ JSON.stringify(sort_option_array) }`)
-  // return sort_option_array;
   const ret = sort_option_array.filter((item) => item !== null).map((item) => ({ column: item[0], ascending: item[1] }));
-  // Log.debug(`make_field_condition_2 ret=${JSON.stringify(ret)}`);
   return ret;
 }
 
+/**
+ * フィールド条件を作成
+ * @param {number} column_index - 開始列インデックス
+ * @param {Array} array - ソート情報の配列
+ * @returns {Array} フィールド条件の配列
+ */
 function make_field_condition(column_index, array) {
-  // Log.debug(`make_field_condition column_index=${column_index} array=${array}`);
   const ret_array = [];
   const sort_option_array = make_ascending_sort_option_array(array);
   for (let i = 0; i < sort_option_array.length; i++) {

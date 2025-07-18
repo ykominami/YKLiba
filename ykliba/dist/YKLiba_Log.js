@@ -20,19 +20,19 @@ class Log {
 
   /**
    * Returns the log level for unknown messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for unknown messages.
    */
   static UNKNOWN() { return 6; }
 
   /**
    * Returns the log level for fault messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for fault messages.
    */
   static FAULT() { return 5; }
 
   /**
    * Returns the log level for error messages.
-   * @returns {number} Log level for warnings.
+   * @returns {number} Log level for error messages.
    */
   static ERROR() { return 4; }
 
@@ -95,9 +95,9 @@ class Log {
   }
 
   /**
-     * Logs a debug message if the log level is set to debug.
-     * @param {string} mes - The message to log.
-     */
+   * Logs a debug message if the log level is set to debug.
+   * @param {string} mes - The message to log.
+   */
   static debug(mes) {
     if (Log.getLogLevel() <= Log.DEBUG()) {
       console.error(mes);
@@ -450,14 +450,28 @@ class Log {
     console.log(value);
   }
 
+  /**
+   * Displays a message in the console log.
+   * @param {string} message - The message to display.
+   */
   static displayLog(message) {
     Log.display(message, 'CUI', true);
   }
 
+  /**
+   * Displays a message as an alert dialog.
+   * @param {string} message - The message to display.
+   */
   static displayAlert(message) {
     Log.display(message, 'GUI', true);
   }
 
+  /**
+   * Displays a message based on the specified kind and mode.
+   * @param {string} message - The message to display.
+   * @param {string} kind - The display kind ('GUI' for alert, 'CUI' for console).
+   * @param {boolean} mode - Whether to display the message (true to display, false to skip).
+   */
   static display(message, kind, mode) {
     if (mode != true) {
       return;
@@ -469,6 +483,10 @@ class Log {
       console.log(message);
     }
   }
+
+  /**
+   * Tests various console logging methods.
+   */
   static testConsole() {
     console.info('INFO')
     console.log('LOG')

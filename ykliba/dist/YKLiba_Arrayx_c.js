@@ -1,4 +1,10 @@
 class Arrayx {
+  /**
+   * 条件に基づいて値の判定を行う
+   * @param {string} cond - 判定条件 ('NOT_BLANK' または 'BLANK')
+   * @param {*} value - 判定対象の値
+   * @returns {boolean} 判定結果
+   */
   static determine(cond, value) {
     let ret;
     if (value === null) {
@@ -30,6 +36,15 @@ class Arrayx {
     return ret;
   }
 
+  /**
+   * 配列内で指定された条件に一致するレコードを検出する
+   * @param {Array} array - 検索対象の配列
+   * @param {string} cond - 検索条件 ('NOT_BLANK' または 'BLANK')
+   * @param {number} detectIndex - 検索対象の列インデックス
+   * @param {number} startY - 検索開始行
+   * @param {number} h - 検索終了行
+   * @returns {Array} [列インデックス, 行インデックス] の配列
+   */
   static detectRecord(array, cond, detectIndex, startY, h) {
     let index = -1;
     if (startY < 0) {
@@ -45,6 +60,11 @@ class Arrayx {
     return [detectIndex, index];
   }
 
+  /**
+   * 配列の形状情報を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 配列のサイズ情報 {size, lenMax, lenMin}
+   */
   static arrayShape(array) {
     const sizeArray = array.map((list) => list.length);
     let lenMax;
@@ -59,6 +79,13 @@ class Arrayx {
     return { size, lenMax, lenMin };
   }
 
+  /**
+   * 配列の左上座標を取得する（簡易版）
+   * @param {Array} array - 対象配列
+   * @param {Object} shape - 配列の形状情報
+   * @param {Object} startPoint - 開始点
+   * @returns {Object} 左上座標 {x, y}
+   */
   static getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint) {
     let { x } = startPoint;
     let { y } = startPoint;
@@ -71,6 +98,16 @@ class Arrayx {
     return { x, y };
   }
 
+  /**
+   * 配列の左下座標を取得する（簡易版）
+   * @param {Array} array - 対象配列
+   * @param {number} lenMax - 最大長
+   * @param {number} size - 配列サイズ
+   * @param {number} startX - 開始X座標
+   * @param {number} startY - 開始Y座標
+   * @param {number} lenMin - 最小長
+   * @returns {Array} 左下座標 [x, y]
+   */
   static getRelativeCoordinatesOfBottomLeftSimple(array, lenMax, size, startX, startY, lenMin) {
     let x = startX;
     let y = startY;
@@ -84,12 +121,22 @@ class Arrayx {
     return [x, y];
   }
 
+  /**
+   * 配列の左上座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 左上座標 {x, y}
+   */
   static getRelativeCoordinatesOfTopLeft(array) {
     const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
     return Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
   }
 
+  /**
+   * 配列の左下座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Array} 左下座標 [x, y]
+   */
   static getRelativeCoordinatesOfBottomLeft(array) {
     const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
@@ -98,6 +145,11 @@ class Arrayx {
     return blPoint;
   }
 
+  /**
+   * 配列の左上と左下座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 左上と左下座標 {tl, bl}
+   */
   static getRelativeCoordinatesOfTLandBL(array) {
     const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
@@ -106,24 +158,53 @@ class Arrayx {
     return { tl: tlPoint, bl: blPoint };
   }
 
+  /**
+   * 配列の右上座標を取得する（簡易版）
+   * @param {Array} array - 対象配列
+   * @param {Object} shape - 配列の形状情報
+   * @param {Object} startPoint - 開始点
+   * @returns {Object} 右上座標 {x, y}
+   */
   static getRelativeCoordinatesOfTopRightSimple(array, shape, startPoint) {
     return { x: shape.lenMin, y: 0 };
   }
 
+  /**
+   * 配列の右下座標を取得する（簡易版）
+   * @param {Array} array - 対象配列
+   * @param {Object} shape - 配列の形状情報
+   * @param {Object} startPoint - 開始点
+   * @returns {Object} 右下座標 {x, y}
+   */
   static getRelativeCoordinatesOfBottomRightSimple(array, shape, startPoint) {
     return { x: shape.lenMin, y: shape.size };
   }
 
+  /**
+   * 配列の右上座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 右上座標 {x, y}
+   */
   static getRelativeCoordinatesOfTopRight(array) {
     const shape = Arrayx.arrayShape(array);
     return { x: shape.lenMin, y: 0 };
   }
 
+  /**
+   * 配列の右下座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 右下座標 {x, y}
+   */
   static getRelativeCoordinatesOfBottomRight(array) {
     const shape = Arrayx.arrayShape(array);
     return { x: shape.lenMin, y: shape.size };
   }
 
+  /**
+   * 配列の右上と右下座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 右上と右下座標 {tr, br}
+   */
   static getRelativeCoordinatesOfTRandBR(array) {
     const shape = Arrayx.arrayShape(array);
     const trShape = { x: shape.lenMin, y: 0 };
@@ -131,6 +212,11 @@ class Arrayx {
     return { tr: trShape, br: brShape };
   }
 
+  /**
+   * 配列の四隅の座標を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Object} 四隅の座標 {tl, bl, tr, br}
+   */
   static getRelativeCoordinatesOfTLandBlandTRandBR(array) {
     const shape = Arrayx.arrayShape(array);
     const startPoint = { x: -1, y: -1 };
@@ -143,6 +229,11 @@ class Arrayx {
     };
   }
 
+  /**
+   * 日付データをフォーマットする
+   * @param {Array} rowData - 日付データの配列
+   * @returns {Array} フォーマットされた日付文字列の配列
+   */
   static getReformData(rowData) {
     return rowData.map((row) => {
       const date = new Date(row);
@@ -153,6 +244,12 @@ class Arrayx {
     });
   }
 
+  /**
+   * ドキュメントにテキストを出力する
+   * @param {Object} doc - Google Docs ドキュメントオブジェクト
+   * @param {string} text - 出力するテキスト
+   * @returns {number} 実行結果 (0: 成功, 1: テキストなし, -1: 失敗)
+   */
   static outputToDocument(doc, text) {
     var SUCCESS = 0;
     var NO_TEXT = 1;
@@ -172,6 +269,12 @@ class Arrayx {
     }
   }
 
+  /**
+   * 連続する領域を検出する
+   * @param {Array} values - 検出対象の配列
+   * @param {Function} op - 判定関数
+   * @returns {Array} 連続領域の開始・終了インデックスの配列
+   */
   static linkedRegion(values, op) {
     if (values === null) {
       return [];
@@ -205,6 +308,11 @@ class Arrayx {
     }, []);
   }
 
+  /**
+   * 1次元配列の妥当性を検証する
+   * @param {Array} array - 検証対象の配列
+   * @returns {Array} [妥当性, メッセージ, エラーコード]
+   */
   static isValid1dArray(array) {
     let ret = Arrayx.isValidObject(array);
     if (ret[0] === false) {
@@ -254,6 +362,11 @@ class Arrayx {
     return [false, 'Unknown', 24];
   }
 
+  /**
+   * 2次元配列の妥当性を検証する
+   * @param {Array} array - 検証対象の配列
+   * @returns {Array} [妥当性, メッセージ, エラーコード]
+   */
   static isValid2dArray(array) {
     let ret = Arrayx.isValidObject(array);
     if (ret[0] === false) {
@@ -299,6 +412,12 @@ class Arrayx {
     }
   }
 
+  /**
+   * 1次元配列の等価性を判定する
+   * @param {Array} arrayA - 比較対象配列A
+   * @param {Array} arrayB - 比較対象配列B
+   * @returns {Array} [等価性, [メッセージ, 詳細情報]]
+   */
   static isEqualArrayOneDim(arrayA, arrayB) {
     const lengthA = arrayA.length;
     const lengthB = arrayB.length;
@@ -313,6 +432,12 @@ class Arrayx {
     return [true, ['same array', 0, 0]];
   }
 
+  /**
+   * 2次元配列の等価性を判定する
+   * @param {Array} arrayA - 比較対象配列A
+   * @param {Array} arrayB - 比較対象配列B
+   * @returns {Array} [等価性, [エラーコード, 詳細情報]]
+   */
   static isEqualArrayTwoDim(arrayA, arrayB) {
     const heightA = arrayA.length;
     const heightB = arrayB.length;
@@ -334,6 +459,12 @@ class Arrayx {
     return [true, [0, 0, 0]];
   }
 
+  /**
+   * 配列の等価性を判定する（1次元・2次元自動判定）
+   * @param {Array} arrayA - 比較対象配列A
+   * @param {Array} arrayB - 比較対象配列B
+   * @returns {Array} [等価性, [詳細情報]]
+   */
   static isEqualArray(arrayA, arrayB) {
     if (typeof (arrayA[0]) === 'object') {
       return Arrayx.isEqualArrayTwoDim(arrayA, arrayB);
@@ -341,6 +472,11 @@ class Arrayx {
     return Arrayx.isEqualArrayOneDim(arrayA, arrayB);
   }
 
+  /**
+   * 配列から最大値と最小値を取得する
+   * @param {Array} array - 対象配列
+   * @returns {Array} [最大値, 最小値]
+   */
   static getMaxAndMin(array) {
     YKLiblog.Log.debug(`getMaxAndMin array=${array}`)
     const aryMax = function (a, b) { return Math.max(a, b); };
@@ -351,6 +487,12 @@ class Arrayx {
     return [max, min];
   }
 
+  /**
+   * ネストした配列から条件に基づく最大値と最小値を取得する
+   * @param {Array} array - 対象配列
+   * @param {Function} op - 比較に使用する関数
+   * @returns {Array} [最大値, 最小値]
+   */
   static getMaxAndMinFromNestedArray(array, op) {
     const aryMax = function (a, b) {
       if (op(a) >= op(b)) {
@@ -369,6 +511,11 @@ class Arrayx {
     return [max, min];
   }
 
+  /**
+   * オブジェクトの妥当性を検証する
+   * @param {*} obj - 検証対象のオブジェクト
+   * @returns {Array} [妥当性, メッセージ]
+   */
   static isValidObject(obj) {
     if (obj === null || typeof obj === 'undefined') {
       return [false, 'object is null or undefined'];

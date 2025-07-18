@@ -1,3 +1,7 @@
+/**
+ * アクティブなスプレッドシートのIDを取得する
+ * @return {string} スプレッドシートのID（アクティブなスプレッドシートがない場合は空文字）
+ */
 function get_ss_id() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let ret = '';
@@ -7,6 +11,12 @@ function get_ss_id() {
   return ret;
 }
 
+/**
+ * 指定されたIDのスプレッドシートとシートを取得する
+ * @param {string} ssId - スプレッドシートのID
+ * @param {string|null} sheetName - シート名（省略時はnull）
+ * @return {Array} [スプレッドシートオブジェクト, シートオブジェクト]
+ */
 function get_spreadsheet(ssId, sheetName = null) {
   const ss = SpreadsheetApp.openById(ssId);
   let sheet = null;
@@ -16,6 +26,12 @@ function get_spreadsheet(ssId, sheetName = null) {
   return [ss, sheet];
 }
 
+/**
+ * 指定されたIDのスプレッドシートとシートを取得する（拡張版）
+ * @param {string} ss_id - スプレッドシートのID
+ * @param {string|null} sheet_name - シート名（省略時はnull）
+ * @return {Array} [スプレッドシートオブジェクト, シートオブジェクト, 全シート配列, シート名をキーとしたオブジェクト]
+ */
 function get_spreadsheet_ex(ss_id, sheet_name = null) {
   const ss = SpreadsheetApp.openById(ss_id);
   let sheet = null;
@@ -30,6 +46,11 @@ function get_spreadsheet_ex(ss_id, sheet_name = null) {
   return [ss, sheet, sheets, sheets_by_name];
 }
 
+/**
+ * 指定されたIDのスプレッドシートの全シート情報を取得する
+ * @param {string} ss_id - スプレッドシートのID
+ * @return {Array} [スプレッドシートオブジェクト, 最初のシートオブジェクト, 全シート配列, シート名をキーとしたオブジェクト]
+ */
 function get_sheets(ss_id) {
   const ss = SpreadsheetApp.openById(ss_id);
   const sheets = ss.getSheets();

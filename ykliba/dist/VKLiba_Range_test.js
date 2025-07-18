@@ -1,3 +1,7 @@
+/**
+ * グループ化機能のテスト関数
+ * 配列の要素を指定されたインデックスでグループ化し、ソートして結果を表示する
+ */
 function testGrouping() {
   const values = [
     [1, 'jkl'],
@@ -24,10 +28,22 @@ function testGrouping() {
   Log.display_log(ret2);
 }
 
+/**
+ * グループ化のヘルパー関数
+ * @param {Array} values - グループ化対象の配列
+ * @param {Function} op - グループ化のキーを取得する関数
+ * @returns {Object} グループ化された結果
+ */
 function testGrouping1(values, op) {
   return grouping(values, (item) => [validString(op(item)), item]);
 }
 
+/**
+ * ソート機能のテスト関数
+ * @param {Array} values - ソート対象の配列
+ * @param {Function} op - ソートのキーを取得する関数
+ * @returns {Array} ソートされた配列
+ */
 function test_sortx(values, op) {
   return values.sort((a, b) => compare_with_string(op(a), op(b)));
 }

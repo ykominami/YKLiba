@@ -1,4 +1,9 @@
 class Rectangle {
+  /**
+   * 2次元配列からマスクパターンを生成する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @returns {Array<Array<number>>} マスクパターン（空文字は0、それ以外は1）
+   */
   static makeMaskPattern(array) {
     const ret_check = is_valid_2d_array(array);
     if (ret_check[0] === false) {
@@ -21,42 +26,112 @@ class Rectangle {
     return buffer;
   }
 
+  /**
+   * 左上角の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyTopLeft(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x + 1] + array[y + 1][x];
   }
 
+  /**
+   * 右上角の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyTopRight(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x - 1] + array[y + 1][x];
   }
 
+  /**
+   * 左下角の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyBottomLeft(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x + 1] + array[y - 1][x];
   }
 
+  /**
+   * 右下角の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyBottomRight(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x - 1] + array[y - 1][x];
   }
 
+  /**
+   * 上辺の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyTopSide(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x + 1] + array[y][x - 1] + array[y + 1][x];
   }
 
+  /**
+   * 下辺の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyBottomSide(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x + 1] + array[y][x - 1] + array[y - 1][x];
   }
 
+  /**
+   * 左辺の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyLeftSide(array, ret_array, x, y) {
     ret_array[y][x] = array[y - 1][x] + array[y][x + 1] + array[y + 1][x];
   }
 
+  /**
+   * 右辺の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyRightSide(array, ret_array, x, y) {
     ret_array[y][x] = array[y - 1][x] + array[y][x - 1] + array[y + 1][x];
   }
 
+  /**
+   * 内部の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} x - X座標
+   * @param {number} y - Y座標
+   */
   static detectAdjacencyInterior(array, ret_array, x, y) {
     ret_array[y][x] = array[y][x - 1] + array[y][x + 1] + array[y + 1][x] + array[y - 1][x];
   }
 
+  /**
+   * 1行の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} width - 幅
+   * @returns {Array<Array>} 更新された結果配列
+   */
   static detectAdjacencyRow(array, ret_array, width) {
     for (let x = 0; x < width; x++) {
       if (x === 0) {
@@ -70,6 +145,12 @@ class Rectangle {
     return ret_array;
   }
 
+  /**
+   * 1列の隣接要素を検出する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @param {Array<Array>} ret_array - 結果を格納する配列
+   * @param {number} height - 高さ
+   */
   static detectAdjacencyColumn(array, ret_array, height) {
     for (let y = 0; y < height; y++) {
       if (y === 0) {
@@ -82,6 +163,11 @@ class Rectangle {
     }
   }
 
+  /**
+   * 2次元配列から隣接要素配列を生成する
+   * @param {Array<Array>} array - 入力2次元配列
+   * @returns {Array<Array<number>>} 隣接要素配列
+   */
   static makeAdjacencyArray(array) {
     const ret_check = is_valid_2d_array(array);
     if (ret_check[0] === false) {

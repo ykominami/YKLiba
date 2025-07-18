@@ -1,3 +1,9 @@
+/**
+ * 値が条件に合致するかどうかを判定する
+ * @param {string} cond 条件 ('NOT_BLANK' または 'BLANK')
+ * @param {any} value 判定する値
+ * @return {boolean} 条件に合致するかどうか
+ */
 function determine(cond, value) {
   let ret;
   if (value === null) {
@@ -33,6 +39,15 @@ function determine(cond, value) {
   return ret;
 }
 
+/**
+ * 配列内で条件に合致するレコードを検出する
+ * @param {Array} array 検索対象の配列
+ * @param {string} cond 条件 ('NOT_BLANK' または 'BLANK')
+ * @param {number} detectIndex 検索する列のインデックス
+ * @param {number} startY 検索開始行
+ * @param {number} h 検索終了行
+ * @return {Array} [detectIndex, 見つかった行のインデックス]
+ */
 function detectRecord(array, cond, detectIndex, startY, h) {
   let index = -1;
   if (startY < 0) {
@@ -48,6 +63,11 @@ function detectRecord(array, cond, detectIndex, startY, h) {
   return [detectIndex, index];
 }
 
+/**
+ * 配列の形状情報を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {size: 行数, lenMax: 最大列数, lenMin: 最小列数}
+ */
 function arrayShape(array) {
   const sizeArray = array.map((list) => list.length);
   let lenMax;
@@ -63,6 +83,13 @@ function arrayShape(array) {
   return { size, lenMax, lenMin };
 }
 
+/**
+ * 配列の左上の座標を取得する（シンプル版）
+ * @param {Array} array 対象の配列
+ * @param {Object} shape 配列の形状情報
+ * @param {Object} startPoint 開始点
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfTopLeftSimple(array, shape, startPoint) {
   let { x } = startPoint;
   let { y } = startPoint;
@@ -75,6 +102,16 @@ function getRelativeCordinatesOfTopLeftSimple(array, shape, startPoint) {
   return { x, y };
 }
 // function detect_record(array, cond, detect_index, start_y, h){
+/**
+ * 配列の左下の座標を取得する（シンプル版）
+ * @param {Array} array 対象の配列
+ * @param {number} lenMax 最大列数
+ * @param {number} size 行数
+ * @param {number} startX 開始列
+ * @param {number} startY 開始行
+ * @param {number} len_min 最小列数
+ * @return {Array} [x: 列インデックス, y: 行インデックス]
+ */
 function getRelativeCordinatesOfBottomLeftSimple(array, lenMax, size, startX, startY, len_min) {
   let x = startX;
   let y = startY;
@@ -88,6 +125,11 @@ function getRelativeCordinatesOfBottomLeftSimple(array, lenMax, size, startX, st
   return [x, y];
 }
 
+/**
+ * 配列の左上の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfTopLeft(array) {
   // let [size, len_max, len_min] = arrayShape(array);
   const shape = arrayShape(array);
@@ -95,6 +137,11 @@ function getRelativeCordinatesOfTopLeft(array) {
   return getRelativeCordinatesOfTopLeftSimple(array, shape, startPoint);
 }
 
+/**
+ * 配列の左下の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Array} [x: 列インデックス, y: 行インデックス]
+ */
 function getRelativeCordinatesOfBottomLeft(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
@@ -106,6 +153,11 @@ function getRelativeCordinatesOfBottomLeft(array) {
   return blPoint;
 }
 
+/**
+ * 配列の左上と左下の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {tl: 左上座標, bl: 左下座標}
+ */
 function getRelativeCordinatesOfTLandBL(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
@@ -116,24 +168,53 @@ function getRelativeCordinatesOfTLandBL(array) {
   return { tl: tlPoint, bl: blPoint };
 }
 
+/**
+ * 配列の右上の座標を取得する（シンプル版）
+ * @param {Array} array 対象の配列
+ * @param {Object} shape 配列の形状情報
+ * @param {Object} startPoint 開始点
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfTopRight_simple(array, shape, startPoint) {
   return { x: shape.lenMin, y: 0 };
 }
 
+/**
+ * 配列の右下の座標を取得する（シンプル版）
+ * @param {Array} array 対象の配列
+ * @param {Object} shape 配列の形状情報
+ * @param {Object} startPoint 開始点
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfBottomRight_simple(array, shape, startPoint) {
   return { x: shape.lenMin, y: shape.size };
 }
 
+/**
+ * 配列の右上の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfTopRight(array) {
   const shape = arrayShape(array);
   return { x: shape.lenMin, y: 0 };
 }
 
+/**
+ * 配列の右下の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {x: 列インデックス, y: 行インデックス}
+ */
 function getRelativeCordinatesOfBottomRight(array) {
   const shape = arrayShape(array);
   return { x: shape.lenMin, y: shape.size };
 }
 
+/**
+ * 配列の右上と右下の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {tr: 右上座標, br: 右下座標}
+ */
 function getRelativeCordinatesOfTRandBR(array) {
   const shape = arrayShape(array);
   const trShape = { x: shape.lenMin, y: 0 };
@@ -142,6 +223,11 @@ function getRelativeCordinatesOfTRandBR(array) {
   return { tr: trShape, br: brShape };
 }
 
+/**
+ * 配列の四隅の座標を取得する
+ * @param {Array} array 対象の配列
+ * @return {Object} {tl: 左上座標, bl: 左下座標, tr: 右上座標, br: 右下座標}
+ */
 function getRelativeCordinatesOfTLandBlandTRandBR(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
@@ -158,6 +244,11 @@ function getRelativeCordinatesOfTLandBlandTRandBR(array) {
   };
 }
 
+/**
+ * 日付データを整形する
+ * @param {Array} row_data 日付データの配列
+ * @return {Array} 整形された日付文字列の配列 (YYYY/MM/DD形式)
+ */
 function get_reform_data(row_data) {
   return row_data.map((row) => {
     const date = new Date(row);
@@ -171,7 +262,6 @@ function get_reform_data(row_data) {
 
 /**
  * Googleドキュメントに文字列を追加する
- *
  * @param {object} doc Googleドキュメント
  * @param {string} text 追加する文字列
  * @return {number} 追加結果（0: 成功, 1: 文字列長0, -1: 失敗）
@@ -200,6 +290,12 @@ function output_to_document(doc, text) {
     return FAILURE;
   }
 }
+/**
+ * 条件に合致する連続した領域を検出する
+ * @param {Array} values 検索対象の配列
+ * @param {Function} op 条件判定関数
+ * @return {Array} 連続領域の開始・終了インデックスの配列
+ */
 function linkedRegion(values, op) {
   if (values === null) {
     return [];
@@ -234,6 +330,11 @@ function linkedRegion(values, op) {
   }, []);
 }
 
+/**
+ * 1次元配列の妥当性を検証する
+ * @param {Array} array 検証対象の配列
+ * @return {Array} [妥当性, メッセージ, エラーコード]
+ */
 function is_valid_1d_array(array) {
   let ret = is_valid_object(array);
   if (ret[0] === false) {
@@ -292,6 +393,11 @@ function is_valid_1d_array(array) {
   return [false, 'Unknown', 24];
 }
 
+/**
+ * 2次元配列の妥当性を検証する
+ * @param {Array} array 検証対象の配列
+ * @return {Array} [妥当性, メッセージ, エラーコード]
+ */
 function is_valid_2d_array(array) {
   let ret = is_valid_object(array);
   if (ret[0] === false) {
@@ -345,6 +451,12 @@ function is_valid_2d_array(array) {
   }
 }
 
+/**
+ * 1次元配列の等価性を判定する
+ * @param {Array} arrayA 比較対象の配列A
+ * @param {Array} arrayB 比較対象の配列B
+ * @return {Array} [等価性, [メッセージ, 詳細情報]]
+ */
 function is_equal_array_one_dim(arrayA, arrayB) {
   const lengthA = arrayA.length;
   const lengthB = arrayB.length;
@@ -360,6 +472,12 @@ function is_equal_array_one_dim(arrayA, arrayB) {
   return [true, ['same array', 0, 0]];
 }
 
+/**
+ * 2次元配列の等価性を判定する
+ * @param {Array} arrayA 比較対象の配列A
+ * @param {Array} arrayB 比較対象の配列B
+ * @return {Array} [等価性, [エラーコード, 詳細情報]]
+ */
 function is_equal_array_two_dim(arrayA, arrayB) {
   const heightA = arrayA.length;
   const heightB = arrayB.length;
@@ -383,6 +501,12 @@ function is_equal_array_two_dim(arrayA, arrayB) {
   return [true, [0, 0, 0]];
 }
 
+/**
+ * 配列の等価性を判定する
+ * @param {Array} arrayA 比較対象の配列A
+ * @param {Array} arrayB 比較対象の配列B
+ * @return {Array} 等価性判定結果
+ */
 function is_equal_array(arrayA, arrayB) {
   if (typeof (arrayA[0]) === 'object') {
     return is_equal_array_two_dim(arrayA, arrayB);
@@ -391,6 +515,11 @@ function is_equal_array(arrayA, arrayB) {
   return is_equal_array_one_dim(array_a, array_b);
 }
 
+/**
+ * 配列の最大値と最小値を取得する
+ * @param {Array} array 対象の配列
+ * @return {Array} [最大値, 最小値]
+ */
 function getMaxAndMin(array) {
   YKLiblog.Log.debug(`getMaxAndMin array=${array}`)
   const aryMax = function (a, b) { return Math.max(a, b); };
@@ -402,6 +531,12 @@ function getMaxAndMin(array) {
   return [max, min];
 }
 
+/**
+ * ネストした配列から条件に基づいて最大値と最小値を取得する
+ * @param {Array} array 対象の配列
+ * @param {Function} op 比較に使用する関数
+ * @return {Array} [最大値, 最小値]
+ */
 function getMaxAndMinFromNestedArray(array, op) {
   const aryMax = function (a, b) {
     if (op(a) >= op(b)) {

@@ -1,3 +1,8 @@
+/**
+ * ヘッダー行を除いた範囲を取得する
+ * @param {Range} range - 元の範囲
+ * @returns {Range} ヘッダー行を除いた範囲
+ */
 function get_headerless_range(range) {
   const newRange = range.offset(1, 0);
   const shape = getRangeShape(newRange);
@@ -5,6 +10,12 @@ function get_headerless_range(range) {
   return newRange;
 }
 
+/**
+ * 環境設定に基づいてヘッダー付きレコードデータを取得する
+ * @param {Object} env - 環境設定オブジェクト
+ * @param {Object} adjust - 調整パラメータ（オプション）
+ * @returns {Array} ヘッダー付きレコードデータ
+ */
 function get_data_as_records_with_header(env, adjust = null) {
   let ss;
   let values;
@@ -18,6 +29,12 @@ function get_data_as_records_with_header(env, adjust = null) {
   return values;
 }
 
+/**
+ * シートからヘッダー付きレコードデータを取得する
+ * @param {Sheet} sheet - 対象シート
+ * @param {Object} adjust - 調整パラメータ（オプション）
+ * @returns {Array} [ヘッダー範囲, データ範囲, データハッシュ]
+ */
 function get_records_with_header(sheet, adjust = null) {
   YKLiblog.Log.debug(`YKLiba_Code.gs get_records_with_header adjust=${adjust}`)
   const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
@@ -33,6 +50,12 @@ function get_records_with_header(sheet, adjust = null) {
   return [header_range, data_range, data_hash]
 }
 
+/**
+ * 指定されたヘッダーに基づいてレコードデータを取得する
+ * @param {Sheet} sheet - 対象シート
+ * @param {Array} header - ヘッダー配列
+ * @returns {Array} レコードデータの配列
+ */
 function get_record_by_header(sheet, header) {
   // header = ["id","misc","misc2","purchase_date","price","misc3","category","sub_category","title"];
   // Log.debug(`header=${header}`);
@@ -60,6 +83,13 @@ function get_record_by_header(sheet, header) {
   // Log.debug( `Z buffer=${buffer}` );
   return buffer;
 }
+/**
+ * 範囲を指定された高さと幅で変換する
+ * @param {Range} range - 元の範囲
+ * @param {number} height - 新しい高さ
+ * @param {number} width - 新しい幅
+ * @returns {Range} 変換された範囲
+ */
 function transformRange2(range, height, width){
   const shape = getRangeShape(range)
   r2 = shape.r;
@@ -70,6 +100,12 @@ function transformRange2(range, height, width){
   return range.offset(r2, c2, h2, w2);
 }
 
+/**
+ * 範囲を調整パラメータに基づいて変換する
+ * @param {Range} range - 元の範囲
+ * @param {Object} argAdjust - 調整パラメータ
+ * @returns {Range} 変換された範囲
+ */
 function transformRange(range, argAdjust){
   YKLiblog.Log.debug(`transformRange range=${range}`);
   YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
@@ -96,6 +132,12 @@ function transformRange(range, argAdjust){
   return range.offset(r2, c2, h2, w2);
 }
 
+/**
+ * シートからヘッダーとデータの範囲を取得する
+ * @param {Sheet} sheet - 対象シート
+ * @param {Object} argAdjust - 調整パラメータ（オプション）
+ * @returns {Array} [ヘッダー範囲, データ範囲]
+ */
 function get_range_of_header_and_data(sheet, argAdjust = null) {
   const range = getValidRange(sheet);
   YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
@@ -110,6 +152,12 @@ function get_range_of_header_and_data(sheet, argAdjust = null) {
   return [headerRange, dataRange];
 }
 
+/**
+ * 指定された幅でヘッダーとデータの範囲を取得する
+ * @param {Sheet} sheet - 対象シート
+ * @param {Object} adjust - 調整パラメータ（オプション）
+ * @returns {Array} [ヘッダー範囲, データ範囲]
+ */
 function get_range_of_header_and_data_with_width(sheet, adjust = null) {
   YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data_with_width argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
   
@@ -120,6 +168,13 @@ function get_range_of_header_and_data_with_width(sheet, adjust = null) {
   return [new_header_range, new_data_range];
 }
 
+/**
+ * 最初のシートからヘッダー付きレコードデータを取得する
+ * @param {string} ss_id - スプレッドシートID
+ * @param {string} sheet_name - シート名
+ * @param {Object} adjust - 調整パラメータ（オプション）
+ * @returns {Array} ヘッダー付きレコードデータ
+ */
 function get_records_with_header_from_sheet_first(ss_id, sheet_name, adjust = null) {
   const [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
   const sheetx = sheets[0];
@@ -127,6 +182,13 @@ function get_records_with_header_from_sheet_first(ss_id, sheet_name, adjust = nu
   return v;
 }
 
+/**
+ * 指定された列名にフォーマットを設定する
+ * @param {Sheet} sheet - 対象シート
+ * @param {string} column_name - 列名
+ * @param {string} format - フォーマット文字列
+ * @param {Object} adjust - 調整パラメータ（オプション）
+ */
 function set_format_to_named_column(sheet, column_name, format, adjust = null) {
   YKLiblog.Log.debug(`YKLiba_Code.js set_format_to_named_column  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
   const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
@@ -144,6 +206,13 @@ function set_format_to_named_column(sheet, column_name, format, adjust = null) {
   column_range.setNumberFormat(format_array);
 }
 
+/**
+ * シート名を指定して列にフォーマットを設定する
+ * @param {string} ss_id - スプレッドシートID
+ * @param {string} sheetname - シート名
+ * @param {string} column_name - 列名
+ * @param {string} format - フォーマット文字列
+ */
 function set_format_to_named_rows_sheet_by_sheetname(ss_id, sheetname, column_name, format) {
   const [ss, sheet, sheets, sheets_by_name] = get_sheets(ss_id);
   const sheetx = sheets_by_name[sheetname];
