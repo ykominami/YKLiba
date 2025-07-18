@@ -1,4 +1,9 @@
 class Code {
+  /**
+   * 指定された範囲からヘッダー行を除いた範囲を取得する
+   * @param {Range} range - 対象の範囲
+   * @returns {Range} ヘッダー行を除いた範囲
+   */
   static getHeaderlessRange(range) {
     const newRange = range.offset(1, 0);
     const shape = Range.getRangeShape(newRange);
@@ -6,6 +11,12 @@ class Code {
     return newRange;
   }
 
+  /**
+   * 環境設定に基づいてヘッダー付きまたはヘッダー指定でデータをレコード形式で取得する
+   * @param {Object} env - 環境設定オブジェクト（ss_id, sheet_name, header等）
+   * @param {Object} adjust - 調整パラメータ（オプション）
+   * @returns {Array} レコード形式のデータ
+   */
   static getDataAsRecordsWithHeader(env, adjust = null) {
     let ss;
     let values;
@@ -19,6 +30,12 @@ class Code {
     return values;
   }
 
+  /**
+   * シートからヘッダー行とデータ行を分離してレコード形式で取得する
+   * @param {Sheet} sheet - 対象のシート
+   * @param {Object} adjust - 調整パラメータ（オプション）
+   * @returns {Array} [ヘッダー範囲, データ範囲, データハッシュ配列]
+   */
   static getRecordsWithHeader(sheet, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.gs getRecordsWithHeader adjust=${adjust}`)
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
@@ -34,6 +51,12 @@ class Code {
     return [header_range, data_range, data_hash]
   }
 
+  /**
+   * 指定されたヘッダー配列に基づいてシートからデータをレコード形式で取得する
+   * @param {Sheet} sheet - 対象のシート
+   * @param {Array} header - ヘッダー名の配列
+   * @returns {Array} レコード形式のデータ配列
+   */
   static getRecordByHeader(sheet, header) {
     // header = ["id","misc","misc2","purchase_date","price","misc3","category","sub_category","title"];
     // Log.debug(`header=${header}`);
@@ -62,6 +85,13 @@ class Code {
     return buffer;
   }
 
+  /**
+   * 範囲を指定された高さと幅で変換する
+   * @param {Range} range - 対象の範囲
+   * @param {number} height - 新しい高さ
+   * @param {number} width - 新しい幅
+   * @returns {Range} 変換された範囲
+   */
   static transformRange2(range, height, width){
     const shape = Range.getRangeShape(range)
     const r2 = shape.r;
@@ -72,6 +102,12 @@ class Code {
     return range.offset(r2, c2, h2, w2);
   }
 
+  /**
+   * 範囲を調整パラメータに基づいて変換する
+   * @param {Range} range - 対象の範囲
+   * @param {Object} argAdjust - 調整パラメータ（r, c, h, w）
+   * @returns {Range} 変換された範囲
+   */
   static transformRange(range, argAdjust){
     YKLiblog.Log.debug(`transformRange range=${range}`);
     YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
@@ -98,6 +134,12 @@ class Code {
     return range.offset(r2, c2, h2, w2);
   }
 
+  /**
+   * シートからヘッダー範囲とデータ範囲を取得する
+   * @param {Sheet} sheet - 対象のシート
+   * @param {Object} argAdjust - 調整パラメータ（オプション）
+   * @returns {Array} [ヘッダー範囲, データ範囲]
+   */
   static getRangeOfHeaderAndData(sheet, argAdjust = null) {
     const range = Range.getValidRange(sheet);
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
@@ -112,6 +154,12 @@ class Code {
     return [headerRange, dataRange];
   }
 
+  /**
+   * シートからヘッダー範囲とデータ範囲を指定幅で取得する
+   * @param {Sheet} sheet - 対象のシート
+   * @param {Object} adjust - 調整パラメータ（オプション）
+   * @returns {Array} [ヘッダー範囲, データ範囲]
+   */
   static getRangeOfHeaderAndDataWithWidth(sheet, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
     
@@ -122,6 +170,13 @@ class Code {
     return [new_header_range, new_data_range];
   }
 
+  /**
+   * スプレッドシートの最初のシートからヘッダー付きレコードを取得する
+   * @param {string} ss_id - スプレッドシートID
+   * @param {string} sheet_name - シート名
+   * @param {Object} adjust - 調整パラメータ（オプション）
+   * @returns {Array} ヘッダー付きレコードデータ
+   */
   static getRecordsWithHeaderFromSheetFirst(ss_id, sheet_name, adjust = null) {
     const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
     const sheetx = sheets[0];
@@ -129,6 +184,13 @@ class Code {
     return v;
   }
 
+  /**
+   * 指定された列名のセルにフォーマットを適用する
+   * @param {Sheet} sheet - 対象のシート
+   * @param {string} column_name - 列名
+   * @param {string} format - 適用するフォーマット
+   * @param {Object} adjust - 調整パラメータ（オプション）
+   */
   static setFormatToNamedColumn(sheet, column_name, format, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.js setFormatToNamedColumn  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
@@ -146,6 +208,13 @@ class Code {
     column_range.setNumberFormat(format_array);
   }
 
+  /**
+   * 指定されたシート名の指定列にフォーマットを適用する
+   * @param {string} ss_id - スプレッドシートID
+   * @param {string} sheetname - シート名
+   * @param {string} column_name - 列名
+   * @param {string} format - 適用するフォーマット
+   */
   static setFormatToNamedRowsSheetBySheetname(ss_id, sheetname, column_name, format) {
     const [ss, sheet, sheets, sheets_by_name] = Code.getSheets(ss_id);
     const sheetx = sheets_by_name[sheetname];

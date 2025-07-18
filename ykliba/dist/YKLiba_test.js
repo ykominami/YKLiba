@@ -1,3 +1,7 @@
+/**
+ * テスト関数: determine関数の動作をテストする
+ * NOT_BLANKとBLANKの判定ロジックを検証
+ */
 function test_dtermin() {
   ret11 = determine('NOT_BLANK', '');
   ret12 = determine('NOT_BLANK', ' ');
@@ -14,6 +18,10 @@ function test_dtermin() {
   Log.debug(`ret22=${ret23}`);
 }
 
+/**
+ * テスト関数: detect_record関数の動作をテストする
+ * 配列内のレコード検出ロジックを検証
+ */
 function test_detect_record() {
   const array = [[], []];
   const array2 = [['A'], []];
@@ -84,6 +92,10 @@ function test_detect_record() {
   //
 }
 
+/**
+ * テスト関数: arrayShape関数の動作をテストする
+ * 配列の形状（サイズ、最大長、最小長）を取得する機能を検証
+ */
 function test_arrayShape() {
   const array = [[], []];
   const array2 = [['A'], []];
@@ -112,6 +124,10 @@ function test_arrayShape() {
   Log.debug(`ret=${ret}`);
 }
 
+/**
+ * テスト関数: getRelativeCordinatesOfTopLeft_simple関数の動作をテストする
+ * 配列の左上座標を取得する機能を検証
+ */
 function test_getRelativeCordinatesOfTopLeft_simple() {
   const array = [[], []];
   const array2 = [['A'], []];
@@ -157,6 +173,10 @@ function test_getRelativeCordinatesOfTopLeft_simple() {
   Log.debug(`ret=${ret}`);
 }
 
+/**
+ * テスト関数: getRelativeCordinatesOfBottomLeft_simple関数の動作をテストする
+ * 配列の左下座標を取得する機能を検証
+ */
 function test_getRelativeCordinatesOfBottomLeft_simple() {
   const array = [[], []];
   const array2 = [['A'], []];
@@ -212,6 +232,10 @@ function test_getRelativeCordinatesOfBottomLeft_simple() {
   Log.debug(`ret=${ret}`);
 }
 
+/**
+ * テスト関数: getRelativeCordinatesOfTLandBL関数の動作をテストする
+ * 配列の左上と左下座標を同時に取得する機能を検証
+ */
 function test_getRelativeCordinatesOfTLandBL() {
   const array = [[], []];
   const array2 = [['A'], []];
@@ -241,6 +265,10 @@ function test_getRelativeCordinatesOfTLandBL() {
   Log.debug(`ret=${ret}`);
 }
 
+/**
+ * テスト関数: get_column_code関数の動作をテストする
+ * 列番号を取得する機能を検証
+ */
 function test_get_column_code() {
   [null, '', 'A', 'Z', 'a', 'z', 'AA', 'ZZ'].map((ch) => {
     const code = get_column_number(ch);
