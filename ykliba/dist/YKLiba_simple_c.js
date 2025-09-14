@@ -1,3 +1,10 @@
+// Import required classes
+// Base class for spreadsheet operations
+// Arrayx class for array operations
+// Utils class for utility functions
+// Range class for range operations
+// YKLiblog class for logging operations
+
 class Simple {
   /**
    * 環境設定を使用してシートからシンプルな行データを取得する
@@ -6,8 +13,8 @@ class Simple {
    * @returns {Array} シートの値の配列
    */
   static getSimpleRowsWithEnv(env, maxRange = null) {
-    const [ss, sheet] = get_spreadsheet(env.ss_id, env.sheet_name);
-    const values = this.getSimpleRows(sheet, maxRange);
+    const [ss, sheet] = Base.getSpreadsheet(env.ss_id, env.sheet_name);
+    const values = Simple.getSimpleRows(sheet, maxRange);
     return values;
   }
 
@@ -17,13 +24,13 @@ class Simple {
    * @returns {Range} シンプルな行の範囲
    */
   static simpleRowsRangeX(sheetx) {
-    const [values, range] = this.getSimpleRowsAndRange(sheetx);
+    const [values, range] = Simple.getSimpleRowsAndRange(sheetx);
 
-    const tl_bl_Point = getRelativeCordinatesOfTLandBL(values);
+    const tl_bl_Point = Arrayx.getRelativeCordinatesOfTLandBL(values);
 
-    const rindex = get_rindex(values[0]);
+    const rindex = Utils.getRindex(values[0]);
     const simple_width = rindex;
-    const shape = getRelativeCordinatesOfTLandBlandTRandBR(values);
+    const shape = Arrayx.getRelativeCordinatesOfTLandBlandTRandBR(values);
     const simple_range = range.offset(shape.tl.y, shape.tl.x, (shape.bl.y - shape.tl.y), simple_width);
     return simple_range;
   }
@@ -45,7 +52,7 @@ class Simple {
    * @returns {Range} 有効な範囲
    */
   static getSimpleRowsRange(sheet) {
-    return getValidRange(sheet);
+    return Range.getValidRange(sheet);
   }
 
   /**
@@ -56,7 +63,10 @@ class Simple {
    * @returns {Range} 調整された範囲
    */
   static adjustRange(range, maxH, maxW) {
-    const rangeShape = getRangeShape(range);
+    if( range === null){
+      return null
+    }
+    const rangeShape = Range.getRangeShape(range);
     let w = 0;
     let h = 0;
     if (maxH < rangeShape.h) {
@@ -104,7 +114,7 @@ class Simple {
    * @returns {Array} [値の配列, 範囲]の配列
    */
   static getSimpleRowsAndRange(sheet, maxRange = null) {
-    const range = get_valid_range(sheet);
+    const range = Range.getValidRange(sheet);
     let values = [];
     if (range !== null && maxRange !== null) {
       const newRange = this.adjustRange(range, maxRange.h, maxRange.w);
@@ -121,9 +131,9 @@ class Simple {
    * @returns {Array} [値の配列, 範囲]の配列
    */
   static getSimpleRowsAndRangeX(ss_id, sheet_name, maxRange = null) {
-    const [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
+    const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
     const sheetx = sheets_by_name[sheet_name];
-    return this.getSimpleRowsAndRange(sheetx, maxRange);
+    return Simple.getSimpleRowsAndRange(sheetx, maxRange);
   }
 }
 this.Simple = Simple;

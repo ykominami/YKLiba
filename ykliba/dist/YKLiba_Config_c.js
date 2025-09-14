@@ -1,3 +1,6 @@
+// Import required classes
+// Config0 class for configuration operations
+
 class Config {
   /**
    * 行を追加する操作を表す定数値を返す
@@ -51,8 +54,9 @@ class Config {
   static getLastDateByKey(key, arg_folder_info_hash = null) {
     let folder_info_hash;
     if( arg_folder_info_hash === null) {
-      const values = Config0.getValuesFromConfigSheetX();
-      folder_info_hash = Config0.getFolderInfoHash(values);
+      // const values = Config0.getValuesFromConfigSheetX();
+      // folder_info_hash = Config0.getFolderInfoHash(values);
+      folder_info_hash = {};
     }
     else {
       folder_info_hash = arg_folder_info_hash;

@@ -1,3 +1,6 @@
+// Import required classes
+// Arrayx class for array operations
+
 class Log {
   // static log_level
   // UNKNOWN(6)
@@ -84,7 +87,7 @@ class Log {
    * @param {Array} array - The 2D array to log.
    */
   static debugArray(name, array) {
-    const ret = isValid2dArray(array);
+    const ret = Arrayx.isValid2dArray(array);
     if (ret[0] !== true) {
       return;
     }

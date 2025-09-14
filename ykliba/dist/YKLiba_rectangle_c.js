@@ -1,3 +1,6 @@
+// Import required classes
+// Arrayx class for array operations
+
 class Rectangle {
   /**
    * 2次元配列からマスクパターンを生成する
@@ -5,7 +8,7 @@ class Rectangle {
    * @returns {Array<Array<number>>} マスクパターン（空文字は0、それ以外は1）
    */
   static makeMaskPattern(array) {
-    const ret_check = is_valid_2d_array(array);
+    const ret_check = Arrayx.isValid2dArray(array);
     if (ret_check[0] === false) {
       return [];
     }
@@ -169,7 +172,7 @@ class Rectangle {
    * @returns {Array<Array<number>>} 隣接要素配列
    */
   static makeAdjacencyArray(array) {
-    const ret_check = is_valid_2d_array(array);
+    const ret_check = Arrayx.isValid2dArray(array);
     if (ret_check[0] === false) {
       return [];
     }

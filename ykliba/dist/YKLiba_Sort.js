@@ -6,7 +6,7 @@
  */
 function SortCUI_x(env, sort_option_array) {
   const config = make_config_2(env, sort_option_array);
-  Log.debug(config);
+  YKLiblog.Log.debug(config);
   return SortCUI(config);
 }
 
@@ -50,7 +50,7 @@ function SortGUI(config) {
 function Sortx_in_range_x(dataRange, sortOptions) {
   const sortOptionArray = make_field_condition_2(sortOptions);
 
-  Log.debug(`Sortx_in_range sortOptionArray=${JSON.stringify(sortOptionArray)}`);
+  YKLiblog.Log.debug(`Sortx_in_range sortOptionArray=${JSON.stringify(sortOptionArray)}`);
   dataRange.activate()
     .sort(sortOptionArray);
   return dataRange;
@@ -65,8 +65,8 @@ function Sortx_in_range_x(dataRange, sortOptions) {
 function Sortx_in_range(dataRange, config) {
   const column = dataRange.getColumn();
 
-  Log.debug(`Sortx_in_range config=${JSON.stringify(config)}`);
-  Log.debug(`Sortx_in_range column=${column} config.sortOptions=${config.sortOptions}`);
+  YKLiblog.Log.debug(`Sortx_in_range config=${JSON.stringify(config)}`);
+  YKLiblog.Log.debug(`Sortx_in_range column=${column} config.sortOptions=${config.sortOptions}`);
 
   return Sortx_in_range_x(dataRange, config.sortOptions);
 }

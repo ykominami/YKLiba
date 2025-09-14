@@ -96,7 +96,7 @@ function dump_range(range) {
   const array = range.getValues();
   const h = array.length;
   for (let i = 0; i < h; i++) {
-    Log.debug(`${i}=${array[i]}`);
+    YKLiblog.Log.debug(`${i}=${array[i]}`);
   }
 }
 
@@ -106,7 +106,7 @@ function dump_range(range) {
  */
 function dump_array(array) {
   for (const row of array) {
-    Log.debug(row);
+    YKLiblog.Log.debug(row);
   }
 }
 
@@ -116,7 +116,7 @@ function dump_array(array) {
  */
 function dump_object(obj) {
   for (const key in obj) {
-    Log.debug(`${key}: ${obj[key]}`);
+    YKLiblog.Log.debug(`${key}: ${obj[key]}`);
   }
 }
 
@@ -160,7 +160,7 @@ function get_rindex(array) {
       rindex = i;
       break;
     } else {
-      // Log.debug(`i=${i} str=${str}`)
+      // YKLiblog.Log.debug(`i=${i} str=${str}`)
     }
   }
   return rindex;

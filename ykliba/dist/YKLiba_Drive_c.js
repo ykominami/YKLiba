@@ -1,3 +1,7 @@
+// Import required classes
+// Log class for logging operations
+// YKLiblog class for logging operations
+
 class Drive {
   /**
    * フォルダIDからフォルダオブジェクトを取得する
@@ -25,7 +29,7 @@ class Drive {
    * @return {File|null} ファイルオブジェクト、見つからない場合はnull
    */
   static getFile(folder, name) {
-    Log.debug(`folder=${folder}`);
+    YKLiblog.Log.debug(`folder=${folder}`);
     files = folder.getFilesByName(name);
     while (files.hasNext()) {
       const file = files.next();

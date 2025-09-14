@@ -24,7 +24,7 @@ function create_file(folder, name, content) {
  * @return {GoogleAppsScript.Drive.File|null} ファイルオブジェクト、見つからない場合はnull
  */
 function get_file(folder, name) {
-  Log.debug(`folder=${folder}`);
+  YKLiblog.Log.debug(`folder=${folder}`);
   files = folder.getFilesByName(name);
   while (files.hasNext()) {
     const file = files.next();

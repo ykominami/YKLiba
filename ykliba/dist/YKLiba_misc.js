@@ -88,7 +88,7 @@ function makeConfig2(env, sortOptions, ...fields) {
       displayMode: env.displayMode, ssId: env.ssId, sheetName: env.sheetName, sort_options: null, column_index: env.column_index, fields,
     };
   }
-  Log.debug(`YKLiba_misc makeConfig2 obj=${JSON.stringify(obj)}`)
+  YKLiblog.Log.debug(`YKLiba_misc makeConfig2 obj=${JSON.stringify(obj)}`)
   return obj;
 }
 

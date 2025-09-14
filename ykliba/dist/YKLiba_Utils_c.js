@@ -1,3 +1,8 @@
+// Import required classes
+// Drive class for file operations
+// Arrayx class for array operations
+// Log class for logging operations
+
 class Utils {
   /**
    * 引数がnullまたは空文字列かどうかを判定する
@@ -74,22 +79,6 @@ class Utils {
   }
 
   /**
-   * オブジェクトが有効かどうかを判定する
-   * @param {*} array - 判定対象のオブジェクト
-   * @return {Array} [判定結果, メッセージ, エラーコード] の形式で返す
-   */
-  static isValidObject(array) {
-    if (array === null) {
-      return [false, 'null', 1];
-    }
-    if (typeof (array) === 'undefined') {
-      return [false, 'message: undefined', 2];
-    }
-
-    return [true, 'true', 3];
-  }
-
-  /**
    * スプレッドシートの範囲の値をデバッグ出力する
    * @param {Range} range - 出力対象の範囲
    */
@@ -97,7 +86,7 @@ class Utils {
     const array = range.getValues();
     const h = array.length;
     for (let i = 0; i < h; i++) {
-      Log.debug(`${i}=${array[i]}`);
+      YKLiblog.Log.debug(`${i}=${array[i]}`);
     }
   }
 
@@ -107,7 +96,7 @@ class Utils {
    */
   static dumpArray(array) {
     for (const row of array) {
-      Log.debug(row);
+      YKLiblog.Log.debug(row);
     }
   }
 
@@ -117,7 +106,7 @@ class Utils {
    */
   static dumpObject(obj) {
     for (const key in obj) {
-      Log.debug(`${key}: ${obj[key]}`);
+      YKLiblog.Log.debug(`${key}: ${obj[key]}`);
     }
   }
 
@@ -161,7 +150,7 @@ class Utils {
         rindex = i;
         break;
       } else {
-        // Log.debug(`i=${i} str=${str}`)
+        // YKLiblog.Log.debug(`i=${i} str=${str}`)
       }
     }
     return rindex;

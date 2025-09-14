@@ -1,3 +1,8 @@
+// Import required classes
+// Base class for spreadsheet operations
+// YKLiblog class for logging operations
+// Utils class for utility functions
+
 class Misc {
   /**
    * オブジェクトからシェイプ情報（行、列、高さ、幅）を抽出して新しいオブジェクトを作成する
@@ -57,7 +62,7 @@ class Misc {
    * @returns {string} get_env関数の文字列
    */
   static makeFunctionGetEnv() {
-    const ssId = get_ss_id();
+    const ssId = Base.getSsId();
     const message = `function get_env() {
     return {
       ssId: "${ssId}",
@@ -113,7 +118,7 @@ class Misc {
         fields,
       };
     }
-    Log.debug(`YKLiba_misc makeConfig2 obj=${JSON.stringify(obj)}`)
+    YKLiblog.Log.debug(`YKLiba_misc makeConfig2 obj=${JSON.stringify(obj)}`)
     return obj;
   }
 
@@ -142,7 +147,7 @@ class Misc {
     let column_number = ch;
 
     if (typeof (ch) === 'string') {
-      column_number = get_column_number(ch);
+      column_number = Utils.getColumnNumber(ch);
     }
     return column_number;
   }
@@ -153,8 +158,8 @@ class Misc {
    * @returns {Array} [列番号, 昇順ソートオプション]の配列
    */
   static makeAscendingSortOptionInArray(item) {
-    const column_number = this.convertColumnNumber(item[0]);
-    const sort_option = this.convertAscendingSortOption(item[1]);
+    const column_number = Misc.convertColumnNumber(item[0]);
+    const sort_option = Misc.convertAscendingSortOption(item[1]);
 
     return [column_number, sort_option];
   }
@@ -169,7 +174,7 @@ class Misc {
       if (item !== null) {
         const typeof_item = typeof (item);
         if (typeof_item === 'array' || typeof_item === 'object') {
-          return this.makeAscendingSortOptionInArray(item);
+          return Misc.makeAscendingSortOptionInArray(item);
         }
         return [];
       }

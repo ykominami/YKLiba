@@ -1,3 +1,9 @@
+// Import required classes
+// Arrayx class for array operations
+// Code class for code operations
+// Misc class for utility functions
+// Utils class for utility functions
+
 class Range {
   /**
    * シートからデータ範囲とその値を取得する
@@ -23,8 +29,11 @@ class Range {
     let newRange = null;
     const [range, values] = Range.getRangeAndValues(sheet);
     if ((range !== null && typeof (range) !== 'undefined') && values !== null) {
+      if( range === null){
+        return null
+      }
       const shape = Range.getRangeShape(range);
-      const tlRelative = Range.getRelativeCordinatesOfTopLeft(values);
+      const tlRelative = Arrayx.getRelativeCoordinatesOfTopLeft(values);
 
       const newHeight = shape.h - tlRelative.y;
       const newWidth = shape.w - tlRelative.x;
@@ -39,6 +48,9 @@ class Range {
    * @returns {Object} 形状情報 {r: row, c: column, h: height, w: width}
    */
   static getRangeShape(range) {
+    if( range === null){
+      return null
+    }
     const column = range.getColumn();
     const row = range.getRow();
     const height = range.getHeight();
@@ -73,6 +85,9 @@ class Range {
    * @returns {Array} 指定した列の値の配列
    */
   static getColumn(dataRange, index) {
+    if( dataRange === null){
+      return null
+    }
     const dataArray = dataRange.getValues();
     return dataArray.map((row) => row[index]);
   }
@@ -83,7 +98,7 @@ class Range {
    * @param {Object|null} argAdjust - 調整オプション
    */
   static insertOneRow(sheet, argAdjust = null) {
-    const [header_range, dataRange] = Range.getRangeOfHeaderAndData(sheet, argAdjust);
+    const [header_range, dataRange] = Code.getRangeOfHeaderAndData(sheet, argAdjust);
     const shape = Range.getRangeShape(dataRange);
     const targetRange = dataRange.offset(0, 0, 1, shape.w);
     targetRange.insertCells(SpreadsheetApp.Dimension.COLUMNS);
@@ -168,11 +183,11 @@ class Range {
   static divideRangeX(range, grouping_op, link_op) {
     const hash = Range.groupingWithRange(range, grouping_op);
     const values = range.getValues();
-    const result = Range.linkedRegion(values, link_op);
+    const result = Arrayx.linkedRegion(values, link_op);
     const width = values[0].length;
     const targetRange = range.offset(result[0][0], 0, result[0][1] - result[0][0] + 1, width);
     const shape = Range.getRangeShape(targetRange);
-    Range.dumpObject(shape);
+    Utils.dumpObject(shape);
     return targetRange;
   }
 }

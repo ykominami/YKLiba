@@ -1,3 +1,9 @@
+// Import required classes
+// Base class for spreadsheet operations
+// Range class for range operations  
+// Misc class for utility functions
+// YKLiblog class for logging operations
+
 class Code {
   /**
    * 指定された範囲からヘッダー行を除いた範囲を取得する
@@ -6,8 +12,11 @@ class Code {
    */
   static getHeaderlessRange(range) {
     const newRange = range.offset(1, 0);
-    const shape = Range.getRangeShape(newRange);
-    dump_object(shape);
+    if( newRange === null ){
+      return null
+    }
+    // const shape = Range.getRangeShape(newRange);
+    // dump_object(shape);
     return newRange;
   }
 
@@ -20,7 +29,7 @@ class Code {
   static getDataAsRecordsWithHeader(env, adjust = null) {
     let ss;
     let values;
-    [ss, sheet] = Code.getSpreadsheet(env.ss_id, env.sheet_name);
+    [ss, sheet] = Base.getSpreadsheet(env.ss_id, env.sheet_name);
 
     if (typeof (env.header) === 'undefined') {
       values = Code.getRecordsWithHeader(sheet, adjust);
@@ -93,6 +102,9 @@ class Code {
    * @returns {Range} 変換された範囲
    */
   static transformRange2(range, height, width){
+    if( range === null ){
+      return null
+    }
     const shape = Range.getRangeShape(range)
     const r2 = shape.r;
     const c2 = shape.c;
@@ -110,6 +122,9 @@ class Code {
    */
   static transformRange(range, argAdjust){
     YKLiblog.Log.debug(`transformRange range=${range}`);
+    if( range === null){
+      return null
+    }
     YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
     const shape = Range.getRangeShape(range)
     YKLiblog.Log.debug(`transformRange shape=${shape}`);
@@ -142,6 +157,9 @@ class Code {
    */
   static getRangeOfHeaderAndData(sheet, argAdjust = null) {
     const range = Range.getValidRange(sheet);
+    if( range === null ){
+      return [null, null]
+    }
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
     const shape = Range.getRangeShape(range);
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndData shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
@@ -164,6 +182,9 @@ class Code {
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
     
     const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
+    if( data_range === null ){
+      return [null, null]
+    }
     const shape = Range.getRangeShape(data_range);
     const new_header_range = header_range.offset(0, 0, shape.h, specified_width);
     const new_data_range = data_range.offset(0, 0, shape.ht, specified_width);
@@ -199,6 +220,9 @@ class Code {
     if (index < 0) {
       return [];
     }
+    if( data_range === null){
+      return []
+    }
     const shape = Range.getRangeShape(data_range);
     const column_range = data_range.offset(0, index, shape.h, 1);
     const format_array = [];
@@ -216,7 +240,7 @@ class Code {
    * @param {string} format - 適用するフォーマット
    */
   static setFormatToNamedRowsSheetBySheetname(ss_id, sheetname, column_name, format) {
-    const [ss, sheet, sheets, sheets_by_name] = Code.getSheets(ss_id);
+    const [ss, sheet, sheets, sheets_by_name] = Base.getSheets(ss_id);
     const sheetx = sheets_by_name[sheetname];
     Code.setFormatToNamedColumn(sheetx, column_name, format);
   }
