@@ -1,3 +1,6 @@
+// Import required classes
+// No external class dependencies - only uses Google Apps Script APIs
+
 class Base {
   /**
    * アクティブなスプレッドシートのIDを取得する

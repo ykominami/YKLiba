@@ -1,3 +1,6 @@
+// Import required classes
+// YKLiblog class for logging operations
+
 class Arrayx {
   /**
    * 条件に基づいて値の判定を行う

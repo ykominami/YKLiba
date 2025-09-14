@@ -1,23 +1,18 @@
-class Sort {
-  /**
-   * 環境設定とソートオプション配列を受け取り、設定を構築してソートを実行する
-   * @param {Object} env - 環境設定オブジェクト
-   * @param {Array} sort_option_array - ソートオプションの配列
-   * @returns {Range} ソートされた範囲
-   */
-  static sortCuiX(env, sort_option_array) {
-    const config = make_config_2(env, sort_option_array);
-    Log.debug(config);
-    return Sort.sortCui(config);
-  }
+// Import required classes
+// Base class for spreadsheet operations
+// Misc class for utility functions
+// Code class for code operations
+// Range class for range operations
+// YKLiblog class for logging operations
 
+class Sort {
   /**
    * 設定オブジェクトを受け取り、スプレッドシートを取得してソートを実行する
    * @param {Object} config - ソート設定オブジェクト
    * @returns {Range} ソートされた範囲
    */
   static sortCui(config) {
-    const [ss, sheet] = get_spreadsheet(config.ss_id, config.sheet_name);
+    const [ss, sheet] = Base.getSpreadsheet(config.ss_id, config.sheet_name);
     return Sort.sortX(sheet, config);
   }
 
@@ -28,7 +23,7 @@ class Sort {
    * @returns {Range} ソートされた範囲
    */
   static sortGuiX(env, array) {
-    const config = makeConfig2(env, array);
+    const config = Misc.makeConfig2(env, array);
     return Sort.sortGui(config);
   }
 
@@ -49,9 +44,9 @@ class Sort {
    * @returns {Range} ソートされた範囲
    */
   static sortXInRangeX(dataRange, sortOptions) {
-    const sortOptionArray = make_field_condition_2(sortOptions);
+    const sortOptionArray = Misc.makeFieldCCondition2(sortOptions);
 
-    Log.debug(`sortXInRange sortOptionArray=${JSON.stringify(sortOptionArray)}`);
+    YKLiblog.Log.debug(`sortXInRange sortOptionArray=${JSON.stringify(sortOptionArray)}`);
     dataRange.activate()
       .sort(sortOptionArray);
     return dataRange;
@@ -66,8 +61,8 @@ class Sort {
   static sortXInRange(dataRange, config) {
     const column = dataRange.getColumn();
 
-    Log.debug(`sortXInRange config=${JSON.stringify(config)}`);
-    Log.debug(`sortXInRange column=${column} config.sortOptions=${config.sortOptions}`);
+    YKLiblog.Log.debug(`sortXInRange config=${JSON.stringify(config)}`);
+    YKLiblog.Log.debug(`sortXInRange column=${column} config.sortOptions=${config.sortOptions}`);
 
     return Sort.sortXInRangeX(dataRange, config.sortOptions);
   }
@@ -80,7 +75,7 @@ class Sort {
    * @returns {Range} ソートされた範囲
    */
   static sortX(sheet, config, adujst = null) {
-    const [headerRange, dataRange] = get_range_of_header_and_data(sheet, adujst);
+    const [headerRange, dataRange] = Code.getRangeOfHeaderAndData(sheet, adujst);
     const range = Sort.sortXInRange(dataRange, config);
     return range;
   }
@@ -92,8 +87,11 @@ class Sort {
    * @returns {Array} [ヘッダー範囲, データ範囲]の配列
    */
   static divideRange(range, arg_adjust = null) {
-    const shape = getRangeShape(range);
-    const adjust = get_valid_adjust(arg_adjust);
+    if( range === null){
+      return [null, null]
+    }
+    const shape = Range.getRangeShape(range);
+    const adjust = Misc.getValidAdjust(arg_adjust);
 
     const newRange = range.offset(adjust.r, adjust.c, shape.h + adjust.h, shape.w + adjust.w);
     const height = newRange.getHeight();
@@ -101,19 +99,6 @@ class Sort {
     const data_range = newRange.offset(1, 0, height - 1);
 
     return [header_range, data_range];
-  }
-
-  /**
-   * 範囲、環境設定、ソートオプションを受け取り、範囲内でソートを実行する
-   * @param {Range} range - ソート対象の範囲
-   * @param {Object} env - 環境設定オブジェクト
-   * @param {Object} sortOption - ソートオプション
-   * @returns {Range} ソートされた範囲
-   */
-  static sortOp(range, env, sortOption) {
-    const config = make_config_2(env, sortOption);
-    const sortedRange = Sort.sortXInRange(range, config);
-    return sortedRange;
   }
 }
 this.Sort = Sort;

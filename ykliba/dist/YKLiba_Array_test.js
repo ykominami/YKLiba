@@ -35,7 +35,7 @@ function testLinkedRegion(values, op) {
  */
 function testGetMaxAndMinFromNestedArrayX() {
   const array = [[0, 1, 10], [3, 4, 5], [10, 20, 0], [3, 4, 5], [6, 7, 8]];
-  const ret = getMaxAndMinFromNestedArray(array, (x) => x[2]);
+  const ret = Arrayx.getMaxAndMinFromNestedArray(array, (x) => x[2]);
   Log.displayLog(ret);
 }
 

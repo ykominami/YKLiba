@@ -1,3 +1,6 @@
+// Import required classes
+// Log class for logging operations
+
 class Store {
   /**
    * Storeクラスの初期化を行う
@@ -39,7 +42,7 @@ class Store {
    */
   static set(index, key, value) {
     Store.stores[index][key] = value;
-    Log.debug('Store.stores', Store.stores);
+    YKLiblog.Log.debug('Store.stores', Store.stores);
   }
 
   /**
@@ -49,10 +52,10 @@ class Store {
    * @returns {any} 取得した値
    */
   static get(index, key) {
-    Log.debug(`Store.get index=${index} key=${key}`);
-    Log.debug(Store.stores);
-    Log.debug(`Store.set index=${index} key=${key}`);
-    Log.debug(Store.stores);
+    YKLiblog.Log.debug(`Store.get index=${index} key=${key}`);
+    YKLiblog.Log.debug(Store.stores);
+    YKLiblog.Log.debug(`Store.set index=${index} key=${key}`);
+    YKLiblog.Log.debug(Store.stores);
 
     return Store.stores[index][key];
   }

@@ -1,3 +1,7 @@
+// Import required classes
+// Base class for spreadsheet operations
+// YKLiblog class for logging operations
+
 class Config0 {
   /**
    * 設定シートを取得する
@@ -20,9 +24,9 @@ class Config0 {
    * @returns {Array} 設定シートの値
    */
   static getValuesFromConfigSheetX() {
-    const sheet = this.getConfigSheet()
+    const sheet = Config0.getConfigSheet()
     YKLiblog.Log.debug(`YKLiba_Config.js getValuesFromConfigSheetX 0 sheet=${sheet}`)
-    return this.getValuesFromConfigSheet(sheet)
+    return Config0.getValuesFromConfigSheet(sheet)
   }
 
   /**
@@ -31,9 +35,9 @@ class Config0 {
    */
   static getValuesFromConfigSheetY() {
     const sheetname = PropertiesService.getScriptProperties().getProperty('CONFIG2_SHEETNAME');
-    const sheet = this.getConfigSheet(sheetname);
+    const sheet = Config0.getConfigSheet(sheetname);
     YKLiblog.Log.debug(`YKLiba_Config.js getValuesFromConfigSheetY 0 sheet=${sheet}`)
-    return this.getValuesFromConfigSheet(sheet)
+    return Config0.getValuesFromConfigSheet(sheet)
   }
 
   /**

@@ -10,12 +10,12 @@ function test_dtermin() {
   ret22 = determine('_BLANK', ' ');
   ret23 = determine('_BLANK', ' A ');
 
-  Log.debug(`ret11=${ret11}`);
-  Log.debug(`ret12=${ret12}`);
-  Log.debug(`ret12=${ret13}`);
-  Log.debug(`ret21=${ret21}`);
-  Log.debug(`ret22=${ret22}`);
-  Log.debug(`ret22=${ret23}`);
+  YKLiblog.Log.debug(`ret11=${ret11}`);
+  YKLiblog.Log.debug(`ret12=${ret12}`);
+  YKLiblog.Log.debug(`ret12=${ret13}`);
+  YKLiblog.Log.debug(`ret21=${ret21}`);
+  YKLiblog.Log.debug(`ret22=${ret22}`);
+  YKLiblog.Log.debug(`ret22=${ret23}`);
 }
 
 /**
@@ -32,62 +32,62 @@ function test_detect_record() {
 
   let ret;
   ret = detect_record(array, 'NOT_BLANK', 0, 0, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, 'NOT_BLANK', 0, 0, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, 'NOT_BLANK', 0, 0, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, 'NOT_BLANK', 0, 0, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, 'NOT_BLANK', 0, 0, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, 'NOT_BLANK', 0, 0, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
   //
-  Log.debug('================');
+  YKLiblog.Log.debug('================');
   //
   ret = detect_record(array, 'NOT_BLANK', 0, 1, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, 'NOT_BLANK', 0, 1, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, 'NOT_BLANK', 0, 1, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, 'NOT_BLANK', 0, 1, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, 'NOT_BLANK', 0, 1, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, 'NOT_BLANK', 0, 1, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
   //
-  Log.debug('================');
+  YKLiblog.Log.debug('================');
   //
   ret = detect_record(array, 'NOT_BLANK', 0, 2, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array2, 'NOT_BLANK', 0, 2, 2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array3, 'NOT_BLANK', 0, 2, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array4, 'NOT_BLANK', 0, 2, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array5, 'NOT_BLANK', 0, 2, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = detect_record(array6, 'NOT_BLANK', 0, 2, 3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   //
 }
@@ -106,22 +106,22 @@ function test_arrayShape() {
 
   let ret;
   ret = arrayShape(array);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array4);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array5);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = arrayShape(array6);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 }
 
 /**
@@ -143,34 +143,34 @@ function test_getRelativeCordinatesOfTopLeft_simple() {
   start_y = -1;
 
   [size, len_max, len_min] = arrayShape(array);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   [size, len_max, len_min] = arrayShape(array2);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   [size, len_max, len_min] = arrayShape(array3);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   [size, len_max, len_min] = arrayShape(array4);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   [size, len_max, len_min] = arrayShape(array5);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   [size, len_max, len_min] = arrayShape(array6);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 }
 
 /**
@@ -192,44 +192,44 @@ function test_getRelativeCordinatesOfBottomLeft_simple() {
   start_y = -1;
 
   [size, len_max, len_min] = arrayShape(array);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 0;
   [size, len_max, len_min] = arrayShape(array2);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array3);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array4);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array5);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
   [size, len_max, len_min] = arrayShape(array6);
-  Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
   ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 }
 
 /**
@@ -247,22 +247,22 @@ function test_getRelativeCordinatesOfTLandBL() {
   let ret;
 
   ret = getRelativeCordinatesOfTLandBL(array);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array2);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array3);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array4);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array5);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 
   ret = getRelativeCordinatesOfTLandBL(array6);
-  Log.debug(`ret=${ret}`);
+  YKLiblog.Log.debug(`ret=${ret}`);
 }
 
 /**
@@ -272,6 +272,6 @@ function test_getRelativeCordinatesOfTLandBL() {
 function test_get_column_code() {
   [null, '', 'A', 'Z', 'a', 'z', 'AA', 'ZZ'].map((ch) => {
     const code = get_column_number(ch);
-    Log.debug(`ch=${ch} code=${code}`);
+    YKLiblog.Log.debug(`ch=${ch} code=${code}`);
   });
 }
