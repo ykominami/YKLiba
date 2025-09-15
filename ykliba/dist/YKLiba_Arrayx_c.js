@@ -1,4 +1,5 @@
 // Import required classes
+// Utils class for utility functions
 // YKLiblog class for logging operations
 
 class Arrayx {
@@ -317,7 +318,7 @@ class Arrayx {
    * @returns {Array} [妥当性, メッセージ, エラーコード]
    */
   static isValid1dArray(array) {
-    let ret = Arrayx.isValidObject(array);
+    let ret = Utils.isValidObject(array);
     if (ret[0] === false) {
       return ret;
     }
@@ -325,7 +326,7 @@ class Arrayx {
       return [false, 'first element of Array is empty array', 10];
     }
     if (array.length === 1) {
-      ret = Arrayx.isValidObject(array[0]);
+      ret = Utils.isValidObject(array[0]);
       if (ret[0] === false) {
         return [false, 'first element of Array is null or undefined', 11];
       }
@@ -349,7 +350,7 @@ class Arrayx {
       }
       return [true, '1d Array', 18];
     }
-    ret = Arrayx.isValidObject(array[0]);
+    ret = Utils.isValidObject(array[0]);
     if (ret[0] === false) {
       return [false, 'first element of Array is null or undefined', 19];
     }
@@ -371,12 +372,12 @@ class Arrayx {
    * @returns {Array} [妥当性, メッセージ, エラーコード]
    */
   static isValid2dArray(array) {
-    let ret = Arrayx.isValidObject(array);
+    let ret = Utils.isValidObject(array);
     if (ret[0] === false) {
       return ret;
     }
     if (array.length === 1) {
-      ret = Arrayx.isValidObject(array[0]);
+      ret = Utils.isValidObject(array[0]);
       if (ret[0] === false) {
         return [false, 'first element of Array is null or undefined', 1];
       }
@@ -400,7 +401,7 @@ class Arrayx {
       }
       return [true, '1d Array', 7];
     }
-    ret = Arrayx.isValidObject(array[0]);
+    ret = Utils.isValidObject(array[0]);
     if (ret[0] === false) {
       return [false, 'first element of Array is null or undefined', 8];
     }
@@ -514,17 +515,6 @@ class Arrayx {
     return [max, min];
   }
 
-  /**
-   * オブジェクトの妥当性を検証する
-   * @param {*} obj - 検証対象のオブジェクト
-   * @returns {Array} [妥当性, メッセージ]
-   */
-  static isValidObject(obj) {
-    if (obj === null || typeof obj === 'undefined') {
-      return [false, 'object is null or undefined'];
-    }
-    return [true, 'object is valid'];
-  }
 }
 
 this.Arrayx = Arrayx;

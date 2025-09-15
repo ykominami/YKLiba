@@ -1,7 +1,7 @@
 // Import required classes
 // Drive class for file operations
 // Arrayx class for array operations
-// Log class for logging operations
+// YKLiblog class for logging operations
 
 class Utils {
   /**
@@ -368,6 +368,18 @@ class Utils {
     const second = String(date.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day}-${hour}-${minute}-${second}`;
+  }
+
+  /**
+   * オブジェクトの妥当性を検証する
+   * @param {*} obj - 検証対象のオブジェクト
+   * @returns {Array} [妥当性, メッセージ]
+   */
+  static isValidObject(obj) {
+    if (obj === null || typeof obj === 'undefined') {
+      return [false, 'object is null or undefined'];
+    }
+    return [true, 'object is valid'];
   }
 }
 this.Utils = Utils;

@@ -5,8 +5,8 @@
  */
 function get_headerless_range(range) {
   const newRange = range.offset(1, 0);
-  const shape = getRangeShape(newRange);
-  dump_object(shape);
+  const shape = Range.getRangeShape(newRange);
+  Utils.dumpObject(shape);
   return newRange;
 }
 
@@ -19,12 +19,12 @@ function get_headerless_range(range) {
 function get_data_as_records_with_header(env, adjust = null) {
   let ss;
   let values;
-  [ss, sheet] = get_spreadsheet(env.ss_id, env.sheet_name);
+  [ss, sheet] = Base.getSpreadsheet(env.ss_id, env.sheet_name);
 
   if (typeof (env.header) === 'undefined') {
-    values = get_records_with_header(sheet, adjust);
+    values = Code.getRecordsWithHeader(sheet, adjust);
   } else {
-    values = get_record_by_header(sheet, env.header);
+    values = Code.getRecordByHeader(sheet, env.header);
   }
   return values;
 }
@@ -36,11 +36,11 @@ function get_data_as_records_with_header(env, adjust = null) {
  * @returns {Array} [ヘッダー範囲, データ範囲, データハッシュ]
  */
 function get_records_with_header(sheet, adjust = null) {
-  YKLiblog.Log.debug(`YKLiba_Code.gs get_records_with_header adjust=${adjust}`)
-  const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
+  YKLiblog.Log.debug(`YKLiba_Code.gs getRecordsWithHeader adjust=${adjust}`)
+  const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
   const header = header_range.getValues().pop();
   const data = data_range.getValues();
-  data_hash = data.map((row) => {
+  const data_hash = data.map((row) => {
     const hash = {};
     for (let i = 0; i < header.length; i++) {
       hash[header[i]] = row[i];
@@ -60,7 +60,7 @@ function get_record_by_header(sheet, header) {
   // header = ["id","misc","misc2","purchase_date","price","misc3","category","sub_category","title"];
   // Log.debug(`header=${header}`);
 
-  const [range, values] = getRangeAndValues(sheet);
+  const [range, values] = Range.getRangeAndValues(sheet);
   const buffer = [];
   // Log.debug( `1 buffer=${buffer}` );
   if (range !== null && values !== null) {
@@ -91,7 +91,7 @@ function get_record_by_header(sheet, header) {
  * @returns {Range} 変換された範囲
  */
 function transformRange2(range, height, width){
-  const shape = getRangeShape(range)
+  const shape = Range.getRangeShape(range)
   r2 = shape.r;
   c2 = shape.c;
   h2 = height;
@@ -109,11 +109,11 @@ function transformRange2(range, height, width){
 function transformRange(range, argAdjust){
   YKLiblog.Log.debug(`transformRange range=${range}`);
   YKLiblog.Log.debug(`transformRange range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
-  const shape = getRangeShape(range)
+  const shape = Range.getRangeShape(range)
   YKLiblog.Log.debug(`transformRange shape=${shape}`);
   YKLiblog.Log.debug(`transformRange shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
   YKLiblog.Log.debug(`transformRange argAdjust=${argAdjust}`);
-  const adjust = get_valid_adjust(argAdjust);
+  const adjust = Misc.getValidAdjust(argAdjust);
   YKLiblog.Log.debug(`transformRange adjust=${adjust}`);
   YKLiblog.Log.debug(`transformRange adjust.r=${adjust.r} adjust.c=${adjust.c} adjust.h=${adjust.h} adjust.w=${adjust.w}`);
   let r = adjust.r;
@@ -139,12 +139,12 @@ function transformRange(range, argAdjust){
  * @returns {Array} [ヘッダー範囲, データ範囲]
  */
 function get_range_of_header_and_data(sheet, argAdjust = null) {
-  const range = getValidRange(sheet);
+  const range = Range.getValidRange(sheet);
   YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data range.r=${range.r} range.c=${range.c} range.h=${range.h} range.w=${range.w}`);
-  const shape = getRangeShape(range);
+  const shape = Range.getRangeShape(range);
   YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data shape.r=${shape.r} shape.c=${shape.c} shape.h=${shape.h} shape.w=${shape.w}`);
   YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h} argAdjust.w=${argAdjust.w}`);
-  const newRange = transformRange(range, argAdjust)
+  const newRange = Code.transformRange(range, argAdjust)
   const height = newRange.getHeight();
   const headerRange = newRange.offset(0, 0, 1);
   const dataRange = newRange.offset(1, 0, height - 1);
@@ -159,12 +159,15 @@ function get_range_of_header_and_data(sheet, argAdjust = null) {
  * @returns {Array} [ヘッダー範囲, データ範囲]
  */
 function get_range_of_header_and_data_with_width(sheet, adjust = null) {
-  YKLiblog.Log.debug(`YKLiba_Code.js get_range_of_header_and_data_with_width argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
-  
-  const [header_range, data_range] = get_range_of_header_and_data(sheet, adjust);
-  const shape = getRangeShape(data_range);
-  const new_header_range = header_range.offset(0, 0, shape.h, specified_width);
-  const new_data_range = data_range.offset(0, 0, shape.ht, specified_width);
+  YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
+    
+  const [header_range, data_range] = Code.getRangeOfHeaderAndData(sheet, adjust);
+  if( data_range === null ){
+    return [null, null]
+  }
+  const shape = Range.getRangeShape(data_range);
+  const new_header_range = header_range.offset(0, 0, shape.h, shape.w);
+  const new_data_range = data_range.offset(0, 0, shape.ht, shape.w);
   return [new_header_range, new_data_range];
 }
 
@@ -176,7 +179,7 @@ function get_range_of_header_and_data_with_width(sheet, adjust = null) {
  * @returns {Array} ヘッダー付きレコードデータ
  */
 function get_records_with_header_from_sheet_first(ss_id, sheet_name, adjust = null) {
-  const [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
+  const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
   const sheetx = sheets[0];
   const v = get_records_with_header(sheetx, adjust);
   return v;
@@ -197,7 +200,7 @@ function set_format_to_named_column(sheet, column_name, format, adjust = null) {
   if (index < 0) {
     return [];
   }
-  const shape = getRangeShape(data_range);
+  const shape = Range.getRangeShape(data_range);
   const column_range = data_range.offset(0, index, shape.h, 1);
   const format_array = [];
   for (let i = 0; i < height; i++) {

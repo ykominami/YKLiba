@@ -186,8 +186,8 @@ class Code {
       return [null, null]
     }
     const shape = Range.getRangeShape(data_range);
-    const new_header_range = header_range.offset(0, 0, shape.h, specified_width);
-    const new_data_range = data_range.offset(0, 0, shape.ht, specified_width);
+    const new_header_range = header_range.offset(0, 0, shape.h, shape.w);
+    const new_data_range = data_range.offset(0, 0, shape.ht, shape.w);
     return [new_header_range, new_data_range];
   }
 

@@ -96,7 +96,7 @@ class Simple {
     YKLiblog.Log.debug(`YKLiba_simple.js getSimpleRows 0 range=${range}`);
     if (range !== null) {
       if (maxRange !== null) {
-        const newRange = this.adjustRange(range, maxRange.h, maxRange.w);
+        const newRange = Simple.adjustRange(range, maxRange.h, maxRange.w);
         values = newRange.getValues();
       }
       else {
@@ -117,7 +117,7 @@ class Simple {
     const range = Range.getValidRange(sheet);
     let values = [];
     if (range !== null && maxRange !== null) {
-      const newRange = this.adjustRange(range, maxRange.h, maxRange.w);
+      const newRange = Simple.adjustRange(range, maxRange.h, maxRange.w);
       values = newRange.getValues();
     }
     return [values, newRange];

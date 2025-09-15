@@ -41,7 +41,7 @@ function get_values_from_config_sheet_y(){
  * @return {Array} シートの値配列
  */
 function get_values_from_config_sheet(sheet){
-  return get_simple_rows(sheet)
+  return Simple.getSimpleRows(sheet)
 }
 
 /**
