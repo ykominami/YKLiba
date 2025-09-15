@@ -44,7 +44,7 @@ class Sort {
    * @returns {Range} ソートされた範囲
    */
   static sortXInRangeX(dataRange, sortOptions) {
-    const sortOptionArray = Misc.makeFieldCCondition2(sortOptions);
+    const sortOptionArray = Misc.makeFieldCondition2(sortOptions);
 
     YKLiblog.Log.debug(`sortXInRange sortOptionArray=${JSON.stringify(sortOptionArray)}`);
     dataRange.activate()

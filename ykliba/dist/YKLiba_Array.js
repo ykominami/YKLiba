@@ -73,7 +73,7 @@ function arrayShape(array) {
   let lenMax;
   let lenMin;
   if (sizeArray.length > 0) {
-    [lenMax, lenMin] = getMaxAndMin(sizeArray);
+    [lenMax, lenMin] = Arrayx.getMaxAndMin(sizeArray);
   } else {
     lenMin = 0;
     lenMax = 0;
@@ -90,7 +90,7 @@ function arrayShape(array) {
  * @param {Object} startPoint 開始点
  * @return {Object} {x: 列インデックス, y: 行インデックス}
  */
-function getRelativeCordinatesOfTopLeftSimple(array, shape, startPoint) {
+function getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint) {
   let { x } = startPoint;
   let { y } = startPoint;
   for (let i = 0; i < shape.lenMax; i++) {
@@ -130,11 +130,11 @@ function getRelativeCordinatesOfBottomLeftSimple(array, lenMax, size, startX, st
  * @param {Array} array 対象の配列
  * @return {Object} {x: 列インデックス, y: 行インデックス}
  */
-function getRelativeCordinatesOfTopLeft(array) {
+function getRelativeCoordinatesOfTopLeft(array) {
   // let [size, len_max, len_min] = arrayShape(array);
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
-  return getRelativeCordinatesOfTopLeftSimple(array, shape, startPoint);
+  return getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
 }
 
 /**
@@ -146,9 +146,9 @@ function getRelativeCordinatesOfBottomLeft(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
 
-  const tlPoint = getRelativeCordinatesOfTopLeft_simple(array, shape, startPoint);
+  const tlPoint = Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
 
-  const blPoint = getRelativeCordinatesOfBottomLeft_simple(array, shape, tlPoint);
+  const blPoint = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array, shape, tlPoint);
 
   return blPoint;
 }
@@ -162,8 +162,8 @@ function getRelativeCordinatesOfTLandBL(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
 
-  const tlPoint = getRelativeCordinatesOfTopLeft_simple(array, shape, startPoint);
-  const blPoint = getRelativeCordinatesOfBottomLeft_simple(array, shape, tlPoint);
+  const tlPoint = Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
+  const blPoint = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array, shape, tlPoint);
 
   return { tl: tlPoint, bl: blPoint };
 }
@@ -232,12 +232,9 @@ function getRelativeCordinatesOfTLandBlandTRandBR(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
 
-  const tlPoint = getRelativeCordinatesOfTopLeft_simple(array, shape, startPoint);
-  // let [tl_x, tl_y] =getRelativeCordinatesOfTopLeft_simple(array, len_max, size, -1, -1, len_min);
-
+  const tlPoint = Arrayx.getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint);
   const trPoint = { x: shape.lenMin, y: 0 };
-  const blPoint = getRelativeCordinatesOfBottomLeft_simple(array, shape, tlPoint);
-  // [bl_x, bl_y] =getRelativeCordinatesOfBottomLeft_simple(array, len_max, size, tl_x, tl_y, len_min);
+  const blPoint = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array, shape, tlPoint);
   const brPoint = { x: shape.lenMin, y: blPoint.y };
   return {
     tl: tlPoint, bl: blPoint, tr: trPoint, br: brPoint,
@@ -336,7 +333,7 @@ function linkedRegion(values, op) {
  * @return {Array} [妥当性, メッセージ, エラーコード]
  */
 function is_valid_1d_array(array) {
-  let ret = is_valid_object(array);
+  let ret = Utils.isValidObject(array);
   if (ret[0] === false) {
     return ret;
   }
@@ -344,7 +341,7 @@ function is_valid_1d_array(array) {
     return [false, 'first element of Array is empty array', 10];
   }
   if (array.length === 1) {
-    ret = is_valid_object(array[0]);
+    ret = Utils.isValidObject(array[0]);
     if (ret[0] === false) {
       return [false, 'first element of Array is null or undefined', 11];
     }
@@ -374,7 +371,7 @@ function is_valid_1d_array(array) {
     return [true, '1d Array', 18];
   }
 
-  ret = is_valid_object(array[0]);
+  ret = Utils.isValidObject(array[0]);
   if (ret[0] === false) {
     return [false, 'first element of Array is null or undefined', 19];
   }
@@ -399,12 +396,12 @@ function is_valid_1d_array(array) {
  * @return {Array} [妥当性, メッセージ, エラーコード]
  */
 function is_valid_2d_array(array) {
-  let ret = is_valid_object(array);
+  let ret = Utils.isValidObject(array);
   if (ret[0] === false) {
     return ret;
   }
   if (array.length === 1) {
-    ret = is_valid_object(array[0]);
+    ret = Utils.isValidObject(array[0]);
     if (ret[0] === false) {
       return [false, 'first element of Array is null or undefined', 1];
     }
@@ -434,7 +431,7 @@ function is_valid_2d_array(array) {
     return [true, '1d Array', 7];
   }
 
-  ret = is_valid_object(array[0]);
+  ret = Utils.isValidObject(array[0]);
   if (ret[0] === false) {
     return [false, 'first element of Array is null or undefined', 8];
   }
@@ -512,7 +509,7 @@ function is_equal_array(arrayA, arrayB) {
     return is_equal_array_two_dim(arrayA, arrayB);
   }
 
-  return is_equal_array_one_dim(array_a, array_b);
+  return is_equal_array_one_dim(arrayA, arrayB);
 }
 
 /**

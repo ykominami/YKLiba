@@ -5,7 +5,7 @@
  * @returns {Array} シートの値の配列
  */
 function get_simple_rows_with_env(env, maxRange = null) {
-  const [ss, sheet] = get_spreadsheet(env.ss_id, env.sheet_name);
+  const [ss, sheet] = Base.getSpreadsheet(env.ss_id, env.sheet_name);
   const values = get_simple_rows(sheet, maxRange);
   return values;
 }
@@ -44,7 +44,7 @@ function simple_rows_x(sheetx) {
  * @returns {Range} 有効な範囲オブジェクト
  */
 function get_simple_rows_range(sheet) {
-  return getValidRange(sheet);
+  return Range.getValidRange(sheet);
 }
 
 /**
@@ -55,7 +55,7 @@ function get_simple_rows_range(sheet) {
  * @returns {Range} 調整された範囲オブジェクト
  */
 function adjustRange(range, maxH, maxW){
-  rangeShape = getRangeShape(range)
+  rangeShape = Range.getRangeShape(range)
   w = 0
   h = 0
   if( maxH < rangeShape.h){
@@ -80,12 +80,12 @@ function adjustRange(range, maxH, maxW){
  * @returns {Array} シートの値の配列
  */
 function get_simple_rows(sheet, maxRange = null) {
-  const range = get_simple_rows_range(sheet);
+  const range = Simple.getSimpleRowsRange(sheet);
   let values = [];
   YKLiblog.Log.debug(`YKLiba_simple.js get_simple_rows 0 range=${range}`);
   if (range !== null){
     if (maxRange !== null) {
-      newRange = adjustRange(range, maxRange.h, maxRange.w)
+      newRange = Simple.adjustRange(range, maxRange.h, maxRange.w)
       values = newRange.getValues();
     }
     else{
@@ -103,10 +103,10 @@ function get_simple_rows(sheet, maxRange = null) {
  * @returns {Array} [値の配列, 範囲オブジェクト]の配列
  */
 function get_simple_rows_and_range(sheet, maxRange = null) {
-  const range = get_valid_range(sheet);
+  const range = Range.getValidRange(sheet);
   let values = [];
   if (range !== null && maxRange !== null) {
-    newRange = adjustRange(range, maxRange.h, maxRange.w)
+    newRange = Simple.adjustRange(range, maxRange.h, maxRange.w)
     values = newRange.getValues();
   }
   return [values, newRange];
@@ -120,7 +120,7 @@ function get_simple_rows_and_range(sheet, maxRange = null) {
  * @returns {Array} [値の配列, 範囲オブジェクト]の配列
  */
 function get_simple_rows_and_range_x(ss_id, sheet_name, maxRange = null) {
-  const [ss, sheet, sheets, sheets_by_name] = get_spreadsheet_ex(ss_id, sheet_name);
+  const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
   const sheetx = sheets_by_name[sheet_name];
   return get_simple_rows_and_range(sheetx, maxRange);
 }

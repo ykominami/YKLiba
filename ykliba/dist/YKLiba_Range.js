@@ -22,8 +22,8 @@ function getValidRange(sheet) {
   let newRange = null;
   const [range, values] = getRangeAndValues(sheet);
   if ((range !== null && typeof (range) !== 'undefined') && values !== null) {
-    const shape = getRangeShape(range);
-    const tlRelative = getRelativeCoordinatesOfTopLeft(values);
+    const shape = Range.getRangeShape(range);
+    const tlRelative = Arrayx.getRelativeCoordinatesOfTopLeft(values);
 
     const newHeight = shape.h - tlRelative.y;
     const newWidth = shape.w - tlRelative.x;
@@ -75,7 +75,7 @@ function getColumn(dataRange, index) {
  */
 function insertOneRow(sheet, argAdjust = null) {
   const [header_range, dataRange] = Code.getRangeOfHeaderAndData(sheet, argAdjust);
-  const shape = getRangeShape(dataRange);
+  const shape = Range.getRangeShape(dataRange);
   const targetRange = dataRange.offset(0, 0, 1, shape.w);
   targetRange.insertCells(SpreadsheetApp.Dimension.COLUMNS);
 }
@@ -158,7 +158,7 @@ function groupingWithRange(range, op) {
  * @returns {GoogleAppsScript.Spreadsheet.Range} 分割された範囲
  */
 function divideRangeX(range, grouping_op, link_op) {
-  const hash = groupingWithRange(range, grouping_op);
+  const hash = Range.groupingWithRange(range, grouping_op);
   // const index = 0
   // const cond_value = 2
   const values = range.getValues();

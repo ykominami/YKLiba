@@ -5,7 +5,7 @@
  * @returns {Range} The sorted range
  */
 function SortCUI_x(env, sort_option_array) {
-  const config = make_config_2(env, sort_option_array);
+  const config = Config0.makeConfig2(env, sort_option_array);
   YKLiblog.Log.debug(config);
   return SortCUI(config);
 }
@@ -16,7 +16,7 @@ function SortCUI_x(env, sort_option_array) {
  * @returns {Range} The sorted range
  */
 function SortCUI(config) {
-  const [ss, sheet] = get_spreadsheet(config.ss_id, config.sheet_name);
+  const [ss, sheet] = Base.getSpreadsheet(config.ss_id, config.sheet_name);
   return Sortx(sheet, config);
 }
 
@@ -27,7 +27,7 @@ function SortCUI(config) {
  * @returns {Range} The sorted range
  */
 function SortGUI_x(env, array) {
-  const config = makeConfig2(env, array);
+  const config = Config0.makeConfig2(env, array);
   return SortGUI(config);
 }
 
@@ -48,7 +48,7 @@ function SortGUI(config) {
  * @returns {Range} The sorted range
  */
 function Sortx_in_range_x(dataRange, sortOptions) {
-  const sortOptionArray = make_field_condition_2(sortOptions);
+  const sortOptionArray = Misc.makeFieldCondition2(sortOptions);
 
   YKLiblog.Log.debug(`Sortx_in_range sortOptionArray=${JSON.stringify(sortOptionArray)}`);
   dataRange.activate()
@@ -79,7 +79,7 @@ function Sortx_in_range(dataRange, config) {
  * @returns {Range} The sorted range
  */
 function Sortx(sheet, config, adujst = null) {
-  const [headerRange, dataRange] = get_range_of_header_and_data(sheet, adujst);
+  const [headerRange, dataRange] = Code.getRangeOfHeaderAndData(sheet, adujst);
   const range = Sortx_in_range(dataRange, config);
   return range;
 }
@@ -91,8 +91,8 @@ function Sortx(sheet, config, adujst = null) {
  * @returns {Array} Array containing [header_range, data_range]
  */
 function divide_range(range, arg_adjust = null) {
-  const shape = getRangeShape(range);
-  const adjust = get_valid_adjust(arg_adjust);
+  const shape = Range.getRangeShape(range);
+  const adjust = Misc.getValidAdjust(arg_adjust);
 
   const newRange = range.offset(adjust.r, adjust.c, shape.h + adjust.h, shape.w + adjust.w);
   const height = newRange.getHeight();
@@ -110,7 +110,7 @@ function divide_range(range, arg_adjust = null) {
  * @returns {Range} The sorted range
  */
 function sortOp(range, env, sortOption) {
-  const config = make_config_2(env, sortOption);
+  const config = Config0.makeConfig2(env, sortOption);
   const sortedRange = Sortx_in_range(range, config);
   return sortedRange;
 }

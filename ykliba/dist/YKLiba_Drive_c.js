@@ -1,5 +1,4 @@
 // Import required classes
-// Log class for logging operations
 // YKLiblog class for logging operations
 
 class Drive {
