@@ -5,6 +5,11 @@
 // Range class for range operations
 // YKLiblog class for logging operations
 
+/**
+ * スプレッドシートのソート機能を提供するクラス
+ * CUIとGUIの両方でのソート操作、複数条件でのソート、範囲指定ソート機能を提供する
+ * Google Apps Scriptのスプレッドシートソート機能を拡張した高度なソート操作を実装
+ */
 class Sort {
   /**
    * 設定オブジェクトを受け取り、スプレッドシートを取得してソートを実行する

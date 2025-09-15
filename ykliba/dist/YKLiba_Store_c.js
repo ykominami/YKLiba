@@ -1,6 +1,11 @@
 // Import required classes
 // YKLiblog class for logging operations
 
+/**
+ * 階層構造のデータストレージ機能を提供するクラス
+ * 最大3階層までのデータ保存・取得機能をサポート
+ * キー・バリュー形式でのデータ管理とハッシュオブジェクトの格納機能を実装
+ */
 class Store {
   /**
    * Storeクラスの初期化を行う

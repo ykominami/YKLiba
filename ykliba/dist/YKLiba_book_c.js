@@ -1,10 +1,11 @@
-/**
- * 書籍管理に関する機能を提供するクラス
- * スプレッドシートのbookシートの操作を行う
- */
 // Import required classes
 // Code class for code operations
 
+/**
+ * 書籍管理に関する機能を提供するクラス
+ * スプレッドシートのbookシートの操作、日付フォーマット設定機能を提供する
+ * 書籍データの管理と表示形式の調整に特化した機能を実装
+ */
 class Book {
   /**
    * bookシートのpurchase_date列のフォーマットをyyyy-mm-ddに設定する

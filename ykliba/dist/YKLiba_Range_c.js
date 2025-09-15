@@ -4,6 +4,11 @@
 // Misc class for utility functions
 // Utils class for utility functions
 
+/**
+ * Google Spreadsheetsの範囲操作を提供するクラス
+ * セル範囲の取得、データ操作、グループ化、ソート機能を提供する
+ * スプレッドシートの範囲に対する高度な操作を実装
+ */
 class Range {
   /**
    * シートからデータ範囲とその値を取得する

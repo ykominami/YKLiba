@@ -1,6 +1,11 @@
 // Import required classes
 // No external class dependencies - only uses Google Apps Script APIs
 
+/**
+ * Google Spreadsheetsの基本操作を提供するクラス
+ * スプレッドシートとシートの取得、管理機能を提供する
+ * Google Apps Script APIを使用したスプレッドシート操作の基盤クラス
+ */
 class Base {
   /**
    * アクティブなスプレッドシートのIDを取得する

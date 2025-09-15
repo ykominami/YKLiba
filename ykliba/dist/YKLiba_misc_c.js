@@ -3,6 +3,11 @@
 // YKLiblog class for logging operations
 // Utils class for utility functions
 
+/**
+ * その他の雑多な機能を提供するクラス
+ * シェイプ情報の作成、設定オブジェクトの構築、ソートオプションの変換機能を提供する
+ * 様々な補助的な処理を集約したヘルパークラス
+ */
 class Misc {
   /**
    * オブジェクトからシェイプ情報（行、列、高さ、幅）を抽出して新しいオブジェクトを作成する
