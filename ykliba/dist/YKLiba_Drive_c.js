@@ -1,6 +1,11 @@
 // Import required classes
 // YKLiblog class for logging operations
 
+/**
+ * Google Driveのファイル操作機能を提供するクラス
+ * フォルダとファイルの作成、取得、削除、スプレッドシートのクリア機能を提供する
+ * Google Drive APIを使用したファイル管理操作を実装
+ */
 class Drive {
   /**
    * フォルダIDからフォルダオブジェクトを取得する

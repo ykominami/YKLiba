@@ -1,6 +1,11 @@
 // Import required classes
 // Arrayx class for array operations
 
+/**
+ * 矩形領域と隣接要素の解析を行うクラス
+ * 2次元配列からマスクパターンの生成、隣接要素の検出機能を提供する
+ * 配列内の空白要素や隣接関係の分析に特化したアルゴリズムを実装
+ */
 class Rectangle {
   /**
    * 2次元配列からマスクパターンを生成する

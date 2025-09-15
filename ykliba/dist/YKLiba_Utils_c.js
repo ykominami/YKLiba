@@ -3,6 +3,11 @@
 // Arrayx class for array operations
 // YKLiblog class for logging operations
 
+/**
+ * 汎用的なユーティリティ機能を提供するクラス
+ * 文字列処理、日付操作、配列操作、ファイル出力、データ変換などの機能を提供する
+ * Google Apps Script環境での共通処理を集約した基盤ユーティリティクラス
+ */
 class Utils {
   /**
    * 引数がnullまたは空文字列かどうかを判定する

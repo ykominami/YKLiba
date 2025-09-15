@@ -1,6 +1,11 @@
 // Import required classes
 // Arrayx class for array operations
 
+/**
+ * ログ出力機能を提供するクラス
+ * 複数のログレベル（DEBUG、INFO、WARN、ERROR、FAULT、UNKNOWN）をサポート
+ * コンソール出力とアラートダイアログ表示の両方に対応したロギング機能を実装
+ */
 class Log {
   // static log_level
   // UNKNOWN(6)

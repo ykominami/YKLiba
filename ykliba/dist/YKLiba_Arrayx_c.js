@@ -2,6 +2,11 @@
 // Utils class for utility functions
 // YKLiblog class for logging operations
 
+/**
+ * 配列操作に関する機能を提供するクラス
+ * 2次元配列の座標計算、配列の妥当性検証、データ変換などの機能を含む
+ * Google Apps Script環境での配列処理に特化した実装を提供する
+ */
 class Arrayx {
   /**
    * 条件に基づいて値の判定を行う

@@ -2,6 +2,11 @@
 // Base class for spreadsheet operations
 // YKLiblog class for logging operations
 
+/**
+ * 基本的な設定操作機能を提供するクラス
+ * 設定シートの取得、設定値の読み込み、フォルダ操作機能を提供する
+ * Google Apps Scriptの設定管理の基盤機能を実装
+ */
 class Config0 {
   /**
    * 設定シートを取得する

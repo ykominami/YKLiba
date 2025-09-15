@@ -5,6 +5,11 @@
 // Range class for range operations
 // YKLiblog class for logging operations
 
+/**
+ * シンプルなスプレッドシート操作を提供するクラス
+ * 基本的なデータ取得、範囲調整、環境設定ベースの操作機能を提供する
+ * 簡潔なAPIでスプレッドシートの行データを効率的に処理する機能を実装
+ */
 class Simple {
   /**
    * 環境設定を使用してシートからシンプルな行データを取得する

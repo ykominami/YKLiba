@@ -4,6 +4,11 @@
 // Misc class for utility functions
 // YKLiblog class for logging operations
 
+/**
+ * スプレッドシートのデータ処理とコード操作を提供するクラス
+ * ヘッダー付きデータの取得、範囲の変換、フォーマット設定機能を提供する
+ * Google Apps Scriptでのスプレッドシート操作に特化した高レベルAPIを実装
+ */
 class Code {
   /**
    * 指定された範囲からヘッダー行を除いた範囲を取得する

@@ -1,6 +1,11 @@
 // Import required classes
 // Config0 class for configuration operations
 
+/**
+ * 設定値の管理と操作機能を提供するクラス
+ * 定数値の取得、フォルダ情報の更新、設定データの操作機能を提供する
+ * アプリケーション設定の管理に特化した機能を実装
+ */
 class Config {
   /**
    * 行を追加する操作を表す定数値を返す
