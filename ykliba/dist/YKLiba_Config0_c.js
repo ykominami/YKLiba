@@ -12,6 +12,8 @@ class Config0 {
    * 設定シートを取得する
    * @param {string|null} sheetname - シート名（nullの場合はデフォルトシート名を使用）
    * @returns {GoogleAppsScript.Spreadsheet.Sheet} 設定シート
+   * @throws {Error} PropertiesService.getScriptProperties().getProperty()でプロパティが取得できない場合
+   * @throws {Error} Base.getSpreadsheetで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
    */
   static getConfigSheet(sheetname = null) {
     const ss_id = PropertiesService.getScriptProperties().getProperty('CONFIG_SPREADSHEET_ID');
@@ -27,6 +29,8 @@ class Config0 {
   /**
    * デフォルト設定シートから値を取得する
    * @returns {Array} 設定シートの値
+   * @throws {Error} Config0.getConfigSheetメソッドでエラーが発生した場合
+   * @throws {Error} Config0.getValuesFromConfigSheetメソッドでエラーが発生した場合
    */
   static getValuesFromConfigSheetX() {
     const sheet = Config0.getConfigSheet()
@@ -37,6 +41,9 @@ class Config0 {
   /**
    * 2番目の設定シートから値を取得する
    * @returns {Array} 設定シートの値
+   * @throws {Error} PropertiesService.getScriptProperties().getProperty()でプロパティが取得できない場合
+   * @throws {Error} Config0.getConfigSheetメソッドでエラーが発生した場合
+   * @throws {Error} Config0.getValuesFromConfigSheetメソッドでエラーが発生した場合
    */
   static getValuesFromConfigSheetY() {
     const sheetname = PropertiesService.getScriptProperties().getProperty('CONFIG2_SHEETNAME');
@@ -49,6 +56,7 @@ class Config0 {
    * 指定されたシートから値を取得する
    * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet - 対象のシート
    * @returns {Array} シートの値
+   * @throws {Error} Base.getSimpleRowsメソッドでエラーが発生した場合
    */
   static getValuesFromConfigSheet(sheet) {
     return Base.getSimpleRows(sheet)
@@ -58,6 +66,8 @@ class Config0 {
    * 指定されたIDでフォルダを取得する
    * @param {string} folderId - フォルダID
    * @returns {GoogleAppsScript.Drive.Folder} フォルダオブジェクト
+   * @throws {Error} DriveApp.getFolderById()で無効なフォルダIDが指定された場合
+   * @throws {Error} フォルダが存在しない、またはアクセス権限がない場合
    */
   static getFolderById(folderId) {
     return DriveApp.getFolderById(folderId)

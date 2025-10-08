@@ -14,6 +14,8 @@ class Range {
    * シートからデータ範囲とその値を取得する
    * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet - 対象のシート
    * @returns {Array} [range, values] - データ範囲とその値の配列
+   * @throws {Error} sheetがnullまたはundefinedの場合、getDataRange()メソッド呼び出しが失敗した場合
+   * @throws {Error} range.getValues()メソッド呼び出しが失敗した場合
    */
   static getRangeAndValues(sheet) {
     let range = null;
@@ -29,6 +31,9 @@ class Range {
    * シートから有効なデータ範囲を取得する（空の行や列を除く）
    * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet - 対象のシート
    * @returns {GoogleAppsScript.Spreadsheet.Range|null} 有効なデータ範囲
+   * @throws {Error} Range.getRangeAndValuesでエラーが発生した場合
+   * @throws {Error} Arrayx.getRelativeCoordinatesOfTopLeftメソッド呼び出しが失敗した場合
+   * @throws {Error} range.offset()メソッドで範囲外のオフセットを指定した場合
    */
   static getValidRange(sheet) {
     let newRange = null;
@@ -51,6 +56,8 @@ class Range {
    * 範囲の形状情報を取得する
    * @param {GoogleAppsScript.Spreadsheet.Range} range - 対象の範囲
    * @returns {Object} 形状情報 {r: row, c: column, h: height, w: width}
+   * @throws {Error} rangeがnullの場合
+   * @throws {Error} range.getColumn()、getRow()、getHeight()、getWidth()メソッド呼び出しが失敗した場合
    */
   static getRangeShape(range) {
     if( range === null){
@@ -78,6 +85,8 @@ class Range {
    * 範囲に値を設定する
    * @param {GoogleAppsScript.Spreadsheet.Range} range - 対象の範囲
    * @param {Array} values - 設定する値の2次元配列
+   * @throws {Error} rangeがnullの場合、またはrange.setValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} valuesの次元が範囲と一致しない場合
    */
   static setValues(range, values) {
     range.setValues(values);
@@ -88,6 +97,9 @@ class Range {
    * @param {GoogleAppsScript.Spreadsheet.Range} dataRange - データ範囲
    * @param {number} index - 列のインデックス
    * @returns {Array} 指定した列の値の配列
+   * @throws {Error} dataRangeがnullの場合
+   * @throws {Error} dataRange.getValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} indexが範囲外の値の場合
    */
   static getColumn(dataRange, index) {
     if( dataRange === null){
@@ -101,6 +113,9 @@ class Range {
    * シートに1行を挿入する
    * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet - 対象のシート
    * @param {Object|null} argAdjust - 調整オプション
+   * @throws {Error} Code.getRangeOfHeaderAndDataでエラーが発生した場合
+   * @throws {Error} SpreadsheetApp.Dimension.COLUMNSが無効な値の場合
+   * @throws {Error} insertCells()メソッド呼び出しが失敗した場合
    */
   static insertOneRow(sheet, argAdjust = null) {
     const [header_range, dataRange] = Code.getRangeOfHeaderAndData(sheet, argAdjust);
@@ -114,6 +129,8 @@ class Range {
    * @param {Array} values - グループ化対象の配列
    * @param {Function} op - グループ化操作関数 (curVal) => [key, value]
    * @returns {Object} グループ化された結果のハッシュ
+   * @throws {Error} valuesがnullまたはundefinedの場合
+   * @throws {Error} opが関数でない場合、またはop実行時にエラーが発生した場合
    */
   static grouping(values, op) {
     return values.reduce((hash, curVal, index) => {
@@ -162,6 +179,8 @@ class Range {
    * @param {Array} array - ソート対象の配列
    * @param {Function} op - ソート比較関数
    * @returns {Array} ソートされた配列
+   * @throws {Error} arrayがnullまたはundefinedの場合
+   * @throws {Error} opが関数でない場合、またはop実行時にエラーが発生した場合
    */
   static sortx(array, op) {
     return array.sort(op);
@@ -172,6 +191,8 @@ class Range {
    * @param {GoogleAppsScript.Spreadsheet.Range} range - 対象の範囲
    * @param {Function} op - グループ化操作関数
    * @returns {Object} グループ化された結果のハッシュ
+   * @throws {Error} rangeがnullの場合、またはrange.getValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} Range.groupingメソッドでエラーが発生した場合
    */
   static groupingWithRange(range, op) {
     const values = range.getValues();
@@ -184,6 +205,9 @@ class Range {
    * @param {Function} grouping_op - グループ化操作関数
    * @param {Function} link_op - リンク操作関数
    * @returns {GoogleAppsScript.Spreadsheet.Range} 分割された範囲
+   * @throws {Error} rangeがnullの場合、またはrange.getValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} Range.groupingWithRangeやArrayx.linkedRegionメソッドでエラーが発生した場合
+   * @throws {Error} range.offset()メソッドで範囲外のオフセットを指定した場合
    */
   static divideRangeX(range, grouping_op, link_op) {
     const hash = Range.groupingWithRange(range, grouping_op);

@@ -65,6 +65,7 @@ class Misc {
   /**
    * 環境設定を取得する関数の文字列を生成する
    * @returns {string} get_env関数の文字列
+   * @throws {Error} Base.getSsId()メソッドでエラーが発生した場合
    */
   static makeFunctionGetEnv() {
     const ssId = Base.getSsId();
@@ -83,6 +84,8 @@ class Misc {
    * @param {Object} env - 環境設定オブジェクト
    * @param {...any} fields - フィールド情報（可変長引数）
    * @returns {Object} 設定オブジェクト
+   * @throws {Error} envオブジェクトのプロパティアクセスでエラーが発生した場合
+   * @throws {Error} fieldsが空配列の場合、pop()メソッドでエラーが発生する可能性がある
    */
   static makeConfig(env, ...fields) {
     return {
@@ -101,6 +104,7 @@ class Misc {
    * @param {Object|null} sortOptions - ソートオプション
    * @param {...any} fields - フィールド情報（可変長引数）
    * @returns {Object} 設定オブジェクト
+   * @throws {Error} envオブジェクトのプロパティアクセスでエラーが発生した場合
    */
   static makeConfig2(env, sortOptions, ...fields) {
     let obj;
@@ -147,6 +151,7 @@ class Misc {
    * 文字または数値から列番号を変換する
    * @param {string|number} ch - 列文字または列番号
    * @returns {number} 列番号
+   * @throws {Error} Utils.getColumnNumberメソッドで無効な列文字が指定された場合
    */
   static convertColumnNumber(ch) {
     let column_number = ch;
@@ -161,6 +166,7 @@ class Misc {
    * 配列アイテムから昇順ソートオプションの配列を作成する
    * @param {Array} item - [列情報, ソート文字]の配列
    * @returns {Array} [列番号, 昇順ソートオプション]の配列
+   * @throws {Error} itemが配列でない場合、またはインデックスアクセスでエラーが発生した場合
    */
   static makeAscendingSortOptionInArray(item) {
     const column_number = Misc.convertColumnNumber(item[0]);
@@ -173,6 +179,7 @@ class Misc {
    * 配列の各アイテムから昇順ソートオプションの配列を作成する（拡張版）
    * @param {Array} array - ソート情報の配列
    * @returns {Array} 昇順ソートオプションの配列
+   * @throws {Error} arrayがnullまたはundefinedの場合
    */
   static makeAscendingSortOptionArray2(array) {
     const array2 = array.map((item) => {
@@ -192,6 +199,8 @@ class Misc {
    * 配列の各アイテムから昇順ソートオプションの配列を作成する
    * @param {Array} array - ソート情報の配列
    * @returns {Array} 昇順ソートオプションの配列
+   * @throws {Error} arrayがnullまたはundefinedの場合
+   * @throws {Error} 配列の要素にアクセスする際にエラーが発生した場合
    */
   static makeAscendingSortOptionArray(array) {
     const v = array.map((item) => {
@@ -215,6 +224,8 @@ class Misc {
    * 配列からフィールド条件オブジェクトの配列を作成する（拡張版）
    * @param {Array} array - ソート情報の配列
    * @returns {Array} フィールド条件オブジェクトの配列
+   * @throws {Error} makeAscendingSortOptionArray2メソッドでエラーが発生した場合
+   * @throws {Error} 配列の要素にアクセスする際にエラーが発生した場合
    */
   static makeFieldCondition2(array) {
     const sort_option_array = this.makeAscendingSortOptionArray2(array);
@@ -227,6 +238,7 @@ class Misc {
    * @param {number} column_index - 開始列インデックス
    * @param {Array} array - ソート情報の配列
    * @returns {Array} フィールド条件オブジェクトの配列
+   * @throws {Error} makeAscendingSortOptionArrayメソッドでエラーが発生した場合
    */
   static makeFieldCondition(column_index, array) {
     const ret_array = [];

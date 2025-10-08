@@ -55,6 +55,7 @@ class Config {
    * @param {string} key - 取得対象のフォルダキー
    * @param {Object|null} arg_folder_info_hash - フォルダ情報ハッシュ（省略時は設定シートから取得）
    * @returns {*} フォルダ情報の最後の日付
+   * @throws {TypeError} キーが存在しない場合、またはfolder_infoがundefinedの場合
    */
   static getLastDateByKey(key, arg_folder_info_hash = null) {
     let folder_info_hash;
