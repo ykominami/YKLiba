@@ -16,6 +16,8 @@ class Simple {
    * @param {Object} env - 環境設定オブジェクト（ss_id, sheet_nameを含む）
    * @param {Object|null} maxRange - 最大範囲制限（h, wプロパティを含む）
    * @returns {Array} シートの値の配列
+   * @throws {Error} Base.getSpreadsheetで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
+   * @throws {Error} Simple.getSimpleRowsメソッドでエラーが発生した場合
    */
   static getSimpleRowsWithEnv(env, maxRange = null) {
     const [ss, sheet] = Base.getSpreadsheet(env.ss_id, env.sheet_name);
@@ -27,6 +29,9 @@ class Simple {
    * シートからシンプルな行の範囲を計算して取得する
    * @param {Object} sheetx - シートオブジェクト
    * @returns {Range} シンプルな行の範囲
+   * @throws {Error} Simple.getSimpleRowsAndRangeメソッドでエラーが発生した場合
+   * @throws {Error} Arrayx.getRelativeCordinatesOfTLandBLやUtils.getRindexメソッドでエラーが発生した場合
+   * @throws {Error} range.offset()メソッドで範囲外のオフセットを指定した場合
    */
   static simpleRowsRangeX(sheetx) {
     const [values, range] = Simple.getSimpleRowsAndRange(sheetx);
@@ -44,6 +49,8 @@ class Simple {
    * シートからシンプルな行の値を取得する
    * @param {Object} sheetx - シートオブジェクト
    * @returns {Array} シンプルな行の値の配列
+   * @throws {Error} simpleRowsRangeXメソッドでエラーが発生した場合
+   * @throws {Error} simple_range.getValues()メソッド呼び出しが失敗した場合
    */
   static simpleRowsX(sheetx) {
     const simple_range = this.simpleRowsRangeX(sheetx);
@@ -55,6 +62,7 @@ class Simple {
    * シートから有効な範囲を取得する
    * @param {Object} sheet - シートオブジェクト
    * @returns {Range} 有効な範囲
+   * @throws {Error} Range.getValidRangeメソッドでエラーが発生した場合
    */
   static getSimpleRowsRange(sheet) {
     return Range.getValidRange(sheet);
@@ -66,6 +74,8 @@ class Simple {
    * @param {number} maxH - 最大高さ
    * @param {number} maxW - 最大幅
    * @returns {Range} 調整された範囲
+   * @throws {Error} rangeがnullの場合
+   * @throws {Error} Range.getRangeShapeやrange.offset()メソッドでエラーが発生した場合
    */
   static adjustRange(range, maxH, maxW) {
     if( range === null){
@@ -94,6 +104,8 @@ class Simple {
    * @param {Object} sheet - シートオブジェクト
    * @param {Object|null} maxRange - 最大範囲制限（h, wプロパティを含む）
    * @returns {Array} シートの値の配列
+   * @throws {Error} getSimpleRowsRangeメソッドでエラーが発生した場合
+   * @throws {Error} Simple.adjustRangeやgetValues()メソッドでエラーが発生した場合
    */
   static getSimpleRows(sheet, maxRange = null) {
     const range = this.getSimpleRowsRange(sheet);
@@ -117,6 +129,8 @@ class Simple {
    * @param {Object} sheet - シートオブジェクト
    * @param {Object|null} maxRange - 最大範囲制限（h, wプロパティを含む）
    * @returns {Array} [値の配列, 範囲]の配列
+   * @throws {Error} Range.getValidRangeメソッドでエラーが発生した場合
+   * @throws {Error} Simple.adjustRangeやgetValues()メソッドでエラーが発生した場合
    */
   static getSimpleRowsAndRange(sheet, maxRange = null) {
     const range = Range.getValidRange(sheet);
@@ -134,6 +148,9 @@ class Simple {
    * @param {string} sheet_name - シート名
    * @param {Object|null} maxRange - 最大範囲制限（h, wプロパティを含む）
    * @returns {Array} [値の配列, 範囲]の配列
+   * @throws {Error} Base.getSpreadsheetExで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
+   * @throws {Error} sheets_by_nameに指定されたsheet_nameが存在しない場合
+   * @throws {Error} Simple.getSimpleRowsAndRangeメソッドでエラーが発生した場合
    */
   static getSimpleRowsAndRangeX(ss_id, sheet_name, maxRange = null) {
     const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
