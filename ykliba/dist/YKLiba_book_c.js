@@ -10,6 +10,7 @@ class Book {
   /**
    * bookシートのpurchase_date列のフォーマットをyyyy-mm-ddに設定する
    * @param {string} ss_id - スプレッドシートID
+   * @throws {Error} Code.setFormatToNamedRowsSheetBySheetnameで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
    */
   static setFormatToNamedRowsSheetBySheetnameX(ss_id) {
     const sheetname = 'book';

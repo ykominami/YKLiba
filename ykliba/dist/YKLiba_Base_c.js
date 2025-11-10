@@ -10,6 +10,7 @@ class Base {
   /**
    * アクティブなスプレッドシートのIDを取得する
    * @returns {string} スプレッドシートのID（アクティブなスプレッドシートがない場合は空文字）
+   * @throws {Error} スプレッドシートへのアクセスに失敗した場合
    */
   static getSsId() {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -25,6 +26,7 @@ class Base {
    * @param {string} ssId - スプレッドシートのID
    * @param {string|null} sheetName - シート名（省略時はnull）
    * @returns {Array} [スプレッドシート, シート]の配列
+   * @throws {Error} スプレッドシートIDが無効な場合、シート名が見つからない場合
    */
   static getSpreadsheet(ssId, sheetName = null) {
     const ss = SpreadsheetApp.openById(ssId);
@@ -40,6 +42,7 @@ class Base {
    * @param {string} ssId - スプレッドシートのID
    * @param {string|null} sheetName - シート名（省略時はnull）
    * @returns {Array} [スプレッドシート, シート, 全シート配列, シート名マップ]の配列
+   * @throws {Error} スプレッドシートIDが無効な場合、シート名が見つからない場合
    */
   static getSpreadsheetEx(ssId, sheetName = null) {
     const ss = SpreadsheetApp.openById(ssId);
@@ -59,6 +62,7 @@ class Base {
    * 指定されたIDのスプレッドシートと全シート情報を取得する
    * @param {string} ssId - スプレッドシートのID
    * @returns {Array} [スプレッドシート, 最初のシート, 全シート配列, シート名マップ]の配列
+   * @throws {Error} スプレッドシートIDが無効な場合
    */
   static getSheets(ssId) {
     const ss = SpreadsheetApp.openById(ssId);

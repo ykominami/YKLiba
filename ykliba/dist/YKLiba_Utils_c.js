@@ -13,6 +13,7 @@ class Utils {
    * 引数がnullまたは空文字列かどうかを判定する
    * @param {*} arg - 判定対象の値
    * @return {boolean} nullまたは空文字列の場合true、それ以外の場合false
+   * @throws {Error} 比較演算子で予期しないエラーが発生した場合
    */
   static isNullOrWhitespace(arg){
     return arg === null || arg === "";
@@ -23,6 +24,7 @@ class Utils {
    * @param {Date|number} date1 - 比較対象の日付1
    * @param {Date|number} date2 - 比較対象の日付2
    * @return {boolean} date1がdate2より後の場合true、それ以外の場合false
+   * @throws {TypeError} 無効な日付オブジェクトに対してgetTime()を呼び出した場合
    */
   static isAfterDate(date1, date2){
     let time1, time2;
@@ -54,6 +56,7 @@ class Utils {
    * オブジェクトがundefinedかどうかを判定する
    * @param {*} obj - 判定対象のオブジェクト
    * @return {boolean} undefinedの場合true、それ以外の場合false
+   * @throws {Error} typeof演算子で予期しないエラーが発生した場合
    */
   static isUndefined(obj){
     if( (typeof obj) == "undefined" ){
@@ -69,6 +72,7 @@ class Utils {
    * @param {Array} array_a - 比較対象の配列1
    * @param {Array} array_b - 比較対象の配列2
    * @return {boolean} 配列が等しい場合true、それ以外の場合false
+   * @throws {TypeError} 循環参照を含むオブジェクトをJSON化しようとした場合
    */
   static isEqual(array_a, array_b) {
     return JSON.stringify(array_a) === JSON.stringify(array_b);

@@ -11,6 +11,7 @@ class Drive {
    * フォルダIDからフォルダオブジェクトを取得する
    * @param {string} folder_id - 取得するフォルダのID
    * @return {Folder} フォルダオブジェクト
+   * @throws {Error} フォルダIDが無効な場合またはフォルダが見つからない場合
    */
   static getFolder(folder_id) {
     return DriveApp.getFolderById(folder_id);
@@ -21,6 +22,7 @@ class Drive {
    * @param {Folder} folder - ファイルを作成するフォルダ
    * @param {string} name - 作成するファイル名
    * @param {string} content - ファイルの内容
+   * @throws {Error} フォルダオブジェクトが無効な場合またはファイル作成に失敗した場合
    */
   static createFile(folder, name, content) {
     folder.createFile(name, content);
@@ -31,6 +33,7 @@ class Drive {
    * @param {Folder} folder - 検索対象のフォルダ
    * @param {string} name - 取得するファイル名
    * @return {File|null} ファイルオブジェクト、見つからない場合はnull
+   * @throws {Error} フォルダオブジェクトが無効な場合
    */
   static getFile(folder, name) {
     YKLiblog.Log.debug(`folder=${folder}`);
@@ -48,6 +51,7 @@ class Drive {
    * 指定されたフォルダ内の全ファイルを削除（ゴミ箱に移動）する
    * @param {Folder} folder - ファイルを削除するフォルダ
    * @return {boolean} 処理が完了した場合はtrue
+   * @throws {Error} フォルダオブジェクトが無効な場合またはファイル削除に失敗した場合
    */
   static removeFilesUnderFolder(folder) {
     files = folder.getFiles();
@@ -61,6 +65,7 @@ class Drive {
   /**
    * スプレッドシートの内容をクリアする（ヘッダー行を除く）
    * @param {Sheet} sheet - クリアするスプレッドシート
+   * @throws {Error} シートオブジェクトが無効な場合または行削除に失敗した場合
    */
   static clearSheet(sheet) {
     const lastRow = sheet.getLastRow();

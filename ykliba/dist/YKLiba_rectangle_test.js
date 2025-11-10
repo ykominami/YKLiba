@@ -3,7 +3,7 @@
  * 配列の空文字列を0、それ以外を1に変換するマスクパターンの生成をテストする
  */
 function test_mask_pattern() {
-  Util.set_log_level(Util.DEBUG());
+  YKLiblog.Log.setLogLevel(YKLiblog.Log.DEBUG());
 
   array = [
     ['', '', 'a', 'b'],
@@ -18,10 +18,10 @@ function test_mask_pattern() {
     [0, 0, 1, 1],
   ];
   const mask_pattern = make_mask_pattern(array);
-  Util.debug(mask_pattern);
+  YKLiblog.Log.debug(mask_pattern);
 
   const [ret, state] = is_equal_array(mask_pattern, expected_array);
-  Util.debug(`ret=${ret} state=${state}`);
+  YKLiblog.Log.debug(`ret=${ret} state=${state}`);
 }
 
 /**
@@ -46,7 +46,7 @@ function test_count_row_and_column(array, expect_row_count, expect_column_count)
  * 様々なパターンの配列で行と列のカウント機能をテストする
  */
 function test_count_row_and_column_x_x() {
-  Util.set_log_level(Util.DEBUG());
+  YKLiblog.Log.setLogLevel(YKLiblog.Log.DEBUG());
 
   array = [
     [0, 0, 1, 1],

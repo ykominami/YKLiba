@@ -15,6 +15,8 @@ class Sort {
    * 設定オブジェクトを受け取り、スプレッドシートを取得してソートを実行する
    * @param {Object} config - ソート設定オブジェクト
    * @returns {Range} ソートされた範囲
+   * @throws {Error} Base.getSpreadsheetで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
+   * @throws {Error} Sort.sortXメソッドでエラーが発生した場合
    */
   static sortCui(config) {
     const [ss, sheet] = Base.getSpreadsheet(config.ss_id, config.sheet_name);
@@ -26,6 +28,8 @@ class Sort {
    * @param {Object} env - 環境設定オブジェクト
    * @param {Array} array - ソート設定の配列
    * @returns {Range} ソートされた範囲
+   * @throws {Error} Misc.makeConfig2メソッドでエラーが発生した場合
+   * @throws {Error} Sort.sortGuiメソッドでエラーが発生した場合
    */
   static sortGuiX(env, array) {
     const config = Misc.makeConfig2(env, array);
@@ -36,6 +40,8 @@ class Sort {
    * 設定オブジェクトを受け取り、アクティブシートでソートを実行する
    * @param {Object} config - ソート設定オブジェクト
    * @returns {Range} ソートされた範囲
+   * @throws {Error} SpreadsheetApp.getActiveSheet()でアクティブシートが取得できない場合
+   * @throws {Error} Sort.sortXメソッドでエラーが発生した場合
    */
   static sortGui(config) {
     const sheet = SpreadsheetApp.getActiveSheet();
@@ -47,6 +53,8 @@ class Sort {
    * @param {Range} dataRange - ソート対象のデータ範囲
    * @param {Object} sortOptions - ソートオプション
    * @returns {Range} ソートされた範囲
+   * @throws {Error} Misc.makeFieldCondition2メソッドでエラーが発生した場合
+   * @throws {Error} dataRange.activate()やsort()メソッド呼び出しが失敗した場合
    */
   static sortXInRangeX(dataRange, sortOptions) {
     const sortOptionArray = Misc.makeFieldCondition2(sortOptions);
@@ -62,6 +70,8 @@ class Sort {
    * @param {Range} dataRange - ソート対象のデータ範囲
    * @param {Object} config - ソート設定オブジェクト
    * @returns {Range} ソートされた範囲
+   * @throws {Error} dataRange.getColumn()メソッド呼び出しが失敗した場合
+   * @throws {Error} Sort.sortXInRangeXメソッドでエラーが発生した場合
    */
   static sortXInRange(dataRange, config) {
     const column = dataRange.getColumn();
@@ -78,6 +88,8 @@ class Sort {
    * @param {Object} config - ソート設定オブジェクト
    * @param {Object} adujst - 調整オブジェクト（オプション）
    * @returns {Range} ソートされた範囲
+   * @throws {Error} Code.getRangeOfHeaderAndDataでエラーが発生した場合
+   * @throws {Error} Sort.sortXInRangeメソッドでエラーが発生した場合
    */
   static sortX(sheet, config, adujst = null) {
     const [headerRange, dataRange] = Code.getRangeOfHeaderAndData(sheet, adujst);
@@ -90,6 +102,9 @@ class Sort {
    * @param {Range} range - 分割対象の範囲
    * @param {Object} arg_adjust - 調整オブジェクト（オプション）
    * @returns {Array} [ヘッダー範囲, データ範囲]の配列
+   * @throws {Error} rangeがnullの場合
+   * @throws {Error} Range.getRangeShapeやMisc.getValidAdjustメソッドでエラーが発生した場合
+   * @throws {Error} range.offset()やgetHeight()メソッド呼び出しが失敗した場合
    */
   static divideRange(range, arg_adjust = null) {
     if( range === null){

@@ -11,6 +11,8 @@ class Rectangle {
    * 2次元配列からマスクパターンを生成する
    * @param {Array<Array>} array - 入力2次元配列
    * @returns {Array<Array<number>>} マスクパターン（空文字は0、それ以外は1）
+   * @throws {Error} Arrayx.isValid2dArrayメソッドでエラーが発生した場合
+   * @throws {Error} 配列が2次元配列でない場合、または配列アクセスでエラーが発生した場合
    */
   static makeMaskPattern(array) {
     const ret_check = Arrayx.isValid2dArray(array);
@@ -175,6 +177,8 @@ class Rectangle {
    * 2次元配列から隣接要素配列を生成する
    * @param {Array<Array>} array - 入力2次元配列
    * @returns {Array<Array<number>>} 隣接要素配列
+   * @throws {Error} Arrayx.isValid2dArrayメソッドでエラーが発生した場合
+   * @throws {Error} 配列が2次元配列でない場合、または配列アクセスで範囲外エラーが発生した場合
    */
   static makeAdjacencyArray(array) {
     const ret_check = Arrayx.isValid2dArray(array);

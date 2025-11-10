@@ -14,6 +14,7 @@ class Code {
    * 指定された範囲からヘッダー行を除いた範囲を取得する
    * @param {Range} range - 対象の範囲
    * @returns {Range} ヘッダー行を除いた範囲
+   * @throws {Error} rangeがnullの場合、またはoffsetメソッドで範囲外のオフセットを指定した場合
    */
   static getHeaderlessRange(range) {
     const newRange = range.offset(1, 0);
@@ -30,6 +31,8 @@ class Code {
    * @param {Object} env - 環境設定オブジェクト（ss_id, sheet_name, header等）
    * @param {Object} adjust - 調整パラメータ（オプション）
    * @returns {Array} レコード形式のデータ
+   * @throws {Error} Base.getSpreadsheetが無効なスプレッドシートIDまたはシート名でエラーを投げた場合
+   * @throws {Error} envオブジェクトのプロパティアクセスでエラーが発生した場合
    */
   static getDataAsRecordsWithHeader(env, adjust = null) {
     let ss;
@@ -49,6 +52,9 @@ class Code {
    * @param {Sheet} sheet - 対象のシート
    * @param {Object} adjust - 調整パラメータ（オプション）
    * @returns {Array} [ヘッダー範囲, データ範囲, データハッシュ配列]
+   * @throws {Error} getRangeOfHeaderAndDataでシート取得に失敗した場合
+   * @throws {Error} 範囲のgetValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} header配列やdata配列へのアクセスでエラーが発生した場合
    */
   static getRecordsWithHeader(sheet, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.gs getRecordsWithHeader adjust=${adjust}`)
@@ -70,6 +76,8 @@ class Code {
    * @param {Sheet} sheet - 対象のシート
    * @param {Array} header - ヘッダー名の配列
    * @returns {Array} レコード形式のデータ配列
+   * @throws {Error} Range.getRangeAndValuesでシート取得に失敗した場合
+   * @throws {Error} 配列のインデックスアクセスで範囲外エラーが発生した場合
    */
   static getRecordByHeader(sheet, header) {
     // header = ["id","misc","misc2","purchase_date","price","misc3","category","sub_category","title"];
@@ -105,6 +113,8 @@ class Code {
    * @param {number} height - 新しい高さ
    * @param {number} width - 新しい幅
    * @returns {Range} 変換された範囲
+   * @throws {Error} rangeがnullの場合
+   * @throws {Error} Range.getRangeShapeやrange.offsetメソッドで範囲外のオフセットを指定した場合
    */
   static transformRange2(range, height, width){
     if( range === null ){
@@ -124,6 +134,9 @@ class Code {
    * @param {Range} range - 対象の範囲
    * @param {Object} argAdjust - 調整パラメータ（r, c, h, w）
    * @returns {Range} 変換された範囲
+   * @throws {Error} rangeがnullの場合
+   * @throws {Error} Range.getRangeShapeやMisc.getValidAdjustメソッドでエラーが発生した場合
+   * @throws {Error} range.offsetメソッドで範囲外のオフセットを指定した場合
    */
   static transformRange(range, argAdjust){
     YKLiblog.Log.debug(`transformRange range=${range}`);
@@ -159,6 +172,9 @@ class Code {
    * @param {Sheet} sheet - 対象のシート
    * @param {Object} argAdjust - 調整パラメータ（オプション）
    * @returns {Array} [ヘッダー範囲, データ範囲]
+   * @throws {Error} Range.getValidRangeでシート取得に失敗した場合
+   * @throws {Error} Code.transformRangeで変換に失敗した場合
+   * @throws {Error} 範囲のgetHeight()やoffset()メソッドでエラーが発生した場合
    */
   static getRangeOfHeaderAndData(sheet, argAdjust = null) {
     const range = Range.getValidRange(sheet);
@@ -182,6 +198,8 @@ class Code {
    * @param {Sheet} sheet - 対象のシート
    * @param {Object} adjust - 調整パラメータ（オプション）
    * @returns {Array} [ヘッダー範囲, データ範囲]
+   * @throws {Error} Code.getRangeOfHeaderAndDataで取得に失敗した場合
+   * @throws {Error} Range.getRangeShapeやoffset()メソッドでエラーが発生した場合
    */
   static getRangeOfHeaderAndDataWithWidth(sheet, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.js getRangeOfHeaderAndDataWithWidth argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
@@ -202,6 +220,8 @@ class Code {
    * @param {string} sheet_name - シート名
    * @param {Object} adjust - 調整パラメータ（オプション）
    * @returns {Array} ヘッダー付きレコードデータ
+   * @throws {Error} Base.getSpreadsheetExで無効なスプレッドシートIDまたはシート名でエラーが発生した場合
+   * @throws {Error} sheetsが空配列の場合、配列のインデックスアクセスでエラーが発生した場合
    */
   static getRecordsWithHeaderFromSheetFirst(ss_id, sheet_name, adjust = null) {
     const [ss, sheet, sheets, sheets_by_name] = Base.getSpreadsheetEx(ss_id, sheet_name);
@@ -216,6 +236,9 @@ class Code {
    * @param {string} column_name - 列名
    * @param {string} format - 適用するフォーマット
    * @param {Object} adjust - 調整パラメータ（オプション）
+   * @throws {Error} Code.getRangeOfHeaderAndDataで範囲取得に失敗した場合
+   * @throws {Error} header_rangeのgetValues()メソッド呼び出しが失敗した場合
+   * @throws {Error} setNumberFormat()メソッドで無効なフォーマットを指定した場合
    */
   static setFormatToNamedColumn(sheet, column_name, format, adjust = null) {
     YKLiblog.Log.debug(`YKLiba_Code.js setFormatToNamedColumn  argAdjust.r=${argAdjust.r} argAdjust.c=${argAdjust.c} argAdjust.h=${argAdjust.h}`);
@@ -243,6 +266,8 @@ class Code {
    * @param {string} sheetname - シート名
    * @param {string} column_name - 列名
    * @param {string} format - 適用するフォーマット
+   * @throws {Error} Base.getSheetsで無効なスプレッドシートIDでエラーが発生した場合
+   * @throws {Error} sheets_by_nameに指定されたsheetnameが存在しない場合
    */
   static setFormatToNamedRowsSheetBySheetname(ss_id, sheetname, column_name, format) {
     const [ss, sheet, sheets, sheets_by_name] = Base.getSheets(ss_id);

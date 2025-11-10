@@ -90,6 +90,7 @@ class Log {
    * Logs the contents of a 2D array if the log level is set to debug.
    * @param {string} name - The name to display in the log.
    * @param {Array} array - The 2D array to log.
+   * @throws {Error} Arrayx.isValid2dArrayメソッドでエラーが発生した場合
    */
   static debugArray(name, array) {
     const ret = Arrayx.isValid2dArray(array);
@@ -479,6 +480,7 @@ class Log {
    * @param {string} message - The message to display.
    * @param {string} kind - The display kind ('GUI' for alert, 'CUI' for console).
    * @param {boolean} mode - Whether to display the message (true to display, false to skip).
+   * @throws {Error} SpreadsheetApp.getUi()やui.alert()メソッドでエラーが発生した場合
    */
   static display(message, kind, mode) {
     if (mode != true) {

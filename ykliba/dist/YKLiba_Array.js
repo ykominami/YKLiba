@@ -101,7 +101,7 @@ function getRelativeCoordinatesOfTopLeftSimple(array, shape, startPoint) {
   }
   return { x, y };
 }
-// function detect_record(array, cond, detect_index, start_y, h){
+
 /**
  * 配列の左下の座標を取得する（シンプル版）
  * @param {Array} array 対象の配列
@@ -158,7 +158,7 @@ function getRelativeCordinatesOfBottomLeft(array) {
  * @param {Array} array 対象の配列
  * @return {Object} {tl: 左上座標, bl: 左下座標}
  */
-function getRelativeCordinatesOfTLandBL(array) {
+function getRelativeCoordinatesOfTLandBL(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
 
@@ -228,7 +228,7 @@ function getRelativeCordinatesOfTRandBR(array) {
  * @param {Array} array 対象の配列
  * @return {Object} {tl: 左上座標, bl: 左下座標, tr: 右上座標, br: 右下座標}
  */
-function getRelativeCordinatesOfTLandBlandTRandBR(array) {
+function getRelativeCoordinatesOfTLandBlandTRandBR(array) {
   const shape = arrayShape(array);
   const startPoint = { x: -1, y: -1 };
 
@@ -458,7 +458,7 @@ function is_equal_array_one_dim(arrayA, arrayB) {
   const lengthA = arrayA.length;
   const lengthB = arrayB.length;
   if (lengthA !== lengthB) {
-    return [false, ['length of array are different', heightA, heightB]];
+    return [false, ['length of array are different', lengthA, lengthB]];
   }
 
   for (let x = 0; x < lengthA; x++) {
