@@ -30,17 +30,17 @@ class Simple {
    * @param {Object} sheetx - シートオブジェクト
    * @returns {Range} シンプルな行の範囲
    * @throws {Error} Simple.getSimpleRowsAndRangeメソッドでエラーが発生した場合
-   * @throws {Error} Arrayx.getRelativeCordinatesOfTLandBLやUtils.getRindexメソッドでエラーが発生した場合
+   * @throws {Error} Arrayx.getRelativeCoordinatesOfTLandBLやUtils.getRindexメソッドでエラーが発生した場合
    * @throws {Error} range.offset()メソッドで範囲外のオフセットを指定した場合
    */
   static simpleRowsRangeX(sheetx) {
     const [values, range] = Simple.getSimpleRowsAndRange(sheetx);
 
-    const tl_bl_Point = Arrayx.getRelativeCordinatesOfTLandBL(values);
+    const tl_bl_Point = Arrayx.getRelativeCoordinatesOfTLandBL(values);
 
     const rindex = Utils.getRindex(values[0]);
     const simple_width = rindex;
-    const shape = Arrayx.getRelativeCordinatesOfTLandBlandTRandBR(values);
+    const shape = Arrayx.getRelativeCoordinatesOfTLandBlandTRandBR(values);
     const simple_range = range.offset(shape.tl.y, shape.tl.x, (shape.bl.y - shape.tl.y), simple_width);
     return simple_range;
   }

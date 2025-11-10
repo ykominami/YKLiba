@@ -18,11 +18,11 @@ function get_simple_rows_with_env(env, maxRange = null) {
 function simple_rows_range_x(sheetx) {
   const [values, range] = get_simple_rows_and_range(sheetx);
 
-  const tl_bl_Point = Arrayx.getRelativeCordinatesOfTLandBL(values);
+  const tl_bl_Point = Arrayx.getRelativeCoordinatesOfTLandBL(values);
 
   const rindex = Utils.getRindex(values[0]);
   const simple_width = rindex;
-  const shape = Arrayx.getRelativeCordinatesOfTLandBlandTRandBR(values);
+  const shape = Arrayx.getRelativeCoordinatesOfTLandBlandTRandBR(values);
   const simple_range = range.offset(shape.tl.y, shape.tl.x, (shape.bl.y - shape.tl.y), simple_width);
   return simple_range;
 }
@@ -108,8 +108,9 @@ function get_simple_rows_and_range(sheet, maxRange = null) {
   if (range !== null && maxRange !== null) {
     newRange = Simple.adjustRange(range, maxRange.h, maxRange.w)
     values = newRange.getValues();
+    range = newRange
   }
-  return [values, newRange];
+  return [values, range];
 }
 
 /**

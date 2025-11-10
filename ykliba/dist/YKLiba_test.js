@@ -31,62 +31,62 @@ function test_detect_record() {
   const array6 = [[], ['A'], [], ['B'], []];
 
   let ret;
-  ret = detect_record(array, 'NOT_BLANK', 0, 0, 2);
+  ret = Arrayx.detectRecord(array, 'NOT_BLANK', 0, 0, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, 'NOT_BLANK', 0, 0, 2);
+  ret = Arrayx.detectRecord(array2, 'NOT_BLANK', 0, 0, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, 'NOT_BLANK', 0, 0, 3);
+  ret = Arrayx.detectRecord(array3, 'NOT_BLANK', 0, 0, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, 'NOT_BLANK', 0, 0, 3);
+  ret = Arrayx.detectRecord(array4, 'NOT_BLANK', 0, 0, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, 'NOT_BLANK', 0, 0, 3);
+  ret = Arrayx.detectRecord(array5, 'NOT_BLANK', 0, 0, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, 'NOT_BLANK', 0, 0, 3);
+  ret = Arrayx.detectRecord(array6, 'NOT_BLANK', 0, 0, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
   //
   YKLiblog.Log.debug('================');
   //
-  ret = detect_record(array, 'NOT_BLANK', 0, 1, 2);
+  ret = Arrayx.detectRecord(array, 'NOT_BLANK', 0, 1, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, 'NOT_BLANK', 0, 1, 2);
+  ret = Arrayx.detectRecord(array2, 'NOT_BLANK', 0, 1, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, 'NOT_BLANK', 0, 1, 3);
+  ret = Arrayx.detectRecord(array3, 'NOT_BLANK', 0, 1, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, 'NOT_BLANK', 0, 1, 3);
+  ret = Arrayx.detectRecord(array4, 'NOT_BLANK', 0, 1, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, 'NOT_BLANK', 0, 1, 3);
+  ret = Arrayx.detectRecord(array5, 'NOT_BLANK', 0, 1, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, 'NOT_BLANK', 0, 1, 3);
+  ret = Arrayx.detectRecord(array6, 'NOT_BLANK', 0, 1, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
   //
   YKLiblog.Log.debug('================');
   //
-  ret = detect_record(array, 'NOT_BLANK', 0, 2, 2);
+  ret = Arrayx.detectRecord(array, 'NOT_BLANK', 0, 2, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array2, 'NOT_BLANK', 0, 2, 2);
+  ret = Arrayx.detectRecord(array2, 'NOT_BLANK', 0, 2, 2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array3, 'NOT_BLANK', 0, 2, 3);
+  ret = Arrayx.detectRecord(array3, 'NOT_BLANK', 0, 2, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array4, 'NOT_BLANK', 0, 2, 3);
+  ret = Arrayx.detectRecord(array4, 'NOT_BLANK', 0, 2, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array5, 'NOT_BLANK', 0, 2, 3);
+  ret = Arrayx.detectRecord(array5, 'NOT_BLANK', 0, 2, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = detect_record(array6, 'NOT_BLANK', 0, 2, 3);
+  ret = Arrayx.detectRecord(array6, 'NOT_BLANK', 0, 2, 3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   //
@@ -124,52 +124,101 @@ function test_arrayShape() {
   YKLiblog.Log.debug(`ret=${ret}`);
 }
 
+function arrayShape2(array) {
+  const sizeArray = array.map((list) => list.length);
+  let lenMax;
+  let lenMin;
+  if (sizeArray.length > 0) {
+    [lenMax, lenMin] = Arrayx.getMaxAndMin(sizeArray);
+  } else {
+    lenMin = 0;
+    lenMax = 0;
+  }
+  const size = array.length;
+  return { size, lenMax, lenMin };
+}
+
 /**
  * テスト関数: getRelativeCordinatesOfTopLeft_simple関数の動作をテストする
  * 配列の左上座標を取得する機能を検証
  */
-function test_getRelativeCordinatesOfTopLeft_simple() {
-  const array = [[], []];
-  const array2 = [['A'], []];
-  const array3 = [[], ['A'], []];
-  const array4 = [[], ['A'], ['B']];
-  const array5 = [[], ['A'], ['B'], []];
-  const array6 = [[], ['A'], [], ['B'], []];
-
+function test_getRelativeCoordinatesOfTopLeft_simple() {
   let ret;
   let start_x;
   let start_y;
   start_x = -1;
   start_y = -1;
 
-  [size, len_max, len_min] = arrayShape(array);
+  let size, len_max, len_min;
+
+  const array0 = [1,2,3];
+  const array1 = [[], []];
+  const array2 = [['A'], []];
+  const array3 = [[], ['A'], []];
+  const array4 = [[], ['A'], ['B']];
+  const array5 = [[], ['A'], ['B'], []];
+  const array6 = [[], ['A'], [], ['B'], []];
+
+  const str = typeof(array0)
+  Logger.log(`str=${str}`)
+  Logger.log(array0)
+  let reta = Array.isArray(array0)
+  Logger.log(`reta=${reta}`)
+  for( n in array0 ){
+    Logger.log( n )
+  }
+  for( n in array1 ){
+    Logger.log( n )
+  }
+  for( n in array2 ){
+    Logger.log( n )
+    Logger.log( array2[n] )
+  }
+  let array1x = array1.map( item => item )
+  Logger.log( array1x )
+  let array1x2 = array2.map( item => item )
+  Logger.log( array1x2 )
+
+  // [size, len_max, len_min] = Arrayx.arrayShape(array1);
+  // YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
+  // ret = getRelativeCordinatesOfTopLeft_simple(array1, len_max, size, start_x, start_y, len_min);
+  // YKLiblog.Log.debug(`ret=${ret}`);
+
+  // [size, len_max, len_min] = Arrayx.arrayShape(array2);
+  [size, len_max, len_min] = Arrayx.arrayShape(array1x2);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array, len_max, size, start_x, start_y, len_min);
+  // ret = getRelativeCoordinatesOfTopLeftSimple(array2, len_max, size, start_x, start_y, len_min);
+  let shape = { lenMax: len_max, size: size}
+  ret = getRelativeCoordinatesOfTopLeftSimple(array2, shape, start_x);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  [size, len_max, len_min] = arrayShape(array2);
+  const array3x = array3.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array3);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  shape = { lenMax: len_max, size: size}
+  // ret = getRelativeCoordinatesOfTopLeftSimple(array3, len_max, size, start_x, start_y, len_min);
+  ret = getRelativeCoordinatesOfTopLeftSimple(array3, shape, start_x);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  [size, len_max, len_min] = arrayShape(array3);
+  const array4x = array4.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array4);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
+  shape = { lenMax: len_max, size: size}
+  ret = getRelativeCoordinatesOfTopLeftSimple(array4, shape, start_x);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  [size, len_max, len_min] = arrayShape(array4);
+  const array5x = array5.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array5);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
+  shape = { lenMax: len_max, size: size}
+  ret = getRelativeCoordinatesOfTopLeftSimple(array5, shape, start_x);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  [size, len_max, len_min] = arrayShape(array5);
+  const array6x = array6.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array6);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
-  YKLiblog.Log.debug(`ret=${ret}`);
-
-  [size, len_max, len_min] = arrayShape(array6);
-  YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfTopLeft_simple(array3, len_max, size, start_x, start_y, len_min);
+  shape = { lenMax: len_max, size: size}
+  ret = getRelativeCoordinatesOfTopLeftSimple(array3, shape, start_x);
   YKLiblog.Log.debug(`ret=${ret}`);
 }
 
@@ -177,7 +226,7 @@ function test_getRelativeCordinatesOfTopLeft_simple() {
  * テスト関数: getRelativeCordinatesOfBottomLeft_simple関数の動作をテストする
  * 配列の左下座標を取得する機能を検証
  */
-function test_getRelativeCordinatesOfBottomLeft_simple() {
+function test_getRelativeCoordinatesOfBottomLeft_simple() {
   const array = [[], []];
   const array2 = [['A'], []];
   const array3 = [[], ['A'], []];
@@ -190,53 +239,63 @@ function test_getRelativeCordinatesOfBottomLeft_simple() {
   let start_y;
   start_x = -1;
   start_y = -1;
+  let size, len_max, len_min;
 
-  [size, len_max, len_min] = arrayShape(array);
+  // const arrayx = array.map( item => item )
+  let sizeArray
+  sizeArray = array.map((list) => list.length);
+
+  [size, len_max, len_min] = Arrayx.arrayShape(array);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 0;
-  [size, len_max, len_min] = arrayShape(array2);
+  const array1x2 = array2.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array2);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array2, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
-  [size, len_max, len_min] = arrayShape(array3);
+  const array1x3 = array3.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array3);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array2, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
-  [size, len_max, len_min] = arrayShape(array4);
+  const array1x4 = array4.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array4);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array2, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
-  [size, len_max, len_min] = arrayShape(array5);
+  const array1x5 = array5.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array5);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array2, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 
   start_x = 0;
   start_y = 1;
-  [size, len_max, len_min] = arrayShape(array6);
+  const array1x6 = array5.map( item => item )
+  [size, len_max, len_min] = Arrayx.arrayShape(array6);
   YKLiblog.Log.debug(`size=${size} len_max=${len_max} len_min=${len_min}`);
-  ret = getRelativeCordinatesOfBottomLeft_simple(array2, len_max, size, start_x, start_y, len_min);
+  ret = Arrayx.getRelativeCoordinatesOfBottomLeftSimple(array2, len_max, size, start_x, start_y, len_min);
   YKLiblog.Log.debug(`ret=${ret}`);
 }
 
 /**
- * テスト関数: getRelativeCordinatesOfTLandBL関数の動作をテストする
+ * テスト関数: getRelativeCoordinatesOfTLandBL関数の動作をテストする
  * 配列の左上と左下座標を同時に取得する機能を検証
  */
-function test_getRelativeCordinatesOfTLandBL() {
+function test_getRelativeCoordinatesOfTLandBL() {
   const array = [[], []];
   const array2 = [['A'], []];
   const array3 = [[], ['A'], []];
@@ -246,22 +305,22 @@ function test_getRelativeCordinatesOfTLandBL() {
 
   let ret;
 
-  ret = getRelativeCordinatesOfTLandBL(array);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = getRelativeCordinatesOfTLandBL(array2);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array2);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = getRelativeCordinatesOfTLandBL(array3);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array3);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = getRelativeCordinatesOfTLandBL(array4);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array4);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = getRelativeCordinatesOfTLandBL(array5);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array5);
   YKLiblog.Log.debug(`ret=${ret}`);
 
-  ret = getRelativeCordinatesOfTLandBL(array6);
+  ret = Arrayx.getRelativeCoordinatesOfTLandBL(array6);
   YKLiblog.Log.debug(`ret=${ret}`);
 }
 
